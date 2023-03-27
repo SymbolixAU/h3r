@@ -1,0 +1,17 @@
+Package: h3r
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Authors@R: c(
+    person("David", "Cooley", ,"david.cooley.au@gmail.com", role = c("aut", "cre"))
+    )
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends:
+  h3lib
+LinkingTo:
+  h3lib
+RoxygenNote: 7.2.3
