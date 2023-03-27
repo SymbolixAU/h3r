@@ -1,24 +1,21 @@
 
-#include "h3r.h"
-// #include "h3api.h"
 
-// #include "algos.h" // directionForNeighbor
+#include <stdlib.h> // for NULL
 
 #include <R.h>
-// #include <Rinternals.h>
-//#include <stdlib.h> // for NULL
 #include <Rconfig.h>
 #include <Rinternals.h>
 #include <R_ext/Rdynload.h>
 #include <R_ext/Visibility.h>
 
-
+// #include "h3libapi.h"
+#include "h3r.h"
 
 /* Define .Call functions */
 static const R_CallMethodDef callMethods[] = {
 
   // Indexing
-  // {"h3rLatLngToCell",   (DL_FUNC) &h3rLatLngToCell,   3},
+  {"h3rLatLngToCell",   (DL_FUNC) &h3rLatLngToCell,   3},
   // {"h3rCellToLatLng",   (DL_FUNC) &h3rCellToLatLng,   1},
   // {"h3rCellToBoundary", (DL_FUNC) &h3rCellToBoundary, 1},
 
@@ -61,6 +58,10 @@ static const R_CallMethodDef callMethods[] = {
   {NULL,                NULL,                        0}
 };
 
+/* Imports from h3lib */
+double (*degsToRads)(double);
+double (*radsToDegs)(double);
+// int (*h3ToString)(H3Index, char, size_t);
 
 void attribute_visible R_init_h3r(DllInfo *info)
 {
@@ -68,8 +69,12 @@ void attribute_visible R_init_h3r(DllInfo *info)
 
   R_useDynamicSymbols(info, FALSE);
 
+  /* Imports from h3lib */
+  degsToRads = (double(*)(double degrees)) R_GetCCallable("h3lib", "degsToRads");
+  radsToDegs = (double(*)(double radians)) R_GetCCallable("h3lib", "radsToDegs");
+
   // Indexing
-  // R_RegisterCCallable("h3r", "h3rLatLngToCell",    (DL_FUNC) &h3rLatLngToCell);
+  R_RegisterCCallable("h3r", "h3rLatLngToCell",    (DL_FUNC) &h3rLatLngToCell);
   // R_RegisterCCallable("h3r", "h3rCellToLatLng",    (DL_FUNC) &h3rCellToLatLng);
   // R_RegisterCCallable("h3r", "h3rCellToBoundary",  (DL_FUNC) &h3rCellToBoundary);
 
