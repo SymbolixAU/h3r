@@ -2,22 +2,22 @@
 #include "h3libapi.h"
 #include "h3rUtils.h"
 
-// void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lon, R_xlen_t idx) {
-//   latLng->lat = degsToRads(REAL(lat)[idx]);
-//   latLng->lng = degsToRads(REAL(lon)[idx]);
-// }
-//
-// H3Index sexpStringToH3(SEXP h3, R_xlen_t idx) {
-//   H3Index index;
-//   stringToH3(CHAR(STRING_ELT(h3, idx)), &index);
-//   return index;
-// }
-//
-// SEXP h3ToSexpString(H3Index h3) {
-//   char str[17];
-//   h3ToString(h3, str, sizeof(str));
-//   return Rf_mkChar(str);
-// }
+void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lon, R_xlen_t idx) {
+  latLng->lat = degsToRads(REAL(lat)[idx]);
+  latLng->lng = degsToRads(REAL(lon)[idx]);
+}
+
+H3Index sexpStringToH3(SEXP h3, R_xlen_t idx) {
+  H3Index index;
+  stringToH3(CHAR(STRING_ELT(h3, idx)), &index);
+  return index;
+}
+
+SEXP h3ToSexpString(H3Index h3) {
+  char str[17];
+  h3ToString(h3, str, sizeof(str));
+  return Rf_mkChar(str);
+}
 
 //
 // SEXP h3VecToSexpString(H3Index *h3, R_xlen_t n) {

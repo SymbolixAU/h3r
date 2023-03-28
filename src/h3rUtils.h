@@ -21,11 +21,11 @@ SEXP h3ToSexpString(H3Index h3);
 // //'
 // //' Converts an array of H3 indexes to a SEXP (STRSXP) vector
 // SEXP h3VecToSexpString(H3Index *h3, R_xlen_t n);
-//
-// //' SEXP String to H3
-// //'
-// //' Converts an R String (SEXP) to an `H3Index`
-// H3Index sexpStringToH3(SEXP h3, R_xlen_t idx);
+
+//' SEXP String to H3
+//'
+//' Converts an R String (SEXP) to an `H3Index`
+H3Index sexpStringToH3(SEXP h3, R_xlen_t idx);
 //
 // //' LatLng to SEXP
 // //'

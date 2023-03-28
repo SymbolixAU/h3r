@@ -7,7 +7,7 @@
 #include "h3r.h"
 #include "h3libapi.h"
 
-// #include "h3rUtils.h"
+#include "h3rUtils.h"
 
 SEXP h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res) {
 
@@ -21,19 +21,9 @@ SEXP h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res) {
 
   for( i = 0; i < n; i++ ) {
 
-    // sexpToLatLng(&latLng, lat, lon, i);
-    LatLng ll;
-    ll.lat = degsToRads(REAL(lat)[i]);
-    ll.lng = degsToRads(REAL(lon)[i]);
-
-    // latLngToCell(&latLng, ires, &h3Index);
-
-    // char str[17];
-    // h3ToString(h3Index, str, sizeof(str));
-    // h3ToString(h3Index, str, 17);
-
-    // SET_STRING_ELT(cells, i, h3ToSexpString(h3Index));
-    // SET_STRING_ELT(cells, i, Rf_mkChar(str));
+    sexpToLatLng(&latLng, lat, lon, i);
+    latLngToCell(&latLng, ires, &h3Index);
+    SET_STRING_ELT(cells, i, h3ToSexpString(h3Index));
   }
 
   UNPROTECT(1);
