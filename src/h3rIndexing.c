@@ -1,10 +1,9 @@
 
-#define R_NO_REMAP
+// #define R_NO_REMAP
 #include <R.h>
 #include <Rinternals.h>
 #include <Rdefines.h>
 
-#include "h3r.h"
 #include "h3libapi.h"
 
 #include "h3rUtils.h"
@@ -18,11 +17,15 @@ SEXP h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res) {
   LatLng latLng;
   H3Index h3Index;
   int ires = INTEGER(res)[0];
+  // char str[17];
 
   for( i = 0; i < n; i++ ) {
 
     sexpToLatLng(&latLng, lat, lon, i);
+
     latLngToCell(&latLng, ires, &h3Index);
+    // h3ToString(h3Index, str, 17);
+
     SET_STRING_ELT(cells, i, h3ToSexpString(h3Index));
   }
 
@@ -31,62 +34,62 @@ SEXP h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res) {
 }
 
 
-// SEXP h3rCellToLatLng(SEXP h3) {
-//
-//   R_xlen_t n = Rf_xlength(h3);
-//   R_xlen_t i;
-//
-//   LatLng ll;
-//
-//   SEXP lats = PROTECT(Rf_allocVector(REALSXP, n));
-//   SEXP lons = PROTECT(Rf_allocVector(REALSXP, n));
-//
-//   for( i = 0; i < n; i++ ) {
-//     H3Index index = sexpStringToH3(h3, i);
-//     //int isValid = isValidCell(index);
-//     //if( !isValid ) {
-//     //  fprintf(stderr, "Invlaid H3");
-//     //}
-//     cellToLatLng(index, &ll);
-//     latLngToSexp(&ll, lats, lons, i);
-//   }
-//
-//   SEXP res = latLngList(lats, lons);
-//   UNPROTECT(2);
-//
-//   return res;
-// }
+SEXP h3rCellToLatLng(SEXP h3) {
+
+  R_xlen_t n = Rf_xlength(h3);
+  R_xlen_t i;
+
+  LatLng ll;
+
+  SEXP lats = PROTECT(Rf_allocVector(REALSXP, n));
+  SEXP lons = PROTECT(Rf_allocVector(REALSXP, n));
+
+  for( i = 0; i < n; i++ ) {
+    H3Index index = sexpStringToH3(h3, i);
+    //int isValid = isValidCell(index);
+    //if( !isValid ) {
+    //  fprintf(stderr, "Invlaid H3");
+    //}
+    cellToLatLng(index, &ll);
+    latLngToSexp(&ll, lats, lons, i);
+  }
+
+  SEXP res = latLngList(lats, lons);
+  UNPROTECT(2);
+
+  return res;
+}
 
 
-// SEXP h3rCellToBoundary(SEXP h3) {
-//   R_xlen_t n = Rf_xlength(h3);
-//   R_xlen_t i;
-//   SEXP names = PROTECT(Rf_allocVector(STRSXP, n));
-//
-//   // TODO:
-//   // what structure should be returned?
-//   // - list of named-lists ?
-//   // - data.frame with h3, lat, lng columns?
-//   //H3Index index;
-//   CellBoundary cb;
-//   //LatLng ll;
-//
-//   SEXP res = PROTECT(Rf_allocVector(VECSXP, n)); // store he results in a list
-//   // where each element be named as per the cell, adn the valeus will be the lon/lat
-//
-//   for( i = 0; i < n; i++ ) {
-//
-//     H3Index index = sexpStringToH3(h3, i);
-//
-//     cellToBoundary(index, &cb);
-//     SEXP lst = cellBoundaryToList(&cb);
-//
-//     SET_STRING_ELT(names, i, STRING_ELT(h3, i));
-//     SET_VECTOR_ELT(res, i, lst);
-//   }
-//
-//   Rf_setAttrib(res, R_NamesSymbol, names);
-//
-//   UNPROTECT(2);
-//   return res;
-// }
+SEXP h3rCellToBoundary(SEXP h3) {
+  R_xlen_t n = Rf_xlength(h3);
+  R_xlen_t i;
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, n));
+
+  // TODO:
+  // what structure should be returned?
+  // - list of named-lists ?
+  // - data.frame with h3, lat, lng columns?
+  //H3Index index;
+  CellBoundary cb;
+  //LatLng ll;
+
+  SEXP res = PROTECT(Rf_allocVector(VECSXP, n)); // store he results in a list
+  // where each element be named as per the cell, adn the valeus will be the lon/lat
+
+  for( i = 0; i < n; i++ ) {
+
+    H3Index index = sexpStringToH3(h3, i);
+
+    cellToBoundary(index, &cb);
+    SEXP lst = cellBoundaryToList(&cb);
+
+    SET_STRING_ELT(names, i, STRING_ELT(h3, i));
+    SET_VECTOR_ELT(res, i, lst);
+  }
+
+  Rf_setAttrib(res, R_NamesSymbol, names);
+
+  UNPROTECT(2);
+  return res;
+}

@@ -1,4 +1,3 @@
-
 ## TODO:
 # polygonToCells
 # maxPolygonToCellsSize
