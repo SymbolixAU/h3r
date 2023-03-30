@@ -103,8 +103,13 @@ static const R_CallMethodDef callMethods[] = {
 };
 
 /* Imports from h3lib */
+
+typedef uint64_t H3Index;
+typedef uint32_t H3Error;
+
 double (*degsToRads)(double);
 double (*radsToDegs)(double);
+H3Error (*areNeighborCells)(H3Index, H3Index, int*);
 // int (*h3ToString)(H3Index, char, size_t);
 
 void attribute_visible R_init_h3r(DllInfo *info)
@@ -116,6 +121,8 @@ void attribute_visible R_init_h3r(DllInfo *info)
   /* Imports from h3lib */
   degsToRads = (double(*)(double degrees)) R_GetCCallable("h3lib", "degsToRads");
   radsToDegs = (double(*)(double radians)) R_GetCCallable("h3lib", "radsToDegs");
+  areNeighborCells = (H3Error(*)(H3Index, H3Index, int*)) R_GetCCallable("h3lib", "areNeighborCells");
+
 
   /* Exports from h3r */
   // Indexing
