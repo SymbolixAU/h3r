@@ -58,6 +58,15 @@ SEXP origDestList(SEXP orig, SEXP dest) {
   return res;
 }
 
+SEXP gridDistList(SEXP grid, SEXP dist) {
+  const char *names[] = {"cell","distance",""};
+  SEXP res = PROTECT(mkNamed(VECSXP, names));
+
+  SET_VECTOR_ELT(res, 0, grid);
+  SET_VECTOR_ELT(res, 1, dist);
+  UNPROTECT(1);
+  return res;
+}
 
 SEXP cellBoundaryToList(CellBoundary *cb) {
   SEXP lats = PROTECT(Rf_allocVector(REALSXP, cb->numVerts));

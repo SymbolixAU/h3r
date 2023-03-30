@@ -41,6 +41,11 @@
  //' Creates a list of origin and destination cells
  SEXP origDestList(SEXP orig, SEXP dest);
 
+ //' gridDistList
+ //'
+ //' Creates a list of cells and distances
+SEXP gridDistList(SEXP grid, SEXP dist);
+
  //' CellBoundaryToList
  //'
  //' Creates a list of lon/lats from a CellBoundary

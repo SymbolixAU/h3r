@@ -77,21 +77,22 @@ SEXP h3rGridDiskDistances(SEXP h3, SEXP k) {
   for( i = 0; i < n; i++ ) {
     h = sexpStringToH3(h3, i);
     distance = INTEGER(k)[i];
-
     h3error(maxGridDiskSize(distance, &maxSize), i);
     H3Index result[maxSize];
-    // TODO: figure out what this distances is doing
     int distances[maxSize];
-    SEXP group = PROTECT(Rf_allocVector(STRSXP, maxSize));
+    SEXP cell = PROTECT(Rf_allocVector(STRSXP, maxSize));
+    SEXP dist = PROTECT(Rf_allocVector(INTSXP, maxSize)); 
 
     h3error(gridDiskDistances(h, distance, result, distances), i);
 
     for( j = 0; j < maxSize; j++){
-      SET_STRING_ELT(group, j, h3ToSexpString(result[j]));
+      SET_STRING_ELT(cell, j, h3ToSexpString(result[j]));
+      SET_INTEGER_ELT(dist, j, distances[j]);
     }
+    SEXP group = gridDistList(cell, dist);
     SET_VECTOR_ELT(out, i, group);
 
-    UNPROTECT(1);
+    UNPROTECT(2);
   }
 
 
@@ -147,21 +148,22 @@ SEXP h3rGridDiskDistancesUnsafe(SEXP h3, SEXP k) {
   for( i = 0; i < n; i++ ) {
     h = sexpStringToH3(h3, i);
     distance = INTEGER(k)[i];
-
     h3error(maxGridDiskSize(distance, &maxSize), i);
     H3Index result[maxSize];
-    // TODO: figure out what this distances is doing
     int distances[maxSize];
-    SEXP group = PROTECT(Rf_allocVector(STRSXP, maxSize));
+    SEXP cell = PROTECT(Rf_allocVector(STRSXP, maxSize));
+    SEXP dist = PROTECT(Rf_allocVector(INTSXP, maxSize)); 
 
     h3error(gridDiskDistancesUnsafe(h, distance, result, distances), i);
 
     for( j = 0; j < maxSize; j++){
-      SET_STRING_ELT(group, j, h3ToSexpString(result[j]));
+      SET_STRING_ELT(cell, j, h3ToSexpString(result[j]));
+      SET_INTEGER_ELT(dist, j, distances[j]);
     }
+    SEXP group = gridDistList(cell, dist);
     SET_VECTOR_ELT(out, i, group);
 
-    UNPROTECT(1);
+    UNPROTECT(2);
   }
 
 
@@ -183,21 +185,22 @@ SEXP h3rGridDiskDistancesSafe(SEXP h3, SEXP k) {
   for( i = 0; i < n; i++ ) {
     h = sexpStringToH3(h3, i);
     distance = INTEGER(k)[i];
-
     h3error(maxGridDiskSize(distance, &maxSize), i);
     H3Index result[maxSize];
-    // TODO: figure out what this distances is doing
     int distances[maxSize];
-    SEXP group = PROTECT(Rf_allocVector(STRSXP, maxSize));
+    SEXP cell = PROTECT(Rf_allocVector(STRSXP, maxSize));
+    SEXP dist = PROTECT(Rf_allocVector(INTSXP, maxSize)); 
 
     h3error(gridDiskDistancesSafe(h, distance, result, distances), i);
 
     for( j = 0; j < maxSize; j++){
-      SET_STRING_ELT(group, j, h3ToSexpString(result[j]));
+      SET_STRING_ELT(cell, j, h3ToSexpString(result[j]));
+      SET_INTEGER_ELT(dist, j, distances[j]);
     }
+    SEXP group = gridDistList(cell, dist);
     SET_VECTOR_ELT(out, i, group);
 
-    UNPROTECT(1);
+    UNPROTECT(2);
   }
 
 
