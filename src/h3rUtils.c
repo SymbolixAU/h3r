@@ -8,7 +8,7 @@ void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lon, R_xlen_t idx) {
 
 H3Index sexpStringToH3(SEXP h3, R_xlen_t idx) {
   H3Index index;
-  stringToH3(CHAR(STRING_ELT(h3, idx)), &index);
+  h3error(stringToH3(CHAR(STRING_ELT(h3, idx)), &index), idx);
   return index;
 }
 
