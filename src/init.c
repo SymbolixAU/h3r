@@ -17,95 +17,119 @@ static const R_CallMethodDef callMethods[] = {
   {"h3rLatLngToCell",   (DL_FUNC) &h3rLatLngToCell,   3},
   {"h3rCellToLatLng",   (DL_FUNC) &h3rCellToLatLng,   1},
   {"h3rCellToBoundary", (DL_FUNC) &h3rCellToBoundary, 1},
-  //
-  // // Inspection
-  // {"h3rGetResolution",       (DL_FUNC) &h3rGetResolution,       1},
-  // {"h3rGetBaseCellNumber",   (DL_FUNC) &h3rGetBaseCellNumber,   1},
-  // {"h3rIsValidCell",         (DL_FUNC) &h3rIsValidCell,         1},
-  // {"h3rIsResClassIII",       (DL_FUNC) &h3rIsResClassIII,       1},
-  // {"h3rIsPentagon",          (DL_FUNC) &h3rIsPentagon,          1},
-  // {"h3rGetIcosahedronFaces", (DL_FUNC) &h3rGetIcosahedronFaces, 1},
-  // {"h3rMaxFaceCount",        (DL_FUNC) &h3rMaxFaceCount,        1},
-  //
-  // // Traversal
-  // {"h3rGridDisk",                 (DL_FUNC) &h3rGridDisk, 2},
-  // {"h3rMaxGridDiskSize",          (DL_FUNC) &h3rMaxGridDiskSize, 1},
-  // {"h3rGridDiskDistances",        (DL_FUNC) &h3rGridDiskDistances, 2},
-  // {"h3rGridDiskUnsafe",           (DL_FUNC) &h3rGridDiskUnsafe, 2},
-  // {"h3rGridDiskDistancesUnsafe",  (DL_FUNC) &h3rGridDiskDistancesUnsafe, 2},
-  // {"h3rGridDiskDistancesSafe",    (DL_FUNC) &h3rGridDiskDistancesSafe, 2},
-  // {"h3rGridRingUnsafe",           (DL_FUNC) &h3rGridRingUnsafe, 2},
-  // {"h3rGridPathCells",            (DL_FUNC) &h3rGridPathCells, 2},
-  // {"h3rGridPathCellsSize",        (DL_FUNC) &h3rGridPathCellsSize, 2},
-  // {"h3rGridDistance",             (DL_FUNC) &h3rGridDistance, 2},
-  //
-  // // Hierarchy
-  // {"h3rCellToParent",        (DL_FUNC) &h3rCellToParent,       2},
-  // {"h3rCellToChildren",      (DL_FUNC) &h3rCellToChildren,     2},
-  // // {"h3rCellToChildrenSize",  (DL_FUNC) &h3rCellToChildrenSize, 2},
-  //
-  // // {"h3rH3ToString",     (DL_FUNC) &h3H3ToString,     1},
-  // // {"h3rStringToH3",     (DL_FUNC) &h3StringToH3,     1},
-  // // {"h3rDirectionForNeighbor", (DL_FUNC) &h3DirectionForNeighbor, 2},
-  //
-  // // Regions
-  //
-  //
-  // // Directed Edges
-  // {"h3rAreNeighborCells",                 (DL_FUNC) &h3rAreNeighborCells,   2},
-  // {"h3rCellsToDirectedEdge",              (DL_FUNC) &h3rCellsToDirectedEdge,   2},
-  // {"h3rIsValidDirectedEdge",              (DL_FUNC) &h3rIsValidDirectedEdge,   1},
-  // {"h3rGetDirectedEdgeOrigin",            (DL_FUNC) &h3rGetDirectedEdgeOrigin,   1},
-  // {"h3rGetDirectedEdgeDestination",       (DL_FUNC) &h3rGetDirectedEdgeDestination,   1},
-  // {"h3rDirectedEdgeToCells",              (DL_FUNC) &h3rDirectedEdgeToCells,   1},
-  // {"h3rOriginToDirectedEdges",            (DL_FUNC) &h3rOriginToDirectedEdges,   1},
-  //
-  //
-  // // Vertexes
-  // {"h3rCellToVertex",      (DL_FUNC) &h3rCellToVertex,   1},
-  // {"h3rCellToVertexes",    (DL_FUNC) &h3rCellToVertexes, 1},
-  // {"h3rVertexToLatLng",    (DL_FUNC) &h3rVertexToLatLng, 1},
-  // {"h3rIsValidVertex",     (DL_FUNC) &h3rIsValidVertex,  1},
-  //
-  //
-  // // Miscellaneous
-  // {"h3rDegsToRads",              (DL_FUNC) &h3rDegsToRads,              1},     // H3 Internal
-  // {"h3rRadsToDegs",              (DL_FUNC) &h3rRadsToDegs,              1},
-  //
-  //
-  // {"h3rGetHexagonAreaAvgM2",   (DL_FUNC) &h3rGetHexagonAreaAvgM2,    1},
-  // {"h3rGetHexagonAreaAvgKm2",   (DL_FUNC) &h3rGetHexagonAreaAvgKm2,   1},
-  //
-  // {"h3rCellAreaRads2", (DL_FUNC) &h3rCellAreaRads2, 1},
-  // {"h3rCellAreaM2",    (DL_FUNC) &h3rCellAreaM2,    1},
-  // {"h3rCellAreaKm2",   (DL_FUNC) &h3rCellAreaKm2,   1},
-  //
-  // {"h3rGetHexagonEdgeLengthAvgM",    (DL_FUNC) &h3rGetHexagonEdgeLengthAvgM,    1},
-  // {"h3rGetHexagonEdgeLengthAvgKm",   (DL_FUNC) &h3rGetHexagonEdgeLengthAvgKm,   1},
-  //
-  // {"h3rEdgeLengthRads", (DL_FUNC) &h3rEdgeLengthRads, 1},
-  // {"h3rEdgeLengthM",    (DL_FUNC) &h3rEdgeLengthM,    1},
-  // {"h3rEdgeLengthKm",   (DL_FUNC) &h3rEdgeLengthKm,   1},
-  //
-  //
-  // {"h3rGetNumCells", (DL_FUNC) &h3rGetNumCells, 1},
-  // {"h3rGetRes0Cells",    (DL_FUNC) &h3rGetRes0Cells,    0},
-  // {"h3rRes0CellCount",   (DL_FUNC) &h3rRes0CellCount,   1},
-  //
-  // {"h3rGetPentagons",    (DL_FUNC) &h3rGetPentagons,    1},
-  // {"h3rPentagonCount",   (DL_FUNC) &h3rPentagonCount,   0},
-  //
-  // {"h3rGreatCircleDistanceRads", (DL_FUNC) &h3rGreatCircleDistanceRads, 4},
-  // {"h3rGreatCircleDistanceM",    (DL_FUNC) &h3rGreatCircleDistanceM,    4},
-  // {"h3rGreatCircleDistanceKm",   (DL_FUNC) &h3rGreatCircleDistanceKm,   4},
+
+  // Inspection
+  {"h3rGetResolution",       (DL_FUNC) &h3rGetResolution,       1},
+  {"h3rGetBaseCellNumber",   (DL_FUNC) &h3rGetBaseCellNumber,   1},
+  {"h3rIsValidCell",         (DL_FUNC) &h3rIsValidCell,         1},
+  {"h3rIsResClassIII",       (DL_FUNC) &h3rIsResClassIII,       1},
+  {"h3rIsPentagon",          (DL_FUNC) &h3rIsPentagon,          1},
+  {"h3rGetIcosahedronFaces", (DL_FUNC) &h3rGetIcosahedronFaces, 1},
+  {"h3rMaxFaceCount",        (DL_FUNC) &h3rMaxFaceCount,        1},
+
+  // Traversal
+  {"h3rGridDisk",                 (DL_FUNC) &h3rGridDisk, 2},
+  {"h3rMaxGridDiskSize",          (DL_FUNC) &h3rMaxGridDiskSize, 1},
+  {"h3rGridDiskDistances",        (DL_FUNC) &h3rGridDiskDistances, 2},
+  {"h3rGridDiskUnsafe",           (DL_FUNC) &h3rGridDiskUnsafe, 2},
+  {"h3rGridDiskDistancesUnsafe",  (DL_FUNC) &h3rGridDiskDistancesUnsafe, 2},
+  {"h3rGridDiskDistancesSafe",    (DL_FUNC) &h3rGridDiskDistancesSafe, 2},
+  {"h3rGridRingUnsafe",           (DL_FUNC) &h3rGridRingUnsafe, 2},
+  {"h3rGridPathCells",            (DL_FUNC) &h3rGridPathCells, 2},
+  {"h3rGridPathCellsSize",        (DL_FUNC) &h3rGridPathCellsSize, 2},
+  {"h3rGridDistance",             (DL_FUNC) &h3rGridDistance, 2},
+
+  // Hierarchy
+  {"h3rCellToParent",        (DL_FUNC) &h3rCellToParent,       2},
+  {"h3rCellToChildren",      (DL_FUNC) &h3rCellToChildren,     2},
+  // {"h3rCellToChildrenSize",  (DL_FUNC) &h3rCellToChildrenSize, 2},
+
+  // {"h3rH3ToString",     (DL_FUNC) &h3H3ToString,     1},
+  // {"h3rStringToH3",     (DL_FUNC) &h3StringToH3,     1},
+  // {"h3rDirectionForNeighbor", (DL_FUNC) &h3DirectionForNeighbor, 2},
+
+  // Regions
+
+
+  // Directed Edges
+  {"h3rAreNeighborCells",                 (DL_FUNC) &h3rAreNeighborCells,   2},
+  {"h3rCellsToDirectedEdge",              (DL_FUNC) &h3rCellsToDirectedEdge,   2},
+  {"h3rIsValidDirectedEdge",              (DL_FUNC) &h3rIsValidDirectedEdge,   1},
+  {"h3rGetDirectedEdgeOrigin",            (DL_FUNC) &h3rGetDirectedEdgeOrigin,   1},
+  {"h3rGetDirectedEdgeDestination",       (DL_FUNC) &h3rGetDirectedEdgeDestination,   1},
+  {"h3rDirectedEdgeToCells",              (DL_FUNC) &h3rDirectedEdgeToCells,   1},
+  {"h3rOriginToDirectedEdges",            (DL_FUNC) &h3rOriginToDirectedEdges,   1},
+
+
+  // Vertexes
+  {"h3rCellToVertex",      (DL_FUNC) &h3rCellToVertex,   1},
+  {"h3rCellToVertexes",    (DL_FUNC) &h3rCellToVertexes, 1},
+  {"h3rVertexToLatLng",    (DL_FUNC) &h3rVertexToLatLng, 1},
+  {"h3rIsValidVertex",     (DL_FUNC) &h3rIsValidVertex,  1},
+
+
+  // Miscellaneous
+  {"h3rDegsToRads",              (DL_FUNC) &h3rDegsToRads,              1},     // H3 Internal
+  {"h3rRadsToDegs",              (DL_FUNC) &h3rRadsToDegs,              1},
+
+
+  {"h3rGetHexagonAreaAvgM2",   (DL_FUNC) &h3rGetHexagonAreaAvgM2,    1},
+  {"h3rGetHexagonAreaAvgKm2",   (DL_FUNC) &h3rGetHexagonAreaAvgKm2,   1},
+
+  {"h3rCellAreaRads2", (DL_FUNC) &h3rCellAreaRads2, 1},
+  {"h3rCellAreaM2",    (DL_FUNC) &h3rCellAreaM2,    1},
+  {"h3rCellAreaKm2",   (DL_FUNC) &h3rCellAreaKm2,   1},
+
+  {"h3rGetHexagonEdgeLengthAvgM",    (DL_FUNC) &h3rGetHexagonEdgeLengthAvgM,    1},
+  {"h3rGetHexagonEdgeLengthAvgKm",   (DL_FUNC) &h3rGetHexagonEdgeLengthAvgKm,   1},
+
+  {"h3rEdgeLengthRads", (DL_FUNC) &h3rEdgeLengthRads, 1},
+  {"h3rEdgeLengthM",    (DL_FUNC) &h3rEdgeLengthM,    1},
+  {"h3rEdgeLengthKm",   (DL_FUNC) &h3rEdgeLengthKm,   1},
+
+
+  {"h3rGetNumCells", (DL_FUNC) &h3rGetNumCells, 1},
+  {"h3rGetRes0Cells",    (DL_FUNC) &h3rGetRes0Cells,    0},
+  {"h3rRes0CellCount",   (DL_FUNC) &h3rRes0CellCount,   1},
+
+  {"h3rGetPentagons",    (DL_FUNC) &h3rGetPentagons,    1},
+  {"h3rPentagonCount",   (DL_FUNC) &h3rPentagonCount,   0},
+
+  {"h3rGreatCircleDistanceRads", (DL_FUNC) &h3rGreatCircleDistanceRads, 4},
+  {"h3rGreatCircleDistanceM",    (DL_FUNC) &h3rGreatCircleDistanceM,    4},
+  {"h3rGreatCircleDistanceKm",   (DL_FUNC) &h3rGreatCircleDistanceKm,   4},
 
   {NULL,                NULL,                        0}
 };
 
 /* Imports from h3lib */
+typedef uint32_t H3Error;
+
+typedef enum {
+  /** H3 digit in center */
+  CENTER_DIGIT = 0,
+  /** H3 digit in k-axes direction */
+  K_AXES_DIGIT = 1,
+  /** H3 digit in j-axes direction */
+  J_AXES_DIGIT = 2,
+  /** H3 digit in j == k direction */
+  JK_AXES_DIGIT = J_AXES_DIGIT | K_AXES_DIGIT, /* 3 */
+  /** H3 digit in i-axes direction */
+  I_AXES_DIGIT = 4,
+  /** H3 digit in i == k direction */
+  IK_AXES_DIGIT = I_AXES_DIGIT | K_AXES_DIGIT, /* 5 */
+  /** H3 digit in i == j direction */
+  IJ_AXES_DIGIT = I_AXES_DIGIT | J_AXES_DIGIT, /* 6 */
+  /** H3 digit in the invalid direction */
+  INVALID_DIGIT = 7,
+  /** Valid digits will be less than this value. Same value as INVALID_DIGIT.
+   */
+  NUM_DIGITS = INVALID_DIGIT,
+  /** Child digit which is skipped for pentagons */
+  PENTAGON_SKIPPED_DIGIT = K_AXES_DIGIT /* 1 */
+} Direction;
 
 typedef uint64_t H3Index;
-typedef uint32_t H3Error;
 
 #define MAX_CELL_BNDRY_VERTS 10
 
@@ -119,15 +143,123 @@ typedef struct {
   LatLng verts[MAX_CELL_BNDRY_VERTS];  ///< vertices in ccw order
 } CellBoundary;
 
-double (*degsToRads)(double);
-double (*radsToDegs)(double);
-H3Error (*cellToBoundary)(H3Index, CellBoundary*);
-H3Error (*cellToLatLng)(H3Index, LatLng*);
-H3Error (*latLngToCell)(const LatLng*, int, H3Index*);
-H3Error (*areNeighborCells)(H3Index, H3Index, int*);
-H3Error (*h3ToString)(H3Index, char, size_t);
-H3Error (*stringToH3)(const char*, H3Index*);
+typedef struct {
+  int numVerts;
+  LatLng *verts;
+} GeoLoop;
 
+typedef struct {
+  GeoLoop geoloop;  ///< exterior boundary of the polygon
+  int numHoles;     ///< number of elements in the array pointed to by holes
+  GeoLoop *holes;   ///< interior boundaries (holes) in the polygon
+} GeoPolygon;
+
+typedef struct {
+  int numPolygons;
+  GeoPolygon *polygons;
+} GeoMultiPolygon;
+
+
+typedef struct LinkedLatLng LinkedLatLng;
+struct LinkedLatLng {
+  LatLng vertex;
+  LinkedLatLng *next;
+};
+
+typedef struct LinkedGeoLoop LinkedGeoLoop;
+struct LinkedGeoLoop {
+  LinkedLatLng *first;
+  LinkedLatLng *last;
+  LinkedGeoLoop *next;
+};
+
+
+typedef struct LinkedGeoPolygon LinkedGeoPolygon;
+struct LinkedGeoPolygon {
+  LinkedGeoLoop *first;
+  LinkedGeoLoop *last;
+  LinkedGeoPolygon *next;
+};
+
+
+typedef struct {
+  int i;  ///< i component
+  int j;  ///< j component
+} CoordIJ;
+
+/*Function Definitions /data-raw/DATASET.R*/
+H3Error (*latLngToCell);
+H3Error (*cellToLatLng);
+H3Error (*cellToBoundary);
+int (*getResolution);
+int (*getBaseCellNumber);
+H3Error (*stringToH3);
+H3Error (*h3ToString);
+int (*isValidCell);
+int (*isResClassIII);
+int (*isPentagon);
+H3Error (*getIcosahedronFaces);
+H3Error (*maxFaceCount);
+H3Error (*gridDisk);
+H3Error (*maxGridDiskSize);
+H3Error (*gridDiskDistances);
+H3Error (*gridDiskUnsafe);
+H3Error (*gridDiskDistancesUnsafe);
+H3Error (*gridDiskDistancesSafe);
+H3Error (*gridDisksUnsafe);
+H3Error (*gridRingUnsafe);
+H3Error (*gridPathCells);
+H3Error (*gridPathCellsSize);
+H3Error (*gridDistance);
+H3Error (*cellToLocalIj);
+H3Error (*localIjToCell);
+H3Error (*cellToParent);
+H3Error (*cellToChildren);
+H3Error (*cellToChildrenSize);
+H3Error (*cellToCenterChild);
+H3Error (*cellToChildPos);
+H3Error (*childPosToCell);
+H3Error (*compactCells);
+H3Error (*uncompactCells);
+H3Error (*uncompactCellsSize);
+H3Error (*polygonToCells);
+H3Error (*maxPolygonToCellsSize);
+H3Error (*cellsToLinkedMultiPolygon);
+void (*destroyLinkedMultiPolygon);
+H3Error (*areNeighborCells);
+H3Error (*cellsToDirectedEdge);
+int (*isValidDirectedEdge);
+H3Error (*getDirectedEdgeOrigin);
+H3Error (*getDirectedEdgeDestination);
+H3Error (*directedEdgeToCells);
+H3Error (*originToDirectedEdges);
+H3Error (*directedEdgeToBoundary);
+H3Error (*cellToVertex);
+H3Error (*cellToVertexes);
+H3Error (*vertexToLatLng);
+int (*isValidVertex);
+double (*degsToRads);
+double (*radsToDegs);
+H3Error (*getHexagonAreaAvgKm2);
+H3Error (*getHexagonAreaAvgM2);
+H3Error (*cellAreaRads2);
+H3Error (*cellAreaKm2);
+H3Error (*cellAreaM2);
+H3Error (*getHexagonEdgeLengthAvgKm);
+H3Error (*getHexagonEdgeLengthAvgM);
+H3Error (*edgeLengthKm);
+H3Error (*edgeLengthM);
+H3Error (*edgeLengthRads);
+H3Error (*getNumCells);
+H3Error (*getRes0Cells);
+int (*res0CellCount);
+H3Error (*getPentagons);
+int (*pentagonCount);
+double (*greatCircleDistanceKm);
+double (*greatCircleDistanceM);
+double (*greatCircleDistanceRads);
+Direction (*directionForNeighbor);
+/*End Function Definitions*/
 
 void attribute_visible R_init_h3r(DllInfo *info)
 {
@@ -150,19 +282,19 @@ void attribute_visible R_init_h3r(DllInfo *info)
   R_RegisterCCallable("h3r", "h3rCellToBoundary",  (DL_FUNC) &h3rCellToBoundary);
 
   // Inspection
-  // R_RegisterCCallable("h3r", "h3rGetResolution",       (DL_FUNC) &h3rGetResolution);
-  // R_RegisterCCallable("h3r", "h3rGetBaseCellNumber",   (DL_FUNC) &h3rGetBaseCellNumber);
-  // R_RegisterCCallable("h3r", "h3rIsValidCell",         (DL_FUNC) &h3rIsValidCell);
-  // R_RegisterCCallable("h3r", "h3rIsResClassIII",       (DL_FUNC) &h3rIsResClassIII);
-  // R_RegisterCCallable("h3r", "h3rIsPentagon",          (DL_FUNC) &h3rIsPentagon);
-  // R_RegisterCCallable("h3r", "h3rGetIcosahedronFaces", (DL_FUNC) &h3rGetIcosahedronFaces);
-  // R_RegisterCCallable("h3r", "h3rMaxFaceCount",        (DL_FUNC) &h3rMaxFaceCount);
+  R_RegisterCCallable("h3r", "h3rGetResolution",       (DL_FUNC) &h3rGetResolution);
+  R_RegisterCCallable("h3r", "h3rGetBaseCellNumber",   (DL_FUNC) &h3rGetBaseCellNumber);
+  R_RegisterCCallable("h3r", "h3rIsValidCell",         (DL_FUNC) &h3rIsValidCell);
+  R_RegisterCCallable("h3r", "h3rIsResClassIII",       (DL_FUNC) &h3rIsResClassIII);
+  R_RegisterCCallable("h3r", "h3rIsPentagon",          (DL_FUNC) &h3rIsPentagon);
+  R_RegisterCCallable("h3r", "h3rGetIcosahedronFaces", (DL_FUNC) &h3rGetIcosahedronFaces);
+  R_RegisterCCallable("h3r", "h3rMaxFaceCount",        (DL_FUNC) &h3rMaxFaceCount);
 
   // Traversal
 
   // Hierarchy
-  // R_RegisterCCallable("h3r", "h3rCellToParent",          (DL_FUNC) &h3rCellToParent);
-  // R_RegisterCCallable("h3r", "h3rCellToChildren",        (DL_FUNC) &h3rCellToChildren);
+  R_RegisterCCallable("h3r", "h3rCellToParent",          (DL_FUNC) &h3rCellToParent);
+  R_RegisterCCallable("h3r", "h3rCellToChildren",        (DL_FUNC) &h3rCellToChildren);
   // R_RegisterCCallable("h3r", "h3rCellToChildrenSize",        (DL_FUNC) &h3rCellToChildrenSize);
 
   // R_RegisterCCallable("h3r", "h3r_h3ToString",   (DL_FUNC) &h3H3ToString);
@@ -173,43 +305,43 @@ void attribute_visible R_init_h3r(DllInfo *info)
 
 
   // Directed Edges
-  // R_RegisterCCallable("h3r", "h3rAreNeighborCells",             (DL_FUNC) &h3rAreNeighborCells);
-  // R_RegisterCCallable("h3r", "h3rCellsToDirectedEdge",          (DL_FUNC) &h3rCellsToDirectedEdge);
-  // R_RegisterCCallable("h3r", "h3rIsValidDirectedEdge",          (DL_FUNC) &h3rIsValidDirectedEdge);
-  // R_RegisterCCallable("h3r", "h3rGetDirectedEdgeOrigin",        (DL_FUNC) &h3rGetDirectedEdgeOrigin);
-  // R_RegisterCCallable("h3r", "h3rGetDirectedEdgeDestination",   (DL_FUNC) &h3rGetDirectedEdgeDestination);
-  // R_RegisterCCallable("h3r", "h3rDirectedEdgeToCells",          (DL_FUNC) &h3rDirectedEdgeToCells);
-  // R_RegisterCCallable("h3r", "h3rOriginToDirectedEdges",        (DL_FUNC) &h3rOriginToDirectedEdges);
+  R_RegisterCCallable("h3r", "h3rAreNeighborCells",             (DL_FUNC) &h3rAreNeighborCells);
+  R_RegisterCCallable("h3r", "h3rCellsToDirectedEdge",          (DL_FUNC) &h3rCellsToDirectedEdge);
+  R_RegisterCCallable("h3r", "h3rIsValidDirectedEdge",          (DL_FUNC) &h3rIsValidDirectedEdge);
+  R_RegisterCCallable("h3r", "h3rGetDirectedEdgeOrigin",        (DL_FUNC) &h3rGetDirectedEdgeOrigin);
+  R_RegisterCCallable("h3r", "h3rGetDirectedEdgeDestination",   (DL_FUNC) &h3rGetDirectedEdgeDestination);
+  R_RegisterCCallable("h3r", "h3rDirectedEdgeToCells",          (DL_FUNC) &h3rDirectedEdgeToCells);
+  R_RegisterCCallable("h3r", "h3rOriginToDirectedEdges",        (DL_FUNC) &h3rOriginToDirectedEdges);
 
 
   // Vertexes
-  // R_RegisterCCallable("h3r", "h3rCellToVertex",     (DL_FUNC) &h3rCellToVertex);
-  // R_RegisterCCallable("h3r", "h3rCellToVertexes",   (DL_FUNC) &h3rCellToVertexes);
-  // R_RegisterCCallable("h3r", "h3rVertexToLatLng",   (DL_FUNC) &h3rVertexToLatLng);
-  // R_RegisterCCallable("h3r", "h3rIsValidVertex",    (DL_FUNC) &h3rIsValidVertex);
+  R_RegisterCCallable("h3r", "h3rCellToVertex",     (DL_FUNC) &h3rCellToVertex);
+  R_RegisterCCallable("h3r", "h3rCellToVertexes",   (DL_FUNC) &h3rCellToVertexes);
+  R_RegisterCCallable("h3r", "h3rVertexToLatLng",   (DL_FUNC) &h3rVertexToLatLng);
+  R_RegisterCCallable("h3r", "h3rIsValidVertex",    (DL_FUNC) &h3rIsValidVertex);
 
 
   // Miscellaneous
-  // R_RegisterCCallable("h3r", "h3rDegsToRads",              (DL_FUNC) &h3rDegsToRads);
-  // R_RegisterCCallable("h3r", "h3rRadsToDegs",              (DL_FUNC) &h3rRadsToDegs);
-  //
-  // R_RegisterCCallable("h3r", "h3rGetHexagonAreaAvgM2",    (DL_FUNC) &h3rGetHexagonAreaAvgM2);
-  // R_RegisterCCallable("h3r", "h3rGetHexagonAreaAvgKm2",   (DL_FUNC) &h3rGetHexagonAreaAvgKm2);
-  //
-  // R_RegisterCCallable("h3r", "h3rCellAreaRads2", (DL_FUNC) &h3rCellAreaRads2);
-  // R_RegisterCCallable("h3r", "h3rCellAreaM2",    (DL_FUNC) &h3rCellAreaM2);
-  // R_RegisterCCallable("h3r", "h3rCellAreaKm2",   (DL_FUNC) &h3rCellAreaKm2);
-  //
-  // R_RegisterCCallable("h3r", "h3rGetNumCells",    (DL_FUNC) &h3rGetNumCells);
-  // R_RegisterCCallable("h3r", "h3rGetRes0Cells",   (DL_FUNC) &h3rGetRes0Cells);
-  // R_RegisterCCallable("h3r", "h3rRes0CellCount",  (DL_FUNC) &h3rRes0CellCount);
-  //
-  // R_RegisterCCallable("h3r", "h3rGetPentagons",   (DL_FUNC) &h3rGetPentagons);
-  // R_RegisterCCallable("h3r", "h3rPentagonCount",  (DL_FUNC) &h3rPentagonCount);
-  //
-  // R_RegisterCCallable("h3r", "h3rGreatCircleDistanceRads", (DL_FUNC) &h3rGreatCircleDistanceRads);
-  // R_RegisterCCallable("h3r", "h3rGreatCircleDistanceM",    (DL_FUNC) &h3rGreatCircleDistanceM);
-  // R_RegisterCCallable("h3r", "h3rGreatCircleDistanceKm",   (DL_FUNC) &h3rGreatCircleDistanceKm);
+  R_RegisterCCallable("h3r", "h3rDegsToRads",              (DL_FUNC) &h3rDegsToRads);
+  R_RegisterCCallable("h3r", "h3rRadsToDegs",              (DL_FUNC) &h3rRadsToDegs);
+
+  R_RegisterCCallable("h3r", "h3rGetHexagonAreaAvgM2",    (DL_FUNC) &h3rGetHexagonAreaAvgM2);
+  R_RegisterCCallable("h3r", "h3rGetHexagonAreaAvgKm2",   (DL_FUNC) &h3rGetHexagonAreaAvgKm2);
+
+  R_RegisterCCallable("h3r", "h3rCellAreaRads2", (DL_FUNC) &h3rCellAreaRads2);
+  R_RegisterCCallable("h3r", "h3rCellAreaM2",    (DL_FUNC) &h3rCellAreaM2);
+  R_RegisterCCallable("h3r", "h3rCellAreaKm2",   (DL_FUNC) &h3rCellAreaKm2);
+
+  R_RegisterCCallable("h3r", "h3rGetNumCells",    (DL_FUNC) &h3rGetNumCells);
+  R_RegisterCCallable("h3r", "h3rGetRes0Cells",   (DL_FUNC) &h3rGetRes0Cells);
+  R_RegisterCCallable("h3r", "h3rRes0CellCount",  (DL_FUNC) &h3rRes0CellCount);
+
+  R_RegisterCCallable("h3r", "h3rGetPentagons",   (DL_FUNC) &h3rGetPentagons);
+  R_RegisterCCallable("h3r", "h3rPentagonCount",  (DL_FUNC) &h3rPentagonCount);
+
+  R_RegisterCCallable("h3r", "h3rGreatCircleDistanceRads", (DL_FUNC) &h3rGreatCircleDistanceRads);
+  R_RegisterCCallable("h3r", "h3rGreatCircleDistanceM",    (DL_FUNC) &h3rGreatCircleDistanceM);
+  R_RegisterCCallable("h3r", "h3rGreatCircleDistanceKm",   (DL_FUNC) &h3rGreatCircleDistanceKm);
 
 
   R_forceSymbols(info, TRUE);  // controls visibility
