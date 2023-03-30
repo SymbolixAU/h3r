@@ -68,6 +68,16 @@ SEXP gridDistList(SEXP grid, SEXP dist) {
   return res;
 }
 
+SEXP coordIJList(SEXP i, SEXP j) {
+  const char *names[] = {"i","j",""};
+  SEXP res = PROTECT(mkNamed(VECSXP, names));
+
+  SET_VECTOR_ELT(res, 0, i);
+  SET_VECTOR_ELT(res, 1, j);
+  UNPROTECT(1);
+  return res;
+}
+
 SEXP cellBoundaryToList(CellBoundary *cb) {
   SEXP lats = PROTECT(Rf_allocVector(REALSXP, cb->numVerts));
   SEXP lons = PROTECT(Rf_allocVector(REALSXP, cb->numVerts));

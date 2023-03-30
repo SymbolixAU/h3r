@@ -323,3 +323,50 @@ SEXP h3rGridDistance(SEXP origH3, SEXP destH3) {
   UNPROTECT(1);
   return out;
 }
+
+SEXP h3rCellToLocalIj(SEXP orig, SEXP h3) {
+  R_xlen_t n = Rf_xlength(orig);
+  R_xlen_t i;
+
+  SEXP coordI = PROTECT(Rf_allocVector(INTSXP, n));
+  SEXP coordJ = PROTECT(Rf_allocVector(INTSXP, n));
+
+  H3Index origin, h;
+  CoordIJ ij;
+  uint32_t mode = 0;
+
+  for( i = 0; i < n; i++ ) {
+    origin = sexpStringToH3(orig, i);
+    h = sexpStringToH3(h3, i);
+    h3error(cellToLocalIj(origin, h, mode, &ij), i);
+    SET_INTEGER_ELT(coordI, i, ij.i);
+    SET_INTEGER_ELT(coordJ, i, ij.j);
+  }
+
+  SEXP out = coordIJList(coordI, coordJ);
+
+  UNPROTECT(2);
+  return out;
+}
+
+SEXP h3rLocalIjToCell(SEXP orig, SEXP coordI, SEXP coordJ) {
+  R_xlen_t n = Rf_xlength(coordI);
+  R_xlen_t i;
+
+  SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
+
+  H3Index origin, h;
+  CoordIJ ij;
+  uint32_t mode = 0;
+
+  for( i = 0; i < n; i++ ) {
+    origin = sexpStringToH3(orig, i);
+    ij.i = INTEGER(coordI)[i];
+    ij.j = INTEGER(coordJ)[i];
+    h3error(localIjToCell(origin, &ij, mode, &h), i);
+    SET_STRING_ELT(out, i,h3ToSexpString(h));
+  }
+
+  UNPROTECT(1);
+  return out;
+}

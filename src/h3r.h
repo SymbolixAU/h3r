@@ -35,6 +35,8 @@ SEXP h3rGridRingUnsafe(SEXP h3, SEXP k);
 SEXP h3rGridPathCells(SEXP origH3, SEXP destH3);
 SEXP h3rGridPathCellsSize(SEXP origH3, SEXP destH3);
 SEXP h3rGridDistance(SEXP origH3, SEXP destH3);
+SEXP h3rCellToLocalIj(SEXP orig, SEXP h3); 
+SEXP h3rLocalIjToCell(SEXP orig, SEXP coordI, SEXP coordJ);
 
 // Hierarchy
 SEXP h3rCellToParent(SEXP h3, SEXP parentResolution);
