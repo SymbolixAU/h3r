@@ -81,5 +81,48 @@ SEXP intToSexpArray(int *arr, R_xlen_t n) {
   return out;
 }
 
+char* h3errorToString(int err) {
+    switch (err) {
+        case 0:
+            return "E_SUCCESS: Success (no error)";
+        case 1:
+            return "E_FAILED: The operation failed but a more specific error is not available";
+        case 2:
+            return "E_DOMAIN: Argument was outside of acceptable range (when a more specific error code is not available)";
+        case 3:
+            return "E_LATLNG_DOMAIN: Latitude or longitude arguments were outside of acceptable range";
+        case 4:
+            return "E_RES_DOMAIN: Resolution argument was outside of acceptable range";
+        case 5:
+            return "E_CELL_INVALID: H3Index cell argument was not valid";
+        case 6:
+            return "E_DIR_EDGE_INVALID: H3Index directed edge argument was not valid";
+        case 7:
+            return "E_UNDIR_EDGE_INVALID: H3Index undirected edge argument was not valid";
+        case 8:
+            return "E_VERTEX_INVALID: H3Index vertex argument was not valid";
+        case 9:
+            return "E_PENTAGON: Pentagon distortion was encountered which the algorithm could not handle it";
+        case 10:
+            return "E_DUPLICATE_INPUT: Duplicate input was encountered in the arguments and the algorithm could not handle it";
+        case 11:
+            return "E_NOT_NEIGHBORS: H3Index cell arguments were not neighbors";
+        case 12:
+            return "E_RES_MISMATCH: H3Index cell arguments had incompatible resolutions";
+        case 13:
+            return "E_MEMORY_ALLOC: Necessary memory allocation failed";
+        case 14:
+            return "E_MEMORY_BOUNDS: Bounds of provided memory were not large enough";
+        case 15:
+            return "E_OPTION_INVALID: Mode or flags argument was not valid";
+        default:
+            return "Unknown error code";
+    }
+}
 
-
+void h3error(int err, R_xlen_t i) {
+  if (err) {
+    const char* errStr = h3errorToString(err);
+    error("h3r - Error at item number %td: %s\n", i + 1, errStr);
+  }
+}

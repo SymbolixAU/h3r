@@ -6,3 +6,4 @@ src/*.dll
 .Rhistory
 .RData
 .Ruserdata
+.vscode

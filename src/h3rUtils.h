@@ -51,4 +51,13 @@
  //' Converts an integer array to a SEXP (INTSXP) array
  SEXP intToSexpArray(int *arr, R_xlen_t n);
 
+ //' H3Error to error message
+ //'
+ //' Converts an H3Error to error message
+ char* h3errorToString(int err);
+
+ //' H3Error call R API error
+ //'
+ //' Throw a R error is there is an error
+ void h3error(int err, R_xlen_t i);
 #endif

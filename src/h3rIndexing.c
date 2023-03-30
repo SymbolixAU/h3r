@@ -23,7 +23,7 @@ SEXP h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res) {
 
     sexpToLatLng(&latLng, lat, lon, i);
 
-    latLngToCell(&latLng, ires, &h3Index);
+    h3error(latLngToCell(&latLng, ires, &h3Index), i);
     // h3ToString(h3Index, str, 17);
 
     SET_STRING_ELT(cells, i, h3ToSexpString(h3Index));
@@ -50,7 +50,7 @@ SEXP h3rCellToLatLng(SEXP h3) {
     //if( !isValid ) {
     //  fprintf(stderr, "Invlaid H3");
     //}
-    cellToLatLng(index, &ll);
+    h3error(cellToLatLng(index, &ll), i);
     latLngToSexp(&ll, lats, lons, i);
   }
 
@@ -81,7 +81,7 @@ SEXP h3rCellToBoundary(SEXP h3) {
 
     H3Index index = sexpStringToH3(h3, i);
 
-    cellToBoundary(index, &cb);
+    h3error(cellToBoundary(index, &cb), i);
     SEXP lst = cellBoundaryToList(&cb);
 
     SET_STRING_ELT(names, i, STRING_ELT(h3, i));

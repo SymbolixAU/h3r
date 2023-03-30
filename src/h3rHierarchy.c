@@ -18,7 +18,7 @@ SEXP h3rCellToParent(SEXP h3, SEXP parentResolution) {
     int res = INTEGER_ELT(parentResolution, i);
     H3Index index = sexpStringToH3(h3, i);
     H3Index parent;
-    cellToParent(index, res, &parent);
+    h3error(cellToParent(index, res, &parent), i);
     SET_STRING_ELT(out, i, h3ToSexpString(parent));
   }
 
@@ -43,10 +43,10 @@ SEXP h3rCellToChildren(SEXP h3, SEXP childResolution) {
     int res = INTEGER_ELT(childResolution, i);
 
     int64_t childrenSize;
-    cellToChildrenSize(index, res, &childrenSize);
+    h3error(cellToChildrenSize(index, res, &childrenSize), i);
 
     H3Index children[ childrenSize ];
-    cellToChildren(index, res, children);
+    h3error(cellToChildren(index, res, children), i);
 
     SEXP childIndexes = h3VecToSexpString(children, childrenSize);
 

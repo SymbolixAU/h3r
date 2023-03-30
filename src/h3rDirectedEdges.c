@@ -19,7 +19,7 @@ SEXP h3rAreNeighborCells(SEXP origH3, SEXP destH3) {
   for( i = 0; i < n; i++ ) {
     origin = sexpStringToH3(origH3, i);
     destination = sexpStringToH3(destH3, i);
-    areNeighborCells(origin, destination, &result);
+    h3error(areNeighborCells(origin, destination, &result), i);
     SET_INTEGER_ELT(out, i, result);
   }
 
@@ -38,7 +38,7 @@ SEXP h3rCellsToDirectedEdge(SEXP origH3, SEXP destH3) {
   for( i = 0; i < n; i++ ) {
     origin = sexpStringToH3(origH3, i);
     destination = sexpStringToH3(destH3, i);
-    cellsToDirectedEdge(origin, destination, &edge);
+    h3error(cellsToDirectedEdge(origin, destination, &edge), i);
     SET_STRING_ELT(out, i,h3ToSexpString(edge));
   }
 
@@ -72,7 +72,7 @@ SEXP h3rGetDirectedEdgeOrigin(SEXP edge) {
 
   for( i = 0; i < n; i++ ) {
     h = sexpStringToH3(edge, i);
-    getDirectedEdgeOrigin(h, &origin);
+    h3error(getDirectedEdgeOrigin(h, &origin), i);
     SET_STRING_ELT(out, i, h3ToSexpString(origin));
   }
 
@@ -90,7 +90,7 @@ SEXP h3rGetDirectedEdgeDestination(SEXP edge) {
 
   for( i = 0; i < n; i++ ) {
     h = sexpStringToH3(edge, i);
-    getDirectedEdgeDestination(h, &destination);
+    h3error(getDirectedEdgeDestination(h, &destination), i);
     SET_STRING_ELT(out, i, h3ToSexpString(destination));
   }
 
@@ -109,7 +109,7 @@ SEXP h3rDirectedEdgeToCells(SEXP edge) {
 
   for( i = 0; i < n; i++ ) {
     h = sexpStringToH3(edge, i);
-    directedEdgeToCells(h, origDest);
+    h3error(directedEdgeToCells(h, origDest), i);
     SET_STRING_ELT(orig, i, h3ToSexpString(origDest[0]));
     SET_STRING_ELT(dest, i, h3ToSexpString(origDest[1]));
   }
@@ -133,7 +133,7 @@ SEXP h3rOriginToDirectedEdges(SEXP origH3) {
 
   for( i = 0; i < n; i++ ) {
     origin = sexpStringToH3(origH3, i);
-    originToDirectedEdges(origin, edges);
+    h3error(originToDirectedEdges(origin, edges), i);
 
     SEXP group = PROTECT(Rf_allocVector(STRSXP, m));
 
