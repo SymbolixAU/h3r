@@ -17,6 +17,6 @@ Compacts the set cellSet of indexes as best as possible, into the array compacte
 }
 \examples{
 
-compactCells(gridDisk('85283473fffffff', 2L))
+compactCells(gridDisk(cell = c("8cbe63562a54bff","8cbe635631103ff"), k = c(1L, 2L)))
 
 }
