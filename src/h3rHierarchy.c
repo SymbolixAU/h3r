@@ -80,3 +80,47 @@ SEXP h3rCellToCenterChild(SEXP h3, SEXP res) {
   UNPROTECT(1);
   return out;
 }
+
+SEXP h3rCellToChildPos(SEXP h3, SEXP res) {
+  R_xlen_t n = Rf_xlength(h3);
+  R_xlen_t i;
+
+  SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
+
+  H3Index h;
+  int ires;
+  int64_t num;
+
+  for( i = 0; i < n; i++ ) {
+    ires = INTEGER(res)[i];
+    h = sexpStringToH3(h3, i);
+    h3error(cellToChildPos(h, ires, &num), i);
+
+    SET_REAL_ELT(out, i, (double)num);
+  }
+
+  UNPROTECT(1);
+  return out;
+}
+
+SEXP h3rChildPosToCell(SEXP pos, SEXP h3, SEXP res) {
+  R_xlen_t n = Rf_xlength(h3);
+  R_xlen_t i;
+
+  SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
+
+  H3Index h, child;
+  int ires;
+  int64_t childPos;
+
+  for( i = 0; i < n; i++ ) {
+    ires = INTEGER(res)[i];
+    h = sexpStringToH3(h3, i);
+    childPos = (int64_t)REAL(pos)[i];
+    h3error(childPosToCell(childPos, h, ires, &child), i);
+    SET_STRING_ELT(out, i, h3ToSexpString(child));
+  }
+
+  UNPROTECT(1);
+  return out;
+}

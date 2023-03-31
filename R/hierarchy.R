@@ -42,13 +42,53 @@ cellToChildren <- function(cell, childRes) {
   .Call(h3rCellToChildren, cell, childRes)
 }
 
-#' Cell To Center Child
-#'
 #' Provies the center child index contained by `cell` at the `childRes` resolution
+#'
+#' @param cell vector of H3 cells
+#' @param childRes integer vector specifying the child resolution for each `cell`
+#'
+#' @return index of the child cells
+#'
+#' @examples
+#'
+#' cellToCenterChild(cell = c("85283473fffffff","85283473fffffff"), childRes = c(7L, 8L))
 #'
 #' @export
 cellToCenterChild <- function(cell, childRes) {
+  .Call(h3rCellToCenterChild, cell, childRes)
+}
 
+#' Returns the position of the child cell within an ordered list of all children of the cell's parent at the specified resolution parentRes.
+#'
+#' @param cell vector of child H3 cells
+#' @param parentRes integer vector specifying the parent resolution for each `cell`
+#'
+#' @return the position of the child cell
+#'
+#' @examples
+#'
+#' cellToChildPos(cell = c("8cbe63562a54bff","8cbe635631103ff"), parentRes = c(1L, 2L))
+#'
+#' @export
+cellToChildPos <- function(cell, parentRes) {
+  .Call(h3rCellToChildPos, cell, parentRes)
+}
+
+#' Returns the child cell at a given position within an ordered list of all children of parent at the specified resolution childRes.
+#'
+#' @param childPos the position of the child cell
+#' @param cell vector of parent H3 cells
+#' @param childRes integer vector specifying the child resolution for each `cell`
+#'
+#' @return the position of the child cell
+#'
+#' @examples
+#'
+#' cchildPosToCell(childPos = c(42, 41), cell = c("85283473fffffff","85283473fffffff"), childRes = c(7L, 7L))
+#'
+#' @export
+childPosToCell <- function(childPos, cell, childRes) {
+  .Call(h3rChildPosToCell, childPos, cell, childRes)
 }
 
 ## TODO:

@@ -21,6 +21,6 @@ Produces an H3 index from local IJ coordinates anchored by an origin.
 }
 \examples{
 
-localIjToCell(cell = c("85283473fffffff","85283473fffffff"), i = c(1L, 2L), j = c(2L, 1L))
+localIjToCell(origin = c("85283473fffffff","85283473fffffff"), i = c(1L, 2L), j = c(2L, 1L))
 
 }

@@ -2,10 +2,23 @@
 % Please edit documentation in R/hierarchy.R
 \name{cellToCenterChild}
 \alias{cellToCenterChild}
-\title{Cell To Center Child}
+\title{Provies the center child index contained by `cell` at the `childRes` resolution}
 \usage{
 cellToCenterChild(cell, childRes)
 }
+\arguments{
+\item{cell}{vector of H3 cells}
+
+\item{childRes}{integer vector specifying the child resolution for each `cell`}
+}
+\value{
+index of the child cells
+}
 \description{
 Provies the center child index contained by `cell` at the `childRes` resolution
+}
+\examples{
+
+cellToCenterChild(cell = c("8cbe63562a54bff","8cbe635631103ff"), childRes = c(1L, 2L))
+
 }
