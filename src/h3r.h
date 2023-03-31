@@ -58,6 +58,7 @@ SEXP h3rGetDirectedEdgeOrigin(SEXP edge);
 SEXP h3rGetDirectedEdgeDestination(SEXP edge);
 SEXP h3rDirectedEdgeToCells(SEXP edge);
 SEXP h3rOriginToDirectedEdges(SEXP origH3);
+SEXP h3rDirectedEdgeToBoundary(SEXP h3);
 
 // Vertexes
 SEXP h3rCellToVertex(SEXP h3, SEXP vertexNum);

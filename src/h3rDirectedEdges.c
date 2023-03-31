@@ -150,5 +150,28 @@ SEXP h3rOriginToDirectedEdges(SEXP origH3) {
   return out;
 }
 
-// TODO:
-// SEXP h3rDirectedEdgeToBoundary(SEXP edge)
+SEXP h3rDirectedEdgeToBoundary(SEXP h3) {
+  R_xlen_t n = Rf_xlength(h3);
+  R_xlen_t i;
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, n));
+
+  CellBoundary cb;
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
+
+  for( i = 0; i < n; i++ ) {
+
+    H3Index h = sexpStringToH3(h3, i);
+
+    h3error(cellToBoundary(h, &cb), i);
+    SEXP lst = cellBoundaryToList(&cb);
+
+    SET_STRING_ELT(names, i, STRING_ELT(h3, i));
+    SET_VECTOR_ELT(out, i, lst);
+  }
+
+  Rf_setAttrib(out, R_NamesSymbol, names);
+
+  UNPROTECT(2);
+  return out;
+}

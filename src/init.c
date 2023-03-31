@@ -39,7 +39,8 @@ static const R_CallMethodDef callMethods[] = {
   {"h3rGridPathCellsSize",        (DL_FUNC) &h3rGridPathCellsSize, 2},
   {"h3rGridDistance",             (DL_FUNC) &h3rGridDistance, 2},
   {"h3rCellToLocalIj",            (DL_FUNC) &h3rCellToLocalIj, 2},
-  {"h3rLocalIjToCell",             (DL_FUNC) &h3rLocalIjToCell, 3},
+  {"h3rLocalIjToCell",            (DL_FUNC) &h3rLocalIjToCell, 3},
+  {"h3rDirectedEdgeToBoundary",   (DL_FUNC) &h3rDirectedEdgeToBoundary, 1},
 
   // Hierarchy
   {"h3rCellToParent",        (DL_FUNC) &h3rCellToParent,       2},
@@ -181,7 +182,7 @@ void attribute_visible R_init_h3r(DllInfo *info)
   R_RegisterCCallable("h3r", "h3rGetDirectedEdgeDestination",   (DL_FUNC) &h3rGetDirectedEdgeDestination);
   R_RegisterCCallable("h3r", "h3rDirectedEdgeToCells",          (DL_FUNC) &h3rDirectedEdgeToCells);
   R_RegisterCCallable("h3r", "h3rOriginToDirectedEdges",        (DL_FUNC) &h3rOriginToDirectedEdges);
-
+  R_RegisterCCallable("h3r", "h3rDirectedEdgeToBoundary",       (DL_FUNC) &h3rDirectedEdgeToBoundary);
 
   // Vertexes
   R_RegisterCCallable("h3r", "h3rCellToVertex",     (DL_FUNC) &h3rCellToVertex);
