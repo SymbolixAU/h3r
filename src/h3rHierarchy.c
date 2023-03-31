@@ -124,3 +124,76 @@ SEXP h3rChildPosToCell(SEXP pos, SEXP h3, SEXP res) {
   UNPROTECT(1);
   return out;
 }
+
+SEXP h3rCompactCells(SEXP h3Sets) {
+  R_xlen_t n = Rf_xlength(h3Sets);
+  R_xlen_t i;
+  int64_t j, setSize;
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
+
+  for (i = 0; i < n; i++) {
+    SEXP h3Set = VECTOR_ELT(h3Sets, i);
+    setSize = Rf_xlength(h3Set);
+
+    H3Index cellSet[setSize];
+    H3Index compactedSet[setSize];
+
+    for (j = 0; j < setSize; j++) {
+      cellSet[j] = sexpStringToH3(h3Set, j);
+    }
+
+    h3error(compactCells(cellSet, compactedSet, setSize), i);
+
+    SEXP compactedGroup = PROTECT(Rf_allocVector(STRSXP, setSize));
+
+    for (j = 0; j < setSize; j++) {
+      SET_STRING_ELT(compactedGroup, j, h3ToSexpString(compactedSet[j]));
+    }
+
+    SET_VECTOR_ELT(out, i, compactedGroup);
+    UNPROTECT(1);
+  }
+
+  UNPROTECT(1);
+  return out;
+}
+
+SEXP h3rUncompactCells(SEXP h3Sets, SEXP res) {
+  R_xlen_t n = Rf_xlength(h3Sets);
+  R_xlen_t i;
+  int64_t j, setSize, maxCells;
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
+
+  int ires;
+
+  for (i = 0; i < n; i++) {
+    SEXP h3Set = VECTOR_ELT(h3Sets, i);
+    setSize = Rf_xlength(h3Set);
+
+    H3Index compactedSet[setSize];
+    ires = INTEGER(res)[i];
+    
+    for (j = 0; j < setSize; j++) {
+      compactedSet[j] = sexpStringToH3(h3Set, j);
+    }
+
+    h3error(uncompactCellsSize(compactedSet, setSize, ires, &maxCells), i);
+    H3Index cellSet[maxCells];
+
+    h3error(uncompactCells(compactedSet, setSize, cellSet, maxCells, ires), i);
+
+    SEXP uncompactedGroup = PROTECT(Rf_allocVector(STRSXP, maxCells));
+
+    for (j = 0; j < maxCells; j++) {
+      SET_STRING_ELT(uncompactedGroup, j, h3ToSexpString(cellSet[j]));
+    }
+
+    SET_VECTOR_ELT(out, i, uncompactedGroup);
+    UNPROTECT(1);
+  }
+
+  UNPROTECT(1);
+  return out;
+}

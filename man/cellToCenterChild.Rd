@@ -19,6 +19,6 @@ Provies the center child index contained by `cell` at the `childRes` resolution
 }
 \examples{
 
-cellToCenterChild(cell = c("8cbe63562a54bff","8cbe635631103ff"), childRes = c(1L, 2L))
+cellToCenterChild(cell = c("85283473fffffff","85283473fffffff"), childRes = c(7L, 8L))
 
 }

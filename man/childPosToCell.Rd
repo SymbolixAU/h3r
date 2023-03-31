@@ -21,6 +21,6 @@ Returns the child cell at a given position within an ordered list of all childre
 }
 \examples{
 
-childPosToCell(childPos = c(42L, 31L), cell = c("8cbe63562a54bff","8cbe635631103ff"), childRes = c(7L, 6L))
+childPosToCell(childPos = c(42, 41), cell = c("85283473fffffff","85283473fffffff"), childRes = c(7L, 7L))
 
 }

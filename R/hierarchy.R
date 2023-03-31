@@ -84,17 +84,48 @@ cellToChildPos <- function(cell, parentRes) {
 #'
 #' @examples
 #'
-#' cchildPosToCell(childPos = c(42, 41), cell = c("85283473fffffff","85283473fffffff"), childRes = c(7L, 7L))
+#' childPosToCell(childPos = c(42, 41), cell = c("85283473fffffff","85283473fffffff"), childRes = c(7L, 7L))
 #'
 #' @export
 childPosToCell <- function(childPos, cell, childRes) {
   .Call(h3rChildPosToCell, childPos, cell, childRes)
 }
 
+#' Compacts the set cellSet of indexes as best as possible, into the array compactedSet.
+#'
+#' @param cellSet list of character vectors containing to be compacted H3 cell indexes
+#'
+#' @return a list of character vectors containing the compacted H3 cell indexes
+#'
+#' @examples
+#'
+#' compactCells(gridDisk('85283473fffffff', 2L))
+#'
+#' @export
+compactCells <- function(cellSet) {
+.Call(h3rCompactCells, cellSet)
+}
+
+#' Uncompacts a set of compacted H3 cell indexes to a given resolution.
+#'
+#' This function uncompacts the provided set of compacted H3 cell indexes to the specified resolution.
+#'
+#' @param compactedSet list of character vectors containing compacted H3 cell indexes
+#' @param res integer specifying the resolution to uncompact the cells to
+#'
+#' @return a list of character vectors containing the uncompacted H3 cell indexes at the specified resolution
+#'
+#' @examples
+#'
+#' uncompactCells(compactCells(gridDisk('85283473fffffff', 1L)), res = 5L)
+#'
+#' @export
+uncompactCells <- function(compactedSet, res) {
+.Call(h3rUncompactCells, compactedSet, res)
+}
+
 ## TODO:
 # cellToChildrenSize <-- returns int64_t
-# cellToCenterChild
-# cellToChildPos
 # compactCells
 # uncompactCells
 # uncompactCellsSize
