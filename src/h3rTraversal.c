@@ -45,19 +45,16 @@ SEXP h3rMaxGridDiskSize(SEXP k) {
   R_xlen_t n = Rf_xlength(k);
   R_xlen_t i;
 
-  SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
+  SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
 
   int distance;
   int64_t num;
-  char buffer[21];
 
   for( i = 0; i < n; i++ ) {
     distance = INTEGER(k)[i];
     h3error(maxGridDiskSize(distance, &num), i);
 
-    sprintf(buffer, "%lld", (long long int)num);
-
-    SET_STRING_ELT(out, i, Rf_mkChar(buffer));
+    SET_REAL_ELT(out, i, (double)num);
   }
 
   UNPROTECT(1);
@@ -280,20 +277,16 @@ SEXP h3rGridPathCellsSize(SEXP origH3, SEXP destH3) {
   R_xlen_t n = Rf_xlength(origH3);
   R_xlen_t i;
 
-  SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
+  SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
 
   H3Index origin, destination;
   int64_t num;
-  char buffer[21];
 
   for( i = 0; i < n; i++ ) {
     origin = sexpStringToH3(origH3, i);
     destination = sexpStringToH3(destH3, i);
     h3error(gridPathCellsSize(origin, destination, &num), i);
-
-    sprintf(buffer, "%lld", (long long int)num);
-
-    SET_STRING_ELT(out, i, Rf_mkChar(buffer));
+    SET_REAL_ELT(out, i, (double)num);
   }
 
   UNPROTECT(1);
@@ -304,20 +297,17 @@ SEXP h3rGridDistance(SEXP origH3, SEXP destH3) {
   R_xlen_t n = Rf_xlength(origH3);
   R_xlen_t i;
 
-  SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
+  SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
 
   H3Index origin, destination;
   int64_t num;
-  char buffer[21];
 
   for( i = 0; i < n; i++ ) {
     origin = sexpStringToH3(origH3, i);
     destination = sexpStringToH3(destH3, i);
     h3error(gridDistance(origin, destination, &num), i);
 
-    sprintf(buffer, "%lld", (long long int)num);
-
-    SET_STRING_ELT(out, i, Rf_mkChar(buffer));
+    SET_REAL_ELT(out, i, (double)num);
   }
 
   UNPROTECT(1);
