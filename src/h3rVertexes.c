@@ -56,7 +56,6 @@ SEXP h3rVertexToLatLng(SEXP h3) {
 
   SEXP lats = PROTECT(Rf_allocVector(REALSXP, n));
   SEXP lons = PROTECT(Rf_allocVector(REALSXP, n));
-  SEXP out = PROTECT(Rf_allocVector(VECSXP, 2));
 
   LatLng point;
   for( i = 0; i < n; i++ ) {
@@ -65,10 +64,9 @@ SEXP h3rVertexToLatLng(SEXP h3) {
     vertexToLatLng(index, &point);
     latLngToSexp(&point, lats, lons, i);
   }
-  SET_VECTOR_ELT(out, 0, lats);
-  SET_VECTOR_ELT(out, 1, lons);
+  SEXP out = latLngList(lats, lons);
 
-  UNPROTECT(3);
+  UNPROTECT(2);
   return out;
 }
 

@@ -48,8 +48,7 @@ cellToVertexes <- function(cell) {
 #'
 #' vertexToLatLng(
 #'   vertex = cellToVertex(
-#'     cell = c("8cbe63562a54bff", "8cbe635631103ff")
-#'     , vertexNum = c(1L, 3L)
+#'     vertex = c("24cbe63562a549ff","255283463fffffff")
 #'     )
 #' )
 #'
