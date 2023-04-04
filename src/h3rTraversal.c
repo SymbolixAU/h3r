@@ -221,12 +221,12 @@ SEXP h3rGridRingUnsafe(SEXP h3, SEXP k) {
     length = INTEGER(k)[i];
 
     h3error(maxGridDiskSize(length, &maxSize), i);
-    H3Index result[maxSize - 1];
-    SEXP group = PROTECT(Rf_allocVector(STRSXP, maxSize - 1));
+    H3Index result[maxSize];
+    SEXP group = PROTECT(Rf_allocVector(STRSXP, maxSize));
 
     h3error(gridRingUnsafe(h, length, result), i);
 
-    for( j = 0; j < maxSize - 1; j++){
+    for( j = 0; j < maxSize; j++){
       SET_STRING_ELT(group, j, h3ToSexpString(result[j]));
     }
     SET_VECTOR_ELT(out, i, group);

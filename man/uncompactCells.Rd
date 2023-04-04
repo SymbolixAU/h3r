@@ -19,6 +19,6 @@ This function uncompacts the provided set of compacted H3 cell indexes to the sp
 }
 \examples{
 
-uncompactCells(compactCells(gridDisk('85283473fffffff', 1L)), res = 5L)
+uncompactCells(compactCells(gridDisk(cell = c("85283477fffffff","85283423fffffff"), k = c(1L, 2L))), res = c(5L, 5L))
 
 }
