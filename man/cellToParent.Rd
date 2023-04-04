@@ -20,7 +20,7 @@ Provides the parent (coarser) index containing `cell`
 \examples{
 
 cell <- "8cbe63562a54bff"
-getResolution(cell = cell)
+getResolution(cell = cell)2
 
 ## The `parentRes` should be a lower value than the result of `getResolution()`
 cellToParent(cell = rep(cell, 2), parentRes = c(11L, 10L))
