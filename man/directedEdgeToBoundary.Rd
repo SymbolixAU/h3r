@@ -18,6 +18,6 @@ Directed edge To Boundary
 }
 \examples{
 
-directedEdgeToBoundary(cell = c("115283473fffffff","115283477fffffff"))
+directedEdgeToBoundary(edge = c("115283473fffffff","115283477fffffff"))
 
 }
