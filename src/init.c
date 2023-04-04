@@ -111,9 +111,163 @@ static const R_CallMethodDef callMethods[] = {
 };
 
 /* Imports from h3lib */
-double (*degsToRads)(double);
-double (*radsToDegs)(double);
-// int (*h3ToString)(H3Index, char, size_t);
+typedef uint32_t H3Error;
+
+typedef enum {
+  /** H3 digit in center */
+  CENTER_DIGIT = 0,
+  /** H3 digit in k-axes direction */
+  K_AXES_DIGIT = 1,
+  /** H3 digit in j-axes direction */
+  J_AXES_DIGIT = 2,
+  /** H3 digit in j == k direction */
+  JK_AXES_DIGIT = J_AXES_DIGIT | K_AXES_DIGIT, /* 3 */
+  /** H3 digit in i-axes direction */
+  I_AXES_DIGIT = 4,
+  /** H3 digit in i == k direction */
+  IK_AXES_DIGIT = I_AXES_DIGIT | K_AXES_DIGIT, /* 5 */
+  /** H3 digit in i == j direction */
+  IJ_AXES_DIGIT = I_AXES_DIGIT | J_AXES_DIGIT, /* 6 */
+  /** H3 digit in the invalid direction */
+  INVALID_DIGIT = 7,
+  /** Valid digits will be less than this value. Same value as INVALID_DIGIT.
+   */
+  NUM_DIGITS = INVALID_DIGIT,
+  /** Child digit which is skipped for pentagons */
+  PENTAGON_SKIPPED_DIGIT = K_AXES_DIGIT /* 1 */
+} Direction;
+
+typedef uint64_t H3Index;
+
+#define MAX_CELL_BNDRY_VERTS 10
+
+typedef struct {
+  double lat;  ///< latitude in radians
+  double lng;  ///< longitude in radians
+} LatLng;
+
+typedef struct {
+  int numVerts;                        ///< number of vertices
+  LatLng verts[MAX_CELL_BNDRY_VERTS];  ///< vertices in ccw order
+} CellBoundary;
+
+typedef struct {
+  int numVerts;
+  LatLng *verts;
+} GeoLoop;
+
+typedef struct {
+  GeoLoop geoloop;  ///< exterior boundary of the polygon
+  int numHoles;     ///< number of elements in the array pointed to by holes
+  GeoLoop *holes;   ///< interior boundaries (holes) in the polygon
+} GeoPolygon;
+
+typedef struct {
+  int numPolygons;
+  GeoPolygon *polygons;
+} GeoMultiPolygon;
+
+
+typedef struct LinkedLatLng LinkedLatLng;
+struct LinkedLatLng {
+  LatLng vertex;
+  LinkedLatLng *next;
+};
+
+typedef struct LinkedGeoLoop LinkedGeoLoop;
+struct LinkedGeoLoop {
+  LinkedLatLng *first;
+  LinkedLatLng *last;
+  LinkedGeoLoop *next;
+};
+
+
+typedef struct LinkedGeoPolygon LinkedGeoPolygon;
+struct LinkedGeoPolygon {
+  LinkedGeoLoop *first;
+  LinkedGeoLoop *last;
+  LinkedGeoPolygon *next;
+};
+
+
+typedef struct {
+  int i;  ///< i component
+  int j;  ///< j component
+} CoordIJ;
+
+/*Function Definitions /data-raw/DATASET.R*/
+H3Error (*latLngToCell);
+H3Error (*cellToLatLng);
+H3Error (*cellToBoundary);
+int (*getResolution);
+int (*getBaseCellNumber);
+H3Error (*stringToH3);
+H3Error (*h3ToString);
+int (*isValidCell);
+int (*isResClassIII);
+int (*isPentagon);
+H3Error (*getIcosahedronFaces);
+H3Error (*maxFaceCount);
+H3Error (*gridDisk);
+H3Error (*maxGridDiskSize);
+H3Error (*gridDiskDistances);
+H3Error (*gridDiskUnsafe);
+H3Error (*gridDiskDistancesUnsafe);
+H3Error (*gridDiskDistancesSafe);
+H3Error (*gridDisksUnsafe);
+H3Error (*gridRingUnsafe);
+H3Error (*gridPathCells);
+H3Error (*gridPathCellsSize);
+H3Error (*gridDistance);
+H3Error (*cellToLocalIj);
+H3Error (*localIjToCell);
+H3Error (*cellToParent);
+H3Error (*cellToChildren);
+H3Error (*cellToChildrenSize);
+H3Error (*cellToCenterChild);
+H3Error (*cellToChildPos);
+H3Error (*childPosToCell);
+H3Error (*compactCells);
+H3Error (*uncompactCells);
+H3Error (*uncompactCellsSize);
+H3Error (*polygonToCells);
+H3Error (*maxPolygonToCellsSize);
+H3Error (*cellsToLinkedMultiPolygon);
+void (*destroyLinkedMultiPolygon);
+H3Error (*areNeighborCells);
+H3Error (*cellsToDirectedEdge);
+int (*isValidDirectedEdge);
+H3Error (*getDirectedEdgeOrigin);
+H3Error (*getDirectedEdgeDestination);
+H3Error (*directedEdgeToCells);
+H3Error (*originToDirectedEdges);
+H3Error (*directedEdgeToBoundary);
+H3Error (*cellToVertex);
+H3Error (*cellToVertexes);
+H3Error (*vertexToLatLng);
+int (*isValidVertex);
+double (*degsToRads);
+double (*radsToDegs);
+H3Error (*getHexagonAreaAvgKm2);
+H3Error (*getHexagonAreaAvgM2);
+H3Error (*cellAreaRads2);
+H3Error (*cellAreaKm2);
+H3Error (*cellAreaM2);
+H3Error (*getHexagonEdgeLengthAvgKm);
+H3Error (*getHexagonEdgeLengthAvgM);
+H3Error (*edgeLengthKm);
+H3Error (*edgeLengthM);
+H3Error (*edgeLengthRads);
+H3Error (*getNumCells);
+H3Error (*getRes0Cells);
+int (*res0CellCount);
+H3Error (*getPentagons);
+int (*pentagonCount);
+double (*greatCircleDistanceKm);
+double (*greatCircleDistanceM);
+double (*greatCircleDistanceRads);
+Direction (*directionForNeighbor);
+/*End Function Definitions*/
 
 void attribute_visible R_init_h3r(DllInfo *info)
 {
@@ -122,8 +276,10 @@ void attribute_visible R_init_h3r(DllInfo *info)
   R_useDynamicSymbols(info, FALSE);
 
   /* Imports from h3lib */
-  degsToRads = (double(*)(double degrees)) R_GetCCallable("h3lib", "degsToRads");
-  radsToDegs = (double(*)(double radians)) R_GetCCallable("h3lib", "radsToDegs");
+  // degsToRads = (double(*)(double degrees)) R_GetCCallable("h3lib", "degsToRads");
+  // radsToDegs = (double(*)(double radians)) R_GetCCallable("h3lib", "radsToDegs");
+  // areNeighborCells = (H3Error(*)(H3Index, H3Index, int*)) R_GetCCallable("h3lib", "areNeighborCells");
+
 
   /* Exports from h3r */
   // Indexing
@@ -192,8 +348,6 @@ void attribute_visible R_init_h3r(DllInfo *info)
 
 
   // Miscellaneous
-  R_RegisterCCallable("h3r", "degsToRads",                 (DL_FUNC) &degsToRads);
-
   R_RegisterCCallable("h3r", "h3rDegsToRads",              (DL_FUNC) &h3rDegsToRads);
   R_RegisterCCallable("h3r", "h3rRadsToDegs",              (DL_FUNC) &h3rRadsToDegs);
 
