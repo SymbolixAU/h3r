@@ -111,3 +111,19 @@ directedEdgeToCells <- function(edge) {
 originToDirectedEdges <- function(origin) {
   .Call(h3rOriginToDirectedEdges, origin)
 }
+
+#' Directed edge To Boundary
+#'
+#' @param edge unidirectional edge
+#'
+#' @return named list, each element named with the input H3 cell, and containing
+#' a `lat` and `lng` vector
+#'
+#' @examples
+#'
+#' directedEdgeToBoundary(edge = c("115283473fffffff","115283477fffffff"))
+#'
+#' @export
+directedEdgeToBoundary <- function(edge) {
+  .Call(h3rDirectedEdgeToBoundary, edge)
+}

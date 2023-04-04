@@ -9,7 +9,7 @@ cellToVertex(cell, vertexNum)
 \arguments{
 \item{cell}{vector of H3 cells}
 
-\item{vertexNum}{intger giving the vertex number of the index to return}
+\item{vertexNum}{integer giving the vertex number of the index to return}
 }
 \description{
 Returns the index for the specified cell vertex.

@@ -18,7 +18,7 @@ SEXP h3rCellToParent(SEXP h3, SEXP parentResolution) {
     int res = INTEGER_ELT(parentResolution, i);
     H3Index index = sexpStringToH3(h3, i);
     H3Index parent;
-    cellToParent(index, res, &parent);
+    h3error(cellToParent(index, res, &parent), i);
     SET_STRING_ELT(out, i, h3ToSexpString(parent));
   }
 
@@ -33,7 +33,7 @@ SEXP h3rCellToChildren(SEXP h3, SEXP childResolution) {
   R_xlen_t i;
 
   SEXP names = PROTECT(Rf_allocVector(STRSXP, n));
-  SEXP out = PROTECT(Rf_allocVector(VECSXP, n)); // store he results in a list
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, n)); // store the results in a list
   // where each element be named as per the cell, and the values will be the child indexes
 
   for( i = 0; i < n; i++ ) {
@@ -43,10 +43,10 @@ SEXP h3rCellToChildren(SEXP h3, SEXP childResolution) {
     int res = INTEGER_ELT(childResolution, i);
 
     int64_t childrenSize;
-    cellToChildrenSize(index, res, &childrenSize);
+    h3error(cellToChildrenSize(index, res, &childrenSize), i);
 
     H3Index children[ childrenSize ];
-    cellToChildren(index, res, children);
+    h3error(cellToChildren(index, res, children), i);
 
     SEXP childIndexes = h3VecToSexpString(children, childrenSize);
 
@@ -59,4 +59,135 @@ SEXP h3rCellToChildren(SEXP h3, SEXP childResolution) {
   UNPROTECT(2);
   return out;
 
+}
+
+SEXP h3rCellToCenterChild(SEXP h3, SEXP res) {
+  R_xlen_t n = Rf_xlength(h3);
+  R_xlen_t i;
+
+  SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
+
+  H3Index h, child;
+  int ires;
+
+  for( i = 0; i < n; i++ ) {
+    ires = INTEGER(res)[i];
+    h = sexpStringToH3(h3, i);
+    h3error(cellToCenterChild(h, ires, &child), i);
+    SET_STRING_ELT(out, i, h3ToSexpString(child));
+  }
+
+  UNPROTECT(1);
+  return out;
+}
+
+SEXP h3rCellToChildPos(SEXP h3, SEXP res) {
+  R_xlen_t n = Rf_xlength(h3);
+  R_xlen_t i;
+
+  SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
+
+  H3Index h;
+  int ires;
+  int64_t num;
+
+  for( i = 0; i < n; i++ ) {
+    ires = INTEGER(res)[i];
+    h = sexpStringToH3(h3, i);
+    h3error(cellToChildPos(h, ires, &num), i);
+
+    SET_REAL_ELT(out, i, (double)num);
+  }
+
+  UNPROTECT(1);
+  return out;
+}
+
+SEXP h3rChildPosToCell(SEXP pos, SEXP h3, SEXP res) {
+  R_xlen_t n = Rf_xlength(h3);
+  R_xlen_t i;
+
+  SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
+
+  H3Index h, child;
+  int ires;
+  int64_t childPos;
+
+  for( i = 0; i < n; i++ ) {
+    ires = INTEGER(res)[i];
+    h = sexpStringToH3(h3, i);
+    childPos = (int64_t)REAL(pos)[i];
+    h3error(childPosToCell(childPos, h, ires, &child), i);
+    SET_STRING_ELT(out, i, h3ToSexpString(child));
+  }
+
+  UNPROTECT(1);
+  return out;
+}
+
+SEXP h3rCompactCells(SEXP h3Sets) {
+  R_xlen_t n = Rf_xlength(h3Sets);
+  R_xlen_t i;
+  int64_t j, setSize, outputSize;
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
+
+  for (i = 0; i < n; i++) {
+    SEXP h3Set = VECTOR_ELT(h3Sets, i);
+    setSize = Rf_xlength(h3Set);
+
+    H3Index cellSet[setSize];
+    H3Index compactedSet[setSize];
+
+    for (j = 0; j < setSize; j++) {
+      cellSet[j] = sexpStringToH3(h3Set, j);
+    }
+
+    h3error(compactCells(cellSet, compactedSet, setSize), i);
+
+    j = 0;
+    while (j < setSize && isValidCell(compactedSet[j])) {
+      j++;
+    }
+    outputSize = j;
+
+    SET_VECTOR_ELT(out, i, h3VecToSexpString(compactedSet, outputSize));
+    UNPROTECT(1);
+  }
+
+  UNPROTECT(1);
+  return out;
+}
+
+SEXP h3rUncompactCells(SEXP h3Sets, SEXP res) {
+  R_xlen_t n = Rf_xlength(h3Sets);
+  R_xlen_t i;
+  int64_t j, setSize, cellSize;
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
+
+  int ires;
+
+  for (i = 0; i < n; i++) {
+    SEXP h3Set = VECTOR_ELT(h3Sets, i);
+    setSize = Rf_xlength(h3Set);
+
+    H3Index compactedSet[setSize];
+    ires = INTEGER(res)[i];
+    
+    for (j = 0; j < setSize; j++) {
+      compactedSet[j] = sexpStringToH3(h3Set, j);
+    }
+
+    h3error(uncompactCellsSize(compactedSet, setSize, ires, &cellSize), i);
+    H3Index cellSet[cellSize];
+
+    h3error(uncompactCells(compactedSet, setSize, cellSet, cellSize, ires), i);
+
+    SET_VECTOR_ELT(out, i, h3VecToSexpString(cellSet, cellSize));
+    UNPROTECT(1);
+  }
+
+  UNPROTECT(1);
+  return out;
 }
