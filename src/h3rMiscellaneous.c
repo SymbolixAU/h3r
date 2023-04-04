@@ -190,18 +190,15 @@ SEXP h3rGetNumCells(SEXP res) {
   R_xlen_t n = Rf_xlength(res);
   R_xlen_t i;
 
-  SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
+  SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
 
   int ires;
   int64_t num;
-  char buffer[21];
-
+  
   for( i = 0; i < n; i++ ) {
     ires = INTEGER(res)[i];
     h3error(getNumCells(ires, &num), i);
-    sprintf(buffer, "%lld", (long long int)num);
-
-    SET_STRING_ELT(out, i, Rf_mkChar(buffer));
+    SET_REAL_ELT(out, i, (double)num);
   }
 
   UNPROTECT(1);

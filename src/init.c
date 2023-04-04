@@ -38,11 +38,19 @@ static const R_CallMethodDef callMethods[] = {
   {"h3rGridPathCells",            (DL_FUNC) &h3rGridPathCells, 2},
   {"h3rGridPathCellsSize",        (DL_FUNC) &h3rGridPathCellsSize, 2},
   {"h3rGridDistance",             (DL_FUNC) &h3rGridDistance, 2},
+  {"h3rCellToLocalIj",            (DL_FUNC) &h3rCellToLocalIj, 2},
+  {"h3rLocalIjToCell",            (DL_FUNC) &h3rLocalIjToCell, 3},
+  {"h3rDirectedEdgeToBoundary",   (DL_FUNC) &h3rDirectedEdgeToBoundary, 1},
 
   // Hierarchy
   {"h3rCellToParent",        (DL_FUNC) &h3rCellToParent,       2},
   {"h3rCellToChildren",      (DL_FUNC) &h3rCellToChildren,     2},
   // {"h3rCellToChildrenSize",  (DL_FUNC) &h3rCellToChildrenSize, 2},
+  {"h3rCellToCenterChild", (DL_FUNC) &h3rCellToCenterChild, 2},
+  {"h3rCellToChildPos", (DL_FUNC) &h3rCellToChildPos, 2},
+  {"h3rChildPosToCell", (DL_FUNC) &h3rChildPosToCell, 3},
+  {"h3rCompactCells", (DL_FUNC) &h3rCompactCells, 1},
+  {"h3rUncompactCells", (DL_FUNC) &h3rUncompactCells, 2},
 
   // {"h3rH3ToString",     (DL_FUNC) &h3H3ToString,     1},
   // {"h3rStringToH3",     (DL_FUNC) &h3StringToH3,     1},
@@ -292,9 +300,27 @@ void attribute_visible R_init_h3r(DllInfo *info)
 
   // Traversal
 
+  R_RegisterCCallable("h3r", "h3rGridDisk",                 (DL_FUNC)&h3rGridDisk);
+  R_RegisterCCallable("h3r", "h3rMaxGridDiskSize",          (DL_FUNC)&h3rMaxGridDiskSize);
+  R_RegisterCCallable("h3r", "h3rGridDiskDistances",        (DL_FUNC)&h3rGridDiskDistances);
+  R_RegisterCCallable("h3r", "h3rGridDiskUnsafe",           (DL_FUNC)&h3rGridDiskUnsafe);
+  R_RegisterCCallable("h3r", "h3rGridDiskDistancesUnsafe",  (DL_FUNC)&h3rGridDiskDistancesUnsafe);
+  R_RegisterCCallable("h3r", "h3rGridDiskDistancesSafe",    (DL_FUNC)&h3rGridDiskDistancesSafe);
+  R_RegisterCCallable("h3r", "h3rGridRingUnsafe",           (DL_FUNC)&h3rGridRingUnsafe);
+  R_RegisterCCallable("h3r", "h3rGridPathCells",            (DL_FUNC)&h3rGridPathCells);
+  R_RegisterCCallable("h3r", "h3rGridPathCellsSize",        (DL_FUNC)&h3rGridPathCellsSize);
+  R_RegisterCCallable("h3r", "h3rGridDistance",             (DL_FUNC)&h3rGridDistance);
+  R_RegisterCCallable("h3r", "h3rCellToLocalIj",            (DL_FUNC)&h3rCellToLocalIj);
+  R_RegisterCCallable("h3r", "h3rLocalIjToCell",            (DL_FUNC)&h3rLocalIjToCell);
+
   // Hierarchy
   R_RegisterCCallable("h3r", "h3rCellToParent",          (DL_FUNC) &h3rCellToParent);
   R_RegisterCCallable("h3r", "h3rCellToChildren",        (DL_FUNC) &h3rCellToChildren);
+  R_RegisterCCallable("h3r", "h3rCellToCenterChild",     (DL_FUNC) &h3rCellToCenterChild);
+  R_RegisterCCallable("h3r", "h3rCellToChildPos",        (DL_FUNC) &h3rCellToChildPos);
+  R_RegisterCCallable("h3r", "h3rChildPosToCell",        (DL_FUNC) &h3rChildPosToCell);
+  R_RegisterCCallable("h3r", "h3rCompactCells",          (DL_FUNC) &h3rCompactCells);
+  R_RegisterCCallable("h3r", "h3rUncompactCells",        (DL_FUNC) &h3rUncompactCells);
   // R_RegisterCCallable("h3r", "h3rCellToChildrenSize",        (DL_FUNC) &h3rCellToChildrenSize);
 
   // R_RegisterCCallable("h3r", "h3r_h3ToString",   (DL_FUNC) &h3H3ToString);
@@ -312,7 +338,7 @@ void attribute_visible R_init_h3r(DllInfo *info)
   R_RegisterCCallable("h3r", "h3rGetDirectedEdgeDestination",   (DL_FUNC) &h3rGetDirectedEdgeDestination);
   R_RegisterCCallable("h3r", "h3rDirectedEdgeToCells",          (DL_FUNC) &h3rDirectedEdgeToCells);
   R_RegisterCCallable("h3r", "h3rOriginToDirectedEdges",        (DL_FUNC) &h3rOriginToDirectedEdges);
-
+  R_RegisterCCallable("h3r", "h3rDirectedEdgeToBoundary",       (DL_FUNC) &h3rDirectedEdgeToBoundary);
 
   // Vertexes
   R_RegisterCCallable("h3r", "h3rCellToVertex",     (DL_FUNC) &h3rCellToVertex);

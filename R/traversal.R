@@ -180,3 +180,36 @@ gridPathCellsSize <- function(origin, destination) {
 gridDistance <- function(origin, destination) {
   .Call(h3rGridDistance, origin, destination)
 }
+
+#' Produces local IJ coordinates for an H3 index anchored by an origin.
+#'
+#' @param origin vector of anchor cell
+#' @param cell vector of cell you input
+#'
+#' @return (i, j) coordinates
+#'
+#' @examples
+#'
+#' cellToLocalIj(origin = c("85283473fffffff","85283473fffffff"), cell = c("8528342bfffffff","85283477fffffff"))
+#'
+#' @export
+cellToLocalIj <- function(origin, cell) {
+  .Call(h3rCellToLocalIj, origin, cell)
+}
+
+#' Produces an H3 index from local IJ coordinates anchored by an origin.
+#'
+#' @param origin vector of anchor cell
+#' @param i vector of local I coordinate
+#' @param j vector of local I coordinate
+#'
+#' @return cell vector of H3 cells
+#'
+#' @examples
+#'
+#' localIjToCell(origin = c("85283473fffffff","85283473fffffff"), i = c(1L, 2L), j = c(2L, 1L))
+#'
+#' @export
+localIjToCell <- function(origin, i, j) {
+  .Call(h3rLocalIjToCell, origin, i, j)
+}
