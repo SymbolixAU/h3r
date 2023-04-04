@@ -253,7 +253,7 @@ pentagonCount <- function() {
 #'
 #' @examples
 #'
-#' greatCirlceDistanceRads(
+#' greatCircleDistanceRads(
 #'   aLats = c(-37.820197)
 #'   , aLons = c(144.983324)
 #'   , bLats = c(-37.818476)
@@ -261,7 +261,7 @@ pentagonCount <- function() {
 #' )
 #'
 #' @export
-greatCirlceDistanceRads <- function(aLats, aLons, bLats, bLons) {
+greatCircleDistanceRads <- function(aLats, aLons, bLats, bLons) {
   .Call(h3rGreatCircleDistanceRads, aLats, aLons, bLats, bLons)
 }
 
@@ -270,7 +270,7 @@ greatCirlceDistanceRads <- function(aLats, aLons, bLats, bLons) {
 #'
 #' @examples
 #'
-#' greatCirlceDistanceM(
+#' greatCircleDistanceM(
 #'   aLats = c(-37.820197)
 #'   , aLons = c(144.983324)
 #'   , bLats = c(-37.818476)
@@ -278,7 +278,7 @@ greatCirlceDistanceRads <- function(aLats, aLons, bLats, bLons) {
 #' )
 #'
 #' @export
-greatCirlceDistanceM <- function(aLats, aLons, bLats, bLons) {
+greatCircleDistanceM <- function(aLats, aLons, bLats, bLons) {
   .Call(h3rGreatCircleDistanceM, aLats, aLons, bLats, bLons)
 }
 
@@ -294,7 +294,7 @@ greatCirlceDistanceM <- function(aLats, aLons, bLats, bLons) {
 #' )
 #'
 #' @export
-greatCirlceDistanceKm <- function(aLats, aLons, bLats, bLons) {
+greatCircleDistanceKm <- function(aLats, aLons, bLats, bLons) {
   .Call(h3rGreatCircleDistanceKm, aLats, aLons, bLats, bLons)
 }
 
