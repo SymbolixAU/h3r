@@ -104,7 +104,7 @@ SEXP h3rGetIcosahedronFaces(SEXP h3) {
     H3Index index = sexpStringToH3(h3, i);
     maxFaceCount(index, &faceCount);
     int faces[ faceCount ];
-    getIcosahedronFaces(index, faces);
+    h3error(getIcosahedronFaces(index, faces), i);
     // faces are the integers in range 0-19
     SET_VECTOR_ELT(out, i, intToSexpArray(faces, faceCount));
     SET_STRING_ELT(names, i, STRING_ELT(h3, i));
@@ -125,7 +125,7 @@ SEXP h3rMaxFaceCount(SEXP h3) {
   int faceCount;
   for( i = 0; i < n; i++ ) {
     H3Index index = sexpStringToH3(h3, i);
-    maxFaceCount(index, &faceCount);
+    h3error(maxFaceCount(index, &faceCount), i);
     SET_INTEGER_ELT(out, i, faceCount);
   }
   UNPROTECT(1);

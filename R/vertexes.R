@@ -6,7 +6,7 @@
 #' and 0 and 4 (inclusive) for pentagonal cells.
 #'
 #' @inheritParams cellToLatLng
-#' @param vertexNum intger giving the vertex number of the index to return
+#' @param vertexNum integer giving the vertex number of the index to return
 #'
 #' @examples
 #'
