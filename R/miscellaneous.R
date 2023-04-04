@@ -286,7 +286,7 @@ greatCircleDistanceM <- function(aLats, aLons, bLats, bLons) {
 #'
 #' @examples
 #'
-#' greatCirlceDistanceKm(
+#' greatCircleDistanceKm(
 #'   aLats = c(-37.820197)
 #'   , aLons = c(144.983324)
 #'   , bLats = c(-37.818476)
