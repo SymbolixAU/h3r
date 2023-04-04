@@ -184,7 +184,7 @@ edgeLengthKm <- function(edge) {
 #'
 #' @param resolution cell resolution
 #'
-#' @return the number of unique H3 indexes at the given resolution, in string.
+#' @return the number of unique H3 indexes at the given resolution
 #'
 #' @examples
 #'
