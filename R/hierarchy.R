@@ -117,8 +117,8 @@ compactCells <- function(cellSet) {
 #'
 #' @examples
 #'
-#' uncompactCells(compactCells(gridDisk('85283473fffffff', 1L)), res = 5L)
-#'
+#' uncompactCells(compactCells(gridDisk(cell = c("85283477fffffff","85283423fffffff"), k = c(1L, 2L))), res = c(5L, 5L))
+#' 
 #' @export
 uncompactCells <- function(compactedSet, res) {
 .Call(h3rUncompactCells, compactedSet, res)

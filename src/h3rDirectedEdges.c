@@ -163,7 +163,7 @@ SEXP h3rDirectedEdgeToBoundary(SEXP h3) {
 
     H3Index h = sexpStringToH3(h3, i);
 
-    h3error(cellToBoundary(h, &cb), i);
+    h3error(directedEdgeToBoundary(h, &cb), i);
     SEXP lst = cellBoundaryToList(&cb);
 
     SET_STRING_ELT(names, i, STRING_ELT(h3, i));

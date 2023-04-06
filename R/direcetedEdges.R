@@ -28,7 +28,7 @@ areNeighborCells <- function(origin, destination) {
 #'
 #' @examples
 #'
-#' cellsToDirectedEdge(origin = c("85283473fffffff","85283473fffffff"), destination = c("85283471fffffff","85283477fffffff"))
+#' cellsToDirectedEdge(origin = c("85283471fffffff","85283473fffffff"), destination = c("85283475fffffff","85283477fffffff"))
 #'
 #' @export
 cellsToDirectedEdge <- function(origin, destination) {
