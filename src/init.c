@@ -45,7 +45,7 @@ static const R_CallMethodDef callMethods[] = {
   // Hierarchy
   {"h3rCellToParent",        (DL_FUNC) &h3rCellToParent,       2},
   {"h3rCellToChildren",      (DL_FUNC) &h3rCellToChildren,     2},
-  // {"h3rCellToChildrenSize",  (DL_FUNC) &h3rCellToChildrenSize, 2},
+  {"h3rCellToChildrenSize",  (DL_FUNC) &h3rCellToChildrenSize, 2},
   {"h3rCellToCenterChild", (DL_FUNC) &h3rCellToCenterChild, 2},
   {"h3rCellToChildPos", (DL_FUNC) &h3rCellToChildPos, 2},
   {"h3rChildPosToCell", (DL_FUNC) &h3rChildPosToCell, 3},

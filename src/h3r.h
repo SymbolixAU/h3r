@@ -41,12 +41,12 @@ SEXP h3rLocalIjToCell(SEXP orig, SEXP coordI, SEXP coordJ);
 // Hierarchy
 SEXP h3rCellToParent(SEXP h3, SEXP parentResolution);
 SEXP h3rCellToChildren(SEXP h3, SEXP childResolution);
+SEXP h3rCellToChildrenSize(SEXP h3, SEXP res);
 SEXP h3rCellToCenterChild(SEXP h3, SEXP res);
 SEXP h3rCellToChildPos(SEXP h3, SEXP res);
 SEXP h3rChildPosToCell(SEXP pos, SEXP h3, SEXP res);
 SEXP h3rCompactCells(SEXP h3Sets);
 SEXP h3rUncompactCells(SEXP h3Sets, SEXP res);
-// SEXP h3rCellToChildrenSize(SEXP h3, SEXP childResolution);
 
 // Regions
 

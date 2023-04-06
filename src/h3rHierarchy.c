@@ -61,6 +61,28 @@ SEXP h3rCellToChildren(SEXP h3, SEXP childResolution) {
 
 }
 
+SEXP h3rCellToChildrenSize(SEXP h3, SEXP res) {
+  R_xlen_t n = Rf_xlength(h3);
+  R_xlen_t i;
+
+  SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
+
+  H3Index h;
+  int64_t num;
+  int ires;
+
+  for( i = 0; i < n; i++ ) {
+    ires = INTEGER(res)[i];
+    h = sexpStringToH3(h3, i);
+    h3error(cellToChildrenSize(h, ires, &num), i);
+
+    SET_REAL_ELT(out, i, (double)num);
+  }
+
+  UNPROTECT(1);
+  return out;
+}
+
 SEXP h3rCellToCenterChild(SEXP h3, SEXP res) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
