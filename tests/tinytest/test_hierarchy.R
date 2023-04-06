@@ -1,6 +1,7 @@
 # Test Hierarchy
 expect_equal(cellToParent(cell = c("8cbe63562a54bff","85283473fffffff"), parentRes = c(3L, 4L)), c("83be63fffffffff", "8428347ffffffff"))
 expect_equal(cellToChildren(cell = c("83be63fffffffff","85283473fffffff"), childRes = c(4L, 6L)), list("83be63fffffffff" = c("84be631ffffffff", "84be633ffffffff", "84be635ffffffff", "84be637ffffffff", "84be639ffffffff", "84be63bffffffff", "84be63dffffffff"),"85283473fffffff" = c("862834707ffffff", "86283470fffffff", "862834717ffffff", "86283471fffffff", "862834727ffffff", "86283472fffffff", "862834737ffffff")))
+expect_equal(cellToCenterChild(cell = c("83be63fffffffff","85283473fffffff"), childRes = c(4L, 7L)), c("84be631ffffffff", "872834700ffffff"))
 expect_equal(cellToChildPos(cell = c("8cbe63562a54bff","8cbe635631103ff"), parentRes = c(1L, 2L)), c(1267125823, 137230626))
 expect_equal(childPosToCell(childPos = c(42, 41), cell = c("85283473fffffff","85283473fffffff"), childRes = c(7L, 7L)), c("872834730ffffff", "87283472effffff"))
 expect_equal(compactCells(gridDisk(cell = c("8cbe63562a54bff","85283473fffffff"), k = c(1L, 2L))), list(c("8cbe63562a54bff", "8cbe63562a549ff", "8cbe63562a541ff", "8cbe63562a543ff", "8cbe63562a55dff", "8cbe63562a737ff", "8cbe63562a735ff"), c("85283447fffffff", "8528340ffffffff", "8528340bfffffff", "85283457fffffff", "85283443fffffff", "8528344ffffffff", "852836b7fffffff", "8528342bfffffff", "8528343bfffffff", "85283407fffffff", "85283403fffffff", "8528341bfffffff", "8428347ffffffff")))
