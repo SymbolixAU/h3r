@@ -57,7 +57,7 @@ static const R_CallMethodDef callMethods[] = {
   // {"h3rDirectionForNeighbor", (DL_FUNC) &h3DirectionForNeighbor, 2},
 
   // Regions
-
+  {"h3rPolygonToCells",                 (DL_FUNC) &h3rPolygonToCells,   3},
 
   // Directed Edges
   {"h3rAreNeighborCells",                 (DL_FUNC) &h3rAreNeighborCells,   2},
@@ -328,7 +328,7 @@ void attribute_visible R_init_h3r(DllInfo *info)
   // R_RegisterCCallable("h3r", "h3r_directionForNeighbor", (DL_FUNC) &h3DirectionForNeighbor);
 
   // Regions
-
+  R_RegisterCCallable("h3r", "h3rPolygonToCells",             (DL_FUNC) &h3rPolygonToCells);
 
   // Directed Edges
   R_RegisterCCallable("h3r", "h3rAreNeighborCells",             (DL_FUNC) &h3rAreNeighborCells);

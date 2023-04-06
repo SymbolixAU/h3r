@@ -6,10 +6,16 @@
 #ifndef R_H3R_UTILS
 #define R_H3R_UTILS
 
-//' Fill Lat Lng
+ //' Fill Lat Lng
  //'
  //' fills the `latLng` object with the contents of SEXP lat/lon vectors
  void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lon, R_xlen_t idx);
+
+
+ //' Fill Lat Lng
+ //'
+ //' fills the `latLng` object with the contents of doubles
+ void doubleToLatLng(LatLng *latLng, double lat, double lon);
 
  //' H3 To Sexp String
  //'

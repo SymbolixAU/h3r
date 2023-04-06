@@ -49,6 +49,7 @@ SEXP h3rCompactCells(SEXP h3Sets);
 SEXP h3rUncompactCells(SEXP h3Sets, SEXP res);
 
 // Regions
+SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isGeoJson);
 
 // Directed Edges
 SEXP h3rAreNeighborCells(SEXP origH3, SEXP destH3);
