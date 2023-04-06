@@ -16,10 +16,10 @@ SEXP h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res) {
 
   LatLng latLng;
   H3Index h3Index;
-  int ires = INTEGER(res)[0];
   // char str[17];
 
   for( i = 0; i < n; i++ ) {
+    int ires = INTEGER(res)[i];
 
     sexpToLatLng(&latLng, lat, lon, i);
 
