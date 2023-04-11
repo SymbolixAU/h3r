@@ -19,6 +19,6 @@ Get the outlines of a set of H3 hexagons, returned in GeoJSON-like MultiPolygon.
 }
 \examples{
 
-cellsToMultiPolygon(cellSet = c(c("872830828ffffff", "87283082effffff")))
+cellsToMultiPolygon(cellSet = list(c("872830828ffffff", "87283082effffff")), 1L)
 
 }

@@ -30,7 +30,7 @@ polygonToCells <- function(polygons, resolution, isGeoJson = 0L) {
 #'
 #' @examples
 #'
-#' cellsToMultiPolygon(cellSet = c(c("872830828ffffff", "87283082effffff")))
+#' cellsToMultiPolygon(cellSet = list(c("872830828ffffff", "87283082effffff")), 1L)
 #' 
 #' @export
 cellsToMultiPolygon <- function(cellSet, isGeoJson = 0L) {

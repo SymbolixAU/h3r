@@ -69,26 +69,23 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isGe
 SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isGeoJson) {
     int ires = INTEGER(res)[0];
     uint32_t flags = 0;
-    int64_t count, i;
+    int64_t count, i, k;
     int64_t validCount = 0;
     int64_t j = 0;
 
     GeoPolygon geoPolygon;
     h3rCoordinatesToGeoPolygon(polygonArray, &geoPolygon, isGeoJson);
 
-    warning("geoloop.verts[0].lat: %f", geoPolygon.geoloop.verts[0].lat);
-    warning("geoloop.verts[0].lng: %f", geoPolygon.geoloop.verts[0].lng);
-    warning("geoloop.verts[1].lat: %f", geoPolygon.geoloop.verts[1].lat);
-    warning("geoloop.verts[1].lng: %f", geoPolygon.geoloop.verts[1].lng);
-    warning("geoloop.verts[2].lat: %f", geoPolygon.geoloop.verts[2].lat);
-    warning("geoloop.verts[2].lng: %f", geoPolygon.geoloop.verts[2].lng);
-    warning("geoPolygon.numHoles: %d", geoPolygon.numHoles);
-    warning("holes[0].verts[0].lat: %f", geoPolygon.holes[0].verts[0].lat);
-    warning("holes[0].verts[0].lng: %f", geoPolygon.holes[0].verts[0].lng);
-    warning("holes[0].verts[1].lat: %f", geoPolygon.holes[0].verts[1].lat);
-    warning("holes[0].verts[1].lng: %f", geoPolygon.holes[0].verts[1].lng);
-    warning("holes[0].verts[2].lat: %f", geoPolygon.holes[0].verts[2].lat);
-    warning("holes[0].verts[2].lng: %f", geoPolygon.holes[0].verts[2].lng);
+    for (i = 0; i < geoPolygon.geoloop.numVerts; i++){
+      fprintf(stdout, "geoloop.verts[%lld].lat: %f \n", i, geoPolygon.geoloop.verts[i].lat);
+      fprintf(stdout, "geoloop.verts[%lld].lng: %f \n", i, geoPolygon.geoloop.verts[i].lng);
+    }
+    for (i = 0; i < geoPolygon.numHoles; i++){
+      for (k = 0; k < geoPolygon.holes[i].numVerts; k++){
+        fprintf(stdout, "holes[%lld].verts[%lld].lat: %f \n", i, k, geoPolygon.holes[i].verts[k].lat);
+        fprintf(stdout, "holes[%lld].verts[%lld].lng: %f \n", i, k, geoPolygon.holes[i].verts[k].lng);
+      }
+    }
 
     h3error(maxPolygonToCellsSize(&geoPolygon, ires, flags, &count), 0);
 
