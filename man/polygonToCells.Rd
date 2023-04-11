@@ -4,7 +4,7 @@
 \alias{polygonToCells}
 \title{Polygon to cells}
 \usage{
-polygonToCells(polygons, resolution, isGeoJson = FALSE)
+polygonToCells(polygons, resolution, isGeoJson = 0L)
 }
 \arguments{
 \item{polygons}{an array of polygons. Each polygon is an array of vectors. Each vector is a list of (lat, lon) or (lon, lat)}
@@ -18,9 +18,6 @@ Returns the h3 indexes for the input GeoJSON-like data structure
 }
 \examples{
 
-cellToVertex(
-  cell = c(rep("8cbe63562a54bff", 6))
-  , vertexNum = c(0L:5L)
-  )
+polygonToCells(list(list(c(37.813318999983238, -122.4089866999972145),c(37.7198061999978478, -122.3544736999993603),c(37.8151571999998453, -122.4798767000009008)), list(c(37.813318999983238, -122.4089866999972145),c(37.7198061999978478, -122.3544736999993603),c(37.8151571999998453, -122.4498767000009008))), 7L)
 
 }
