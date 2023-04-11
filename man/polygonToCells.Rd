@@ -11,13 +11,16 @@ polygonToCells(polygons, resolution, isGeoJson = 0L)
 
 \item{resolution}{The resolution of the output cells}
 
-\item{isGeojson}{if the input isGeoJson (each vertex is (lon, lat)). The default is FALSE (each vertex is (lat, lon))}
+\item{isGeojson}{if the input isGeoJson (each vertex is (lon, lat)). The default is 0L (each vertex is (lat, lon))}
+}
+\value{
+h3 indexes for the input GeoJSON-like data structure
 }
 \description{
 Returns the h3 indexes for the input GeoJSON-like data structure
 }
 \examples{
 
-polygonToCells(list(list(c(37.813318999983238, -122.4089866999972145),c(37.7198061999978478, -122.3544736999993603),c(37.8151571999998453, -122.4798767000009008)), list(c(37.813318999983238, -122.4089866999972145),c(37.7198061999978478, -122.3544736999993603),c(37.8151571999998453, -122.4498767000009008))), 7L)
+polygonToCells(list(list(c(37.813318999983238, -122.4089866999972145),c(37.7198061999978478, -122.3544736999993603),c(37.8151571999998453, -122.4798767000009008)), list(c(37.813318999983238, -122.4089866999972145),c(37.7198061999978478, -122.3544736999993603),c(37.8151571999998453, -122.4498767000009008))), 8L)
 
 }

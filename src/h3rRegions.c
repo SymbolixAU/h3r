@@ -48,7 +48,7 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isGe
 
   // Allocate memory for holes and convert inner loops (holes)
   if (numHoles > 0) {
-      geoPolygon->holes = (GeoLoop *)calloc(numHoles, sizeof(GeoLoop));
+      geoPolygon->holes = (GeoLoop *)malloc(numHoles * sizeof(GeoLoop));
 
       for (int i = 0; i < numHoles; i++) {
           h3rPolygonArrayToGeoLoop(polygonArray[i + 1], numVerts[i + 1], &geoPolygon->holes[i]);
@@ -69,27 +69,155 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isGe
 SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isGeoJson) {
     int ires = INTEGER(res)[0];
     uint32_t flags = 0;
-    int64_t count;
+    int64_t count, i;
+    int64_t validCount = 0;
+    int64_t j = 0;
 
     GeoPolygon geoPolygon;
     h3rCoordinatesToGeoPolygon(polygonArray, &geoPolygon, isGeoJson);
 
     warning("geoloop.verts[0].lat: %f", geoPolygon.geoloop.verts[0].lat);
+    warning("geoloop.verts[0].lng: %f", geoPolygon.geoloop.verts[0].lng);
+    warning("geoloop.verts[1].lat: %f", geoPolygon.geoloop.verts[1].lat);
     warning("geoloop.verts[1].lng: %f", geoPolygon.geoloop.verts[1].lng);
     warning("geoloop.verts[2].lat: %f", geoPolygon.geoloop.verts[2].lat);
+    warning("geoloop.verts[2].lng: %f", geoPolygon.geoloop.verts[2].lng);
     warning("geoPolygon.numHoles: %d", geoPolygon.numHoles);
-
+    warning("holes[0].verts[0].lat: %f", geoPolygon.holes[0].verts[0].lat);
+    warning("holes[0].verts[0].lng: %f", geoPolygon.holes[0].verts[0].lng);
+    warning("holes[0].verts[1].lat: %f", geoPolygon.holes[0].verts[1].lat);
+    warning("holes[0].verts[1].lng: %f", geoPolygon.holes[0].verts[1].lng);
+    warning("holes[0].verts[2].lat: %f", geoPolygon.holes[0].verts[2].lat);
+    warning("holes[0].verts[2].lng: %f", geoPolygon.holes[0].verts[2].lng);
 
     h3error(maxPolygonToCellsSize(&geoPolygon, ires, flags, &count), 0);
-
-    warning("count: %d", count);
-    warning("ires: %d", ires);
 
     H3Index result[count];
 
     h3error(polygonToCells(&geoPolygon, ires, flags, result), 0);
+    
+    for (i = 0; i < count; i++){
+     if( isValidCell(result[i])){
+      validCount++;
+     }
+    }
 
-    SEXP group = h3VecToSexpString(result, count);
+    H3Index out[validCount];
+
+    for (i = 0; i < count; i++){
+     if( isValidCell(result[i])){
+      out[j] = result[i];
+      j++;
+     }
+    }
+
+    SEXP group = h3VecToSexpString(out, validCount);
 
     return group;
+}
+
+SEXP h3rReadMultiPolygon(LinkedGeoPolygon *polygon, int formatAsGeoJson) {
+    SEXP output, loops, coords, coordPair;
+    R_xlen_t polygonCount = 0, loopCount, coordCount;
+    R_xlen_t pIdx, lIdx, cIdx;
+
+    LinkedGeoPolygon *currentPolygon = polygon;
+    while (currentPolygon) {
+        polygonCount++;
+        currentPolygon = currentPolygon->next;
+    }
+    PROTECT(output = allocVector(VECSXP, polygonCount));
+
+    pIdx = 0;
+    while (polygon) {
+        loopCount = 0;
+
+        LinkedGeoLoop *loop = polygon->first;
+        while (loop) {
+            loopCount++;
+            loop = loop->next;
+        }
+
+        PROTECT(loops = allocVector(VECSXP, loopCount));
+
+        loop = polygon->first;
+        lIdx = 0;
+        while (loop) {
+            coordCount = 0;
+
+            LinkedLatLng *coord = loop->first;
+            while (coord) {
+                coordCount++;
+                coord = coord->next;
+            }
+
+            PROTECT(coords = allocVector(VECSXP, coordCount));
+
+            coord = loop->first;
+            cIdx = 0;
+            while (coord) {
+              PROTECT(coordPair = allocVector(REALSXP, 2));
+                if (formatAsGeoJson) {
+                    SET_REAL_ELT(coordPair, 0, radsToDegs(coord->vertex.lng));
+                    SET_REAL_ELT(coordPair, 1, radsToDegs(coord->vertex.lat));
+                } else {
+                    SET_REAL_ELT(coordPair, 0, radsToDegs(coord->vertex.lat));
+                    SET_REAL_ELT(coordPair, 1, radsToDegs(coord->vertex.lng));
+                }
+
+                SET_VECTOR_ELT(coords, cIdx, coordPair);
+                UNPROTECT(1);
+
+                coord = coord->next;
+                cIdx++;
+            }
+            SET_VECTOR_ELT(loops, lIdx, coords);
+            UNPROTECT(1);
+
+            loop = loop->next;
+            lIdx++;
+        }
+
+        SET_VECTOR_ELT(output, pIdx, loops);
+        UNPROTECT(1);
+
+        polygon = polygon->next;
+        pIdx++;
+    }
+
+    UNPROTECT(1);
+
+    return output;
+}
+
+
+SEXP h3rCellsToMultiPolygon(SEXP h3Sets, SEXP isGeoJson) {
+  R_xlen_t n = Rf_xlength(h3Sets);
+  R_xlen_t i;
+  int64_t j, setSize;
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
+
+  for (i = 0; i < n; i++) {
+    int geoJson = INTEGER(isGeoJson)[i];
+    SEXP h3Set = VECTOR_ELT(h3Sets, i);
+    setSize = Rf_xlength(h3Set);
+
+    H3Index cellSet[setSize];
+
+    for (j = 0; j < setSize; j++) {
+      cellSet[j] = sexpStringToH3(h3Set, j);
+    }
+
+    LinkedGeoPolygon geoPolygon;
+
+    h3error(cellsToLinkedMultiPolygon(cellSet, setSize, &geoPolygon), i);
+
+    SET_VECTOR_ELT(out, i, h3rReadMultiPolygon(&geoPolygon, geoJson));
+
+    UNPROTECT(1);
+  }
+
+  UNPROTECT(1);
+  return out;
 }
