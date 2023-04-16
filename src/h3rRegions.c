@@ -92,7 +92,7 @@ SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isGeoJson) {
 
     // H3Index result[numHexagons];
 
-    H3Index *result = (H3Index *)malloc(numHexagons * sizeof(H3Index));
+    H3Index *result = (H3Index *)calloc(numHexagons, sizeof(H3Index));
 
     h3error(polygonToCells(&geoPolygon, ires, flags, result), 0);
 
