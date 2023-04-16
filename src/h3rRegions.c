@@ -69,44 +69,50 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isGe
 SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isGeoJson) {
     int ires = INTEGER(res)[0];
     uint32_t flags = 0;
-    int64_t count, i, k;
+    int64_t numHexagons, i, k;
     int64_t validCount = 0;
     int64_t j = 0;
 
     GeoPolygon geoPolygon;
     h3rCoordinatesToGeoPolygon(polygonArray, &geoPolygon, isGeoJson);
 
-    for (i = 0; i < geoPolygon.geoloop.numVerts; i++){
-      fprintf(stdout, "geoloop.verts[%lld].lat: %f \n", i, geoPolygon.geoloop.verts[i].lat);
-      fprintf(stdout, "geoloop.verts[%lld].lng: %f \n", i, geoPolygon.geoloop.verts[i].lng);
-    }
-    for (i = 0; i < geoPolygon.numHoles; i++){
-      for (k = 0; k < geoPolygon.holes[i].numVerts; k++){
-        fprintf(stdout, "holes[%lld].verts[%lld].lat: %f \n", i, k, geoPolygon.holes[i].verts[k].lat);
-        fprintf(stdout, "holes[%lld].verts[%lld].lng: %f \n", i, k, geoPolygon.holes[i].verts[k].lng);
-      }
-    }
+    // for (i = 0; i < geoPolygon.geoloop.numVerts; i++){
+    //   fprintf(stdout, "geoloop.verts[%lld].lat: %f \n", i, geoPolygon.geoloop.verts[i].lat);
+    //   fprintf(stdout, "geoloop.verts[%lld].lng: %f \n", i, geoPolygon.geoloop.verts[i].lng);
+    // }
+    // for (i = 0; i < geoPolygon.numHoles; i++){
+    //   for (k = 0; k < geoPolygon.holes[i].numVerts; k++){
+    //     fprintf(stdout, "holes[%lld].verts[%lld].lat: %f \n", i, k, geoPolygon.holes[i].verts[k].lat);
+    //     fprintf(stdout, "holes[%lld].verts[%lld].lng: %f \n", i, k, geoPolygon.holes[i].verts[k].lng);
+    //   }
+    // }
 
-    h3error(maxPolygonToCellsSize(&geoPolygon, ires, flags, &count), 0);
+    h3error(maxPolygonToCellsSize(&geoPolygon, ires, flags, &numHexagons), 0);
+    // fprintf(stdout, "numHexagons %lld \n", numHexagons);
 
-    H3Index result[count];
+    // H3Index result[numHexagons];
+
+    H3Index *result = (H3Index *)malloc(numHexagons * sizeof(H3Index));
 
     h3error(polygonToCells(&geoPolygon, ires, flags, result), 0);
-    
-    for (i = 0; i < count; i++){
+
+    for (i = 0; i < numHexagons; i++){
      if( isValidCell(result[i])){
       validCount++;
      }
     }
+    // fprintf(stdout, "validCount %lld \n", validCount);
 
     H3Index out[validCount];
 
-    for (i = 0; i < count; i++){
+    for (i = 0; i < numHexagons; i++){
      if( isValidCell(result[i])){
       out[j] = result[i];
       j++;
      }
     }
+
+    // fprintf(stdout, "j valid: %lld \n", j);
 
     SEXP group = h3VecToSexpString(out, validCount);
 

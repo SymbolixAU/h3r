@@ -11,6 +11,7 @@ void doubleToLatLng(LatLng *latLng, double lat, double lon) {
   latLng->lng = degsToRads(lon);
 }
 
+
 H3Index sexpStringToH3(SEXP h3, R_xlen_t idx) {
   H3Index index;
   h3error(stringToH3(CHAR(STRING_ELT(h3, idx)), &index), idx);
