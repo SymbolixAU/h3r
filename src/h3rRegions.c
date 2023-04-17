@@ -130,7 +130,7 @@ SEXP h3rReadMultiPolygon(LinkedGeoPolygon *polygon, int formatAsGeoJson) {
         polygonCount++;
         currentPolygon = currentPolygon->next;
     }
-    PROTECT(output = allocVector(VECSXP, polygonCount));
+    PROTECT(output = Rf_allocVector(VECSXP, polygonCount));
 
     pIdx = 0;
     while (polygon) {
@@ -142,7 +142,7 @@ SEXP h3rReadMultiPolygon(LinkedGeoPolygon *polygon, int formatAsGeoJson) {
             loop = loop->next;
         }
 
-        PROTECT(loops = allocVector(VECSXP, loopCount));
+        PROTECT(loops = Rf_allocVector(VECSXP, loopCount));
 
         loop = polygon->first;
         lIdx = 0;
@@ -155,12 +155,12 @@ SEXP h3rReadMultiPolygon(LinkedGeoPolygon *polygon, int formatAsGeoJson) {
                 coord = coord->next;
             }
 
-            PROTECT(coords = allocVector(VECSXP, coordCount));
+            PROTECT(coords = Rf_allocVector(VECSXP, coordCount));
 
             coord = loop->first;
             cIdx = 0;
             while (coord) {
-              PROTECT(coordPair = allocVector(REALSXP, 2));
+              PROTECT(coordPair = Rf_allocVector(REALSXP, 2));
                 if (formatAsGeoJson) {
                     SET_REAL_ELT(coordPair, 0, radsToDegs(coord->vertex.lng));
                     SET_REAL_ELT(coordPair, 1, radsToDegs(coord->vertex.lat));
