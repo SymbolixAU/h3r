@@ -3,7 +3,7 @@ Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.0
 Authors@R: c(
-    person("David", "Cooley", ,"david.cooley.au@gmail.com", role = c("aut", "cre"))
+    person("David", "Cooley", ,"dcooley@symbolix.com.au", role = c("aut", "cre"))
     )
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
