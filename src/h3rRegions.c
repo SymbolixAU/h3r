@@ -113,6 +113,7 @@ SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isGeoJson) {
     }
 
     // fprintf(stdout, "j valid: %lld \n", j);
+    free(result);
 
     SEXP group = h3VecToSexpString(out, validCount);
 
