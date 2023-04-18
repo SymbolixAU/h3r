@@ -64,10 +64,10 @@ SEXP coordIJList(SEXP i, SEXP j);
  //' H3Error to error message
  //'
  //' Converts an H3Error to error message
- char* h3errorToString(int err);
+ char* h3rErrorToString(int err);
 
  //' H3Error call R API error
  //'
  //' Throw a R error is there is an error
- void h3error(int err, R_xlen_t i);
+ void h3rError(int err, R_xlen_t i);
 #endif

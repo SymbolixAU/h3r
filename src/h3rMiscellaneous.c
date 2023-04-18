@@ -56,9 +56,9 @@ SEXP h3rGetHexagonAreaAvg(SEXP res, int areaType) {
   for( i = 0; i < n; i++ ) {
     ires = INTEGER(res)[i];
     if(areaType == 0) {
-      h3error(getHexagonAreaAvgM2(ires, &area), i);
+      h3rError(getHexagonAreaAvgM2(ires, &area), i);
     } else {
-      h3error(getHexagonAreaAvgKm2(ires, &area), i);
+      h3rError(getHexagonAreaAvgKm2(ires, &area), i);
     }
     SET_REAL_ELT(out, i, area);
   }
@@ -87,13 +87,13 @@ SEXP h3rCellArea(SEXP h3, int areaType) {
   for( i = 0; i < n; i++ ) {
     h = sexpStringToH3(h3, i);
     if(areaType == 0) {
-      h3error(cellAreaRads2(h, &area), i);
+      h3rError(cellAreaRads2(h, &area), i);
       SET_REAL_ELT(out, i, area);
     } else if (areaType == 1) {
-      h3error(cellAreaM2(h, &area), i);
+      h3rError(cellAreaM2(h, &area), i);
       SET_REAL_ELT(out, i, area);
     } else {
-      h3error(cellAreaKm2(h, &area), i);
+      h3rError(cellAreaKm2(h, &area), i);
     }
       SET_REAL_ELT(out, i, area);
 
@@ -127,10 +127,10 @@ SEXP h3rGetHexagonEdgeLengthAvg(SEXP res, int distType) {
   for( i = 0; i < n; i++ ) {
     ires = INTEGER(res)[i];
     if(distType == 0) {
-      h3error(getHexagonEdgeLengthAvgM(ires, &distance), i);
+      h3rError(getHexagonEdgeLengthAvgM(ires, &distance), i);
       SET_REAL_ELT(out, i, distance);
     } else {
-      h3error(getHexagonEdgeLengthAvgKm(ires, &distance), i);
+      h3rError(getHexagonEdgeLengthAvgKm(ires, &distance), i);
       SET_REAL_ELT(out, i, distance);
     }
   }
@@ -159,13 +159,13 @@ SEXP h3rEdgeLength(SEXP edge, int distType) {
   for( i = 0; i < n; i++ ) {
     h = sexpStringToH3(edge, i);
     if(distType == 0) {
-      h3error(edgeLengthRads(h, &distance), i);
+      h3rError(edgeLengthRads(h, &distance), i);
       SET_REAL_ELT(out, i, distance);
     } else if (distType == 1) {
-      h3error(edgeLengthM(h, &distance), i);
+      h3rError(edgeLengthM(h, &distance), i);
       SET_REAL_ELT(out, i, distance);
     } else {
-      h3error(edgeLengthKm(h, &distance), i);
+      h3rError(edgeLengthKm(h, &distance), i);
       SET_REAL_ELT(out, i, distance);
     }
   }
@@ -197,7 +197,7 @@ SEXP h3rGetNumCells(SEXP res) {
   
   for( i = 0; i < n; i++ ) {
     ires = INTEGER(res)[i];
-    h3error(getNumCells(ires, &num), i);
+    h3rError(getNumCells(ires, &num), i);
     SET_REAL_ELT(out, i, (double)num);
   }
 
@@ -250,7 +250,7 @@ SEXP h3rGetPentagons(SEXP res) {
 
   for( i = 0; i < n; i++ ) {
     ires = INTEGER(res)[i];
-    h3error(getPentagons(ires, pentagons), i);
+    h3rError(getPentagons(ires, pentagons), i);
     SEXP group = PROTECT(Rf_allocVector(STRSXP, count));
 
     for( j = 0; j < count; j++ ) {

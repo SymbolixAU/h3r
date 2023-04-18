@@ -8,7 +8,7 @@ void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lon, R_xlen_t idx) {
 
 H3Index sexpStringToH3(SEXP h3, R_xlen_t idx) {
   H3Index index;
-  h3error(stringToH3(CHAR(STRING_ELT(h3, idx)), &index), idx);
+  h3rError(stringToH3(CHAR(STRING_ELT(h3, idx)), &index), idx);
   return index;
 }
 
@@ -100,7 +100,7 @@ SEXP intToSexpArray(int *arr, R_xlen_t n) {
   return out;
 }
 
-char* h3errorToString(int err) {
+char* h3rErrorToString(int err) {
     switch (err) {
         case 0:
             return "E_SUCCESS: Success (no error)";
@@ -139,9 +139,9 @@ char* h3errorToString(int err) {
     }
 }
 
-void h3error(int err, R_xlen_t i) {
+void h3rError(int err, R_xlen_t i) {
   if (err) {
-    const char* errStr = h3errorToString(err);
+    const char* errStr = h3rErrorToString(err);
     error("h3r - Error at item number %td: %s\n", i + 1, errStr);
   }
 }
