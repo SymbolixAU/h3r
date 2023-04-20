@@ -1,0 +1,20 @@
+Package: h3rcpp
+Type: Package
+Title: Demonstrates Linking To C++ Code In R Library
+Version: 0.1.0
+Authors@R: c(
+    person("David", "Cooley", ,"david.cooley.au@gmail.com", role = c("aut", "cre"))
+    )
+Description: This is an example package showing how to call the C++ API provided
+  by an external package, which in turn calls C code.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: Rcpp (>= 1.0.10)
+SystemRequirements: C++17
+Depends:
+  h3r,
+LinkingTo:
+  h3r,
+  Rcpp
+RoxygenNote: 7.2.3

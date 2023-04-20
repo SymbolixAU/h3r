@@ -1,0 +1,17 @@
+Package: h3rc
+Type: Package
+Title: Demonstrates Linking To C Code In R Library
+Version: 0.1.0
+Authors@R: c(
+    person("David", "Cooley", ,"david.cooley.au@gmail.com", role = c("aut", "cre"))
+    )
+Description: This is an example package showing how to call the C API provided
+  by an external package.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends:
+  h3lib
+LinkingTo:
+  h3lib
+RoxygenNote: 7.2.3
