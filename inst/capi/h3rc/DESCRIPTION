@@ -11,7 +11,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-  h3lib
+  h3r
 LinkingTo:
-  h3lib
+  h3r
 RoxygenNote: 7.2.3
