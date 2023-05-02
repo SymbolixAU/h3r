@@ -26,9 +26,9 @@ void h3rMatrixToLatLng(SEXP matrix, LatLng *latLng, int reverseCoordinates) {
 
   SEXP dim = Rf_getAttrib(matrix, R_DimSymbol);
   int nrow = INTEGER(dim)[0];
-  int ncol = INTEGER(dim)[1];
+  // int ncol = INTEGER(dim)[1];
 
-  R_xlen_t i, j;
+  R_xlen_t i;
   double * p = REAL(matrix);
   for( i = 0; i < nrow; i++) {
     double lat = p[ i ];
@@ -57,11 +57,11 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isLa
     SEXP polygon = VECTOR_ELT(polygons, i);
 
     // TODO:
-    // - shouldn need to acces this infor here _AND_ within `h3rMatrixToLatLng()`
+    // - shouldn need to access this infor here _AND_ within `h3rMatrixToLatLng()`
     // - think of a better way
     SEXP dim = Rf_getAttrib(polygon, R_DimSymbol);
     int nrow = INTEGER(dim)[0];
-    int ncol = INTEGER(dim)[1];
+    // int ncol = INTEGER(dim)[1];
     numVerts[i] = nrow;
 
     polygonArray[i] = (LatLng *)malloc(numVerts[i] * sizeof(LatLng));
@@ -92,21 +92,20 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isLa
   free(polygonArray);
 }
 
-SEXP singlePolygonToCells(SEXP polygon, SEXP res, SEXP isLatLng) {
-  int ires = INTEGER(res)[0];
+SEXP singlePolygonToCells(SEXP polygon, int res, SEXP isLatLng) {
   uint32_t flags = 0;
-  int64_t numHexagons, i, k;
+  int64_t numHexagons, i;
   int64_t validCount = 0;
   int64_t j = 0;
 
   GeoPolygon geoPolygon;
   h3rCoordinatesToGeoPolygon(polygon, &geoPolygon, isLatLng);
 
-  h3error(maxPolygonToCellsSize(&geoPolygon, ires, flags, &numHexagons), 0);
+  h3error(maxPolygonToCellsSize(&geoPolygon, res, flags, &numHexagons), 0);
 
   H3Index *result = (H3Index *)calloc(numHexagons, sizeof(H3Index));
 
-  h3error(polygonToCells(&geoPolygon, ires, flags, result), 0);
+  h3error(polygonToCells(&geoPolygon, res, flags, result), 0);
 
   for (i = 0; i < numHexagons; i++){
     if( isValidCell(result[i])){
@@ -141,7 +140,8 @@ SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isLatLng) {
 
   for(i = 0; i < nPolygons; i++) {
     SEXP polygon = VECTOR_ELT(polygonArray, i);
-    SEXP cells = singlePolygonToCells(polygon, res, isLatLng);
+    int ires = INTEGER(res)[i];
+    SEXP cells = singlePolygonToCells(polygon, ires, isLatLng);
     SET_VECTOR_ELT(out, i, cells);
   }
 
