@@ -92,7 +92,7 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isLa
   free(polygonArray);
 }
 
-SEXP singlePolygonToCells(SEXP polygon, int res, SEXP isLatLng) {
+SEXP singlePolygonToCells(SEXP polygon, int res, SEXP isLatLng, int idx) {
   uint32_t flags = 0;
   int64_t numHexagons, i;
   int64_t validCount = 0;
@@ -101,11 +101,11 @@ SEXP singlePolygonToCells(SEXP polygon, int res, SEXP isLatLng) {
   GeoPolygon geoPolygon;
   h3rCoordinatesToGeoPolygon(polygon, &geoPolygon, isLatLng);
 
-  h3error(maxPolygonToCellsSize(&geoPolygon, res, flags, &numHexagons), 0);
+  h3error(maxPolygonToCellsSize(&geoPolygon, res, flags, &numHexagons), idx);
 
   H3Index *result = (H3Index *)calloc(numHexagons, sizeof(H3Index));
 
-  h3error(polygonToCells(&geoPolygon, res, flags, result), 0);
+  h3error(polygonToCells(&geoPolygon, res, flags, result), idx);
 
   for (i = 0; i < numHexagons; i++){
     if( isValidCell(result[i])){
@@ -141,7 +141,7 @@ SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isLatLng) {
   for(i = 0; i < nPolygons; i++) {
     SEXP polygon = VECTOR_ELT(polygonArray, i);
     int ires = INTEGER(res)[i];
-    SEXP cells = singlePolygonToCells(polygon, ires, isLatLng);
+    SEXP cells = singlePolygonToCells(polygon, ires, isLatLng, i);
     SET_VECTOR_ELT(out, i, cells);
   }
 
