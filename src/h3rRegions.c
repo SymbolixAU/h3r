@@ -21,11 +21,11 @@ void h3rPolygonArrayToGeoLoop(LatLng *polygonArray, int length, GeoLoop *geoLoop
  *
  * Converts a SEXP (REAL) matrix to an array of `LatLng`
  */
-void h3rMatrixToLatLng(SEXP matrix, LatLng *latLng, int reverseCoordinates) {
+void h3rMatrixToLatLng(SEXP matrix, LatLng *latLng, int reverseCoordinates, int nrow) {
   // A SEXP matrix is a vector with dimensions.
 
-  SEXP dim = Rf_getAttrib(matrix, R_DimSymbol);
-  int nrow = INTEGER(dim)[0];
+  // SEXP dim = Rf_getAttrib(matrix, R_DimSymbol);
+  // int nrow = INTEGER(dim)[0];
   // int ncol = INTEGER(dim)[1];
 
   R_xlen_t i;
@@ -66,7 +66,7 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isLa
 
     polygonArray[i] = (LatLng *)malloc(numVerts[i] * sizeof(LatLng));
 
-    h3rMatrixToLatLng(polygon, polygonArray[i], reverseCoordinates);
+    h3rMatrixToLatLng(polygon, polygonArray[i], reverseCoordinates, nrow);
   }
 
   // Convert the outer loop
