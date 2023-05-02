@@ -3,44 +3,90 @@
 #'
 #' Returns the h3 indexes for the input GeoJSON-like data structure
 #'
-#' @param polygons an array of polygons. Each polygon is an array of vectors. Each vector is a list of (lat, lon) or (lon, lat)
+#' @param polygons A list of polygons. Each polygon is list of matrices.
 #' @param resolution The resolution of the output cells
-#' @param isGeojson if the input isGeoJson (each vertex is (lon, lat)). The default is 0L (each vertex is (lat, lon))
+#' @param isLatLng `TRUE` (default) if the coordinates are in `lat / lng` order.
+#' `FALSE` otherwise
 #'
 #' @return h3 indexes for the input GeoJSON-like data structure
 #'
 #' @examples
 #'
-#' polygonToCells(
+#' ## single polygon
+#' polygon <- list(
 #'   list(
-#'     list(
-#'       c(37.813318999983238, -122.4089866999972145)
-#'       , c(37.7198061999978478, -122.3544736999993603)
-#'       , c(37.8151571999998453, -122.4798767000009008)
-#'       )
-#'      )
-#'    , 7L
-#'  )
+#'   matrix(
+#'     c(
+#'     37.813318999983238, -122.4089866999972145,
+#'     37.7198061999978478, -122.3544736999993603,
+#'     37.8151571999998453, -122.4798767000009008
+#'     )
+#'     , ncol = 2
+#'     , byrow = TRUE
+#'   )
+#'   )
+#' )
 #'
-#' polygonToCells(
+#' polygonToCells(polygon, resolution = 7L)
+#'
+#' ## poylgon with a hole
+#' polygon <- list(
+#' list(
+#'   matrix(
+#'     c(
+#'     37.813318999983238, -122.4089866999972145,
+#'     37.7198061999978478, -122.3544736999993603,
+#'     37.8151571999998453, -122.4798767000009008
+#'     )
+#'     , ncol = 2
+#'     , byrow = TRUE
+#'   ),
+#'   matrix(
+#'     c(
+#'     37.813318999983238, -122.4089866999972145,
+#'     37.7198061999978478, -122.3544736999993603,
+#'     37.8151571999998453, -122.4498767000009008
+#'     )
+#'     , ncol = 2
+#'     , byrow = TRUE
+#'   )
+#' )
+#' )
+#'
+#' polygonToCells(polygon, resolution = 7L)
+#'
+#' ## Many polygons
+#' polygon <- list(
 #'   list(
-#'     list(
-#'       c(37.813318999983238, -122.4089866999972145)
-#'       , c(37.7198061999978478, -122.3544736999993603)
-#'       , c(37.8151571999998453, -122.4798767000009008)
+#'     matrix(
+#'       c(
+#'       37.813318999983238, -122.4089866999972145,
+#'       37.7198061999978478, -122.3544736999993603,
+#'       37.8151571999998453, -122.4798767000009008
 #'       )
-#'      , list(
-#'        c(37.813318999983238, -122.4089866999972145)
-#'        , c(37.7198061999978478, -122.3544736999993603)
-#'        , c(37.8151571999998453, -122.4498767000009008)
-#'        )
-#'      )
-#'    , 7L
-#'  )
+#'       , ncol = 2
+#'       , byrow = TRUE
+#'     )
+#'    ),
+#'  list(
+#'   matrix(
+#'     c(
+#'     37.813318999983238, -122.4089866999972145,
+#'     37.7198061999978478, -122.3544736999993603,
+#'     37.8151571999998453, -122.4498767000009008
+#'     )
+#'     , ncol = 2
+#'     , byrow = TRUE
+#'     )
+#'   )
+#' )
+#'
+#' polygonToCells(polygon, resolution = 7L)
+#'
 #'
 #' @export
-polygonToCells <- function(polygons, resolution, isGeoJson = 0L) {
-  .Call(h3rPolygonToCells, polygons, resolution, isGeoJson)
+polygonToCells <- function(polygons, resolution, isLatLng = TRUE) {
+  .Call(h3rPolygonToCells, polygons, resolution, as.integer(isLatLng))
 }
 
 

@@ -35,7 +35,7 @@ SEXP h3rGridRingUnsafe(SEXP h3, SEXP k);
 SEXP h3rGridPathCells(SEXP origH3, SEXP destH3);
 SEXP h3rGridPathCellsSize(SEXP origH3, SEXP destH3);
 SEXP h3rGridDistance(SEXP origH3, SEXP destH3);
-SEXP h3rCellToLocalIj(SEXP orig, SEXP h3); 
+SEXP h3rCellToLocalIj(SEXP orig, SEXP h3);
 SEXP h3rLocalIjToCell(SEXP orig, SEXP coordI, SEXP coordJ);
 
 // Hierarchy
@@ -49,7 +49,7 @@ SEXP h3rCompactCells(SEXP h3Sets);
 SEXP h3rUncompactCells(SEXP h3Sets, SEXP res);
 
 // Regions
-SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isGeoJson);
+SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isLatLng);
 SEXP h3rCellsToMultiPolygon(SEXP h3Sets, SEXP isGeoJson);
 
 // Directed Edges

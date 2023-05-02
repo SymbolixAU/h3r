@@ -16,31 +16,57 @@ void h3rPolygonArrayToGeoLoop(LatLng *polygonArray, int length, GeoLoop *geoLoop
   }
 }
 
-void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isGeoJson){
+/**
+ * H3r Matrix To Lat Lng
+ *
+ * Converts a SEXP (REAL) matrix to an array of `LatLng`
+ */
+void h3rMatrixToLatLng(SEXP matrix, LatLng *latLng, int reverseCoordinates) {
+  // A SEXP matrix is a vector with dimensions.
+
+  SEXP dim = Rf_getAttrib(matrix, R_DimSymbol);
+  int nrow = INTEGER(dim)[0];
+  int ncol = INTEGER(dim)[1];
+
+  R_xlen_t i, j;
+  double * p = REAL(matrix);
+  for( i = 0; i < nrow; i++) {
+    double lat = p[ i ];
+    double lng = p[ i + nrow ];
+
+    if( reverseCoordinates ) {
+      doubleToLatLng(&latLng[i], lat, lng);
+    } else {
+      doubleToLatLng(&latLng[i], lng, lat);
+    }
+  }
+}
+
+void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isLatLng){
   R_xlen_t n = Rf_xlength(polygons);
-  R_xlen_t i, j, numVerts[n], numHoles;
+  R_xlen_t i, numVerts[n], numHoles;
 
   numHoles = n - 1;
 
-  int geoJson = INTEGER(isGeoJson)[0];
+  int reverseCoordinates = INTEGER(isLatLng)[0];
 
   LatLng **polygonArray = (LatLng **)malloc(n * sizeof(LatLng*));
 
   // Convert the SEXP polygon[][][lat, lng] to LatLng[][]
   for (i = 0; i < n; i++) {
-      SEXP polygon = VECTOR_ELT(polygons, i);
-      numVerts[i] = Rf_xlength(polygon);
+    SEXP polygon = VECTOR_ELT(polygons, i);
 
-      polygonArray[i] = (LatLng *)malloc(numVerts[i] * sizeof(LatLng));
+    // TODO:
+    // - shouldn need to acces this infor here _AND_ within `h3rMatrixToLatLng()`
+    // - think of a better way
+    SEXP dim = Rf_getAttrib(polygon, R_DimSymbol);
+    int nrow = INTEGER(dim)[0];
+    int ncol = INTEGER(dim)[1];
+    numVerts[i] = nrow;
 
-      for (j = 0; j < numVerts[i]; j++) {
-        SEXP vertex = VECTOR_ELT(polygon, j);
-        if (geoJson){
-          doubleToLatLng(&polygonArray[i][j], REAL(vertex)[1], REAL(vertex)[0]);
-        } else {
-          doubleToLatLng(&polygonArray[i][j], REAL(vertex)[0], REAL(vertex)[1]);
-        }
-      }
+    polygonArray[i] = (LatLng *)malloc(numVerts[i] * sizeof(LatLng));
+
+    h3rMatrixToLatLng(polygon, polygonArray[i], reverseCoordinates);
   }
 
   // Convert the outer loop
@@ -66,58 +92,61 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isGe
   free(polygonArray);
 }
 
-SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isGeoJson) {
-    int ires = INTEGER(res)[0];
-    uint32_t flags = 0;
-    int64_t numHexagons, i, k;
-    int64_t validCount = 0;
-    int64_t j = 0;
+SEXP singlePolygonToCells(SEXP polygon, SEXP res, SEXP isLatLng) {
+  int ires = INTEGER(res)[0];
+  uint32_t flags = 0;
+  int64_t numHexagons, i, k;
+  int64_t validCount = 0;
+  int64_t j = 0;
 
-    GeoPolygon geoPolygon;
-    h3rCoordinatesToGeoPolygon(polygonArray, &geoPolygon, isGeoJson);
+  GeoPolygon geoPolygon;
+  h3rCoordinatesToGeoPolygon(polygon, &geoPolygon, isLatLng);
 
-    // for (i = 0; i < geoPolygon.geoloop.numVerts; i++){
-    //   fprintf(stdout, "geoloop.verts[%lld].lat: %f \n", i, geoPolygon.geoloop.verts[i].lat);
-    //   fprintf(stdout, "geoloop.verts[%lld].lng: %f \n", i, geoPolygon.geoloop.verts[i].lng);
-    // }
-    // for (i = 0; i < geoPolygon.numHoles; i++){
-    //   for (k = 0; k < geoPolygon.holes[i].numVerts; k++){
-    //     fprintf(stdout, "holes[%lld].verts[%lld].lat: %f \n", i, k, geoPolygon.holes[i].verts[k].lat);
-    //     fprintf(stdout, "holes[%lld].verts[%lld].lng: %f \n", i, k, geoPolygon.holes[i].verts[k].lng);
-    //   }
-    // }
+  h3error(maxPolygonToCellsSize(&geoPolygon, ires, flags, &numHexagons), 0);
 
-    h3error(maxPolygonToCellsSize(&geoPolygon, ires, flags, &numHexagons), 0);
-    // fprintf(stdout, "numHexagons %lld \n", numHexagons);
+  H3Index *result = (H3Index *)calloc(numHexagons, sizeof(H3Index));
 
-    // H3Index result[numHexagons];
+  h3error(polygonToCells(&geoPolygon, ires, flags, result), 0);
 
-    H3Index *result = (H3Index *)calloc(numHexagons, sizeof(H3Index));
-
-    h3error(polygonToCells(&geoPolygon, ires, flags, result), 0);
-
-    for (i = 0; i < numHexagons; i++){
-     if( isValidCell(result[i])){
+  for (i = 0; i < numHexagons; i++){
+    if( isValidCell(result[i])){
       validCount++;
-     }
     }
-    // fprintf(stdout, "validCount %lld \n", validCount);
+  }
 
-    H3Index out[validCount];
+  H3Index out[validCount];
 
-    for (i = 0; i < numHexagons; i++){
-     if( isValidCell(result[i])){
+  for (i = 0; i < numHexagons; i++){
+    if( isValidCell(result[i])){
       out[j] = result[i];
       j++;
-     }
     }
+  }
 
-    // fprintf(stdout, "j valid: %lld \n", j);
-    free(result);
+  free(result);
 
-    SEXP group = h3VecToSexpString(out, validCount);
+  SEXP group = h3VecToSexpString(out, validCount);
 
-    return group;
+  return group;
+}
+
+// TODO:
+// this needs to work on a vector of polygonArray (i.e.., list(list(matrix)) )
+SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isLatLng) {
+
+  R_xlen_t nPolygons = Rf_xlength(polygonArray);
+  R_xlen_t i;
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, nPolygons));
+
+  for(i = 0; i < nPolygons; i++) {
+    SEXP polygon = VECTOR_ELT(polygonArray, i);
+    SEXP cells = singlePolygonToCells(polygon, res, isLatLng);
+    SET_VECTOR_ELT(out, i, cells);
+  }
+
+  UNPROTECT(1);
+  return out;
 }
 
 SEXP h3rReadMultiPolygon(LinkedGeoPolygon *polygon, int formatAsGeoJson) {
