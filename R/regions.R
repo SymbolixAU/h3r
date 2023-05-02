@@ -81,7 +81,7 @@
 #'   )
 #' )
 #'
-#' polygonToCells(polygon, resolution = 7L)
+#' polygonToCells(polygon, resolution = c(7L, 7L))
 #'
 #'
 #' @export
