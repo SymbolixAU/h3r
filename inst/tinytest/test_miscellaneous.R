@@ -6,8 +6,10 @@ expect_equal(getHexagonAreaAvgM2(res = c(5L, 6L)), c(252903858.1819452, 36129062
 expect_equal(cellAreaRads2(cell = c("8cbe63562a54bff","85283473fffffff")), c(8.852704735090137e-12, 0.000006531025010641534))
 expect_equal(cellAreaKm2(cell = c("8cbe63562a54bff","85283473fffffff")), c(0.0003593289170927259, 265.0925581282742))
 expect_equal(cellAreaM2(cell = c("8cbe63562a54bff","85283473fffffff")), c(359.32891709272593, 265092558.12827423))
-expect_equal(getHexagonEdgeLengthAvgKm(res = c(5L, 6L)), c(8.544408276, 3.229482772))
-expect_equal(getHexagonEdgeLengthAvgM(res = c(5L, 6L)), c(8544.408276, 3229.482772))
+
+expect_equal(getHexagonEdgeLengthAvgKm(res = c(5L, 6L)), c(9.85409099, 3.724532667))
+expect_equal(getHexagonEdgeLengthAvgM(res = c(5L, 6L)), c(9854.09099, 3724.532667))
+
 expect_equal(edgeLengthKm(edge = c("16a2a1072b59ffff", "115283473fffffff")), c(0.07854126606369648, 10.294736086198531))
 expect_equal(edgeLengthM(edge = c("16a2a1072b59ffff", "115283473fffffff")), c(78.54126606369648, 10294.73608619853))
 expect_equal(edgeLengthRads(edge = c("16a2a1072b59ffff", "115283473fffffff")), c(0.000012327919877242014, 0.0016158726232536427))

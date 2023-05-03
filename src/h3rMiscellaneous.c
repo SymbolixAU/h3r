@@ -194,7 +194,7 @@ SEXP h3rGetNumCells(SEXP res) {
 
   int ires;
   int64_t num;
-  
+
   for( i = 0; i < n; i++ ) {
     ires = INTEGER(res)[i];
     h3error(getNumCells(ires, &num), i);
