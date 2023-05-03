@@ -6,6 +6,12 @@ void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lon, R_xlen_t idx) {
   latLng->lng = degsToRads(REAL(lon)[idx]);
 }
 
+void doubleToLatLng(LatLng *latLng, double lat, double lon) {
+  latLng->lat = degsToRads(lat);
+  latLng->lng = degsToRads(lon);
+}
+
+
 H3Index sexpStringToH3(SEXP h3, R_xlen_t idx) {
   H3Index index;
   h3error(stringToH3(CHAR(STRING_ELT(h3, idx)), &index), idx);

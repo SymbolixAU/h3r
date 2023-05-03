@@ -45,7 +45,7 @@ static const R_CallMethodDef callMethods[] = {
   // Hierarchy
   {"h3rCellToParent",        (DL_FUNC) &h3rCellToParent,       2},
   {"h3rCellToChildren",      (DL_FUNC) &h3rCellToChildren,     2},
-  // {"h3rCellToChildrenSize",  (DL_FUNC) &h3rCellToChildrenSize, 2},
+  {"h3rCellToChildrenSize",  (DL_FUNC) &h3rCellToChildrenSize, 2},
   {"h3rCellToCenterChild", (DL_FUNC) &h3rCellToCenterChild, 2},
   {"h3rCellToChildPos", (DL_FUNC) &h3rCellToChildPos, 2},
   {"h3rChildPosToCell", (DL_FUNC) &h3rChildPosToCell, 3},
@@ -57,7 +57,8 @@ static const R_CallMethodDef callMethods[] = {
   // {"h3rDirectionForNeighbor", (DL_FUNC) &h3DirectionForNeighbor, 2},
 
   // Regions
-
+  {"h3rPolygonToCells",                 (DL_FUNC) &h3rPolygonToCells,   3},
+  {"h3rCellsToMultiPolygon",                 (DL_FUNC) &h3rCellsToMultiPolygon,   2},
 
   // Directed Edges
   {"h3rAreNeighborCells",                 (DL_FUNC) &h3rAreNeighborCells,   2},
@@ -328,7 +329,8 @@ void attribute_visible R_init_h3r(DllInfo *info)
   // R_RegisterCCallable("h3r", "h3r_directionForNeighbor", (DL_FUNC) &h3DirectionForNeighbor);
 
   // Regions
-
+  R_RegisterCCallable("h3r", "h3rPolygonToCells",             (DL_FUNC) &h3rPolygonToCells);
+  R_RegisterCCallable("h3r", "h3rCellsToMultiPolygon",        (DL_FUNC) &h3rCellsToMultiPolygon);
 
   // Directed Edges
   R_RegisterCCallable("h3r", "h3rAreNeighborCells",             (DL_FUNC) &h3rAreNeighborCells);
