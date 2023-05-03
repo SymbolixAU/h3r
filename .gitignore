@@ -1,6 +1,9 @@
 src/*.o
 src/*.so
 src/*.dll
+inst/capi/h3rc/src/*.o
+inst/capi/h3rc/src/*.so
+inst/capi/h3rc/src/*.dll
 inst/cppapi/h3rcpp/src/*.o
 inst/cppapi/h3rcpp/src/*.so
 inst/cppapi/h3rcpp/src/.*dll
