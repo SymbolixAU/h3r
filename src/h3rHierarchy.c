@@ -74,7 +74,7 @@ SEXP h3rCellToChildrenSize(SEXP h3, SEXP res) {
   for( i = 0; i < n; i++ ) {
     ires = INTEGER(res)[i];
     h = sexpStringToH3(h3, i);
-    h3error(cellToChildrenSize(h, ires, &num), i);
+    h3rError(cellToChildrenSize(h, ires, &num), i);
 
     SET_REAL_ELT(out, i, (double)num);
   }
@@ -196,7 +196,7 @@ SEXP h3rUncompactCells(SEXP h3Sets, SEXP res) {
 
     H3Index compactedSet[setSize];
     ires = INTEGER(res)[i];
-    
+
     for (j = 0; j < setSize; j++) {
       compactedSet[j] = sexpStringToH3(h3Set, j);
     }

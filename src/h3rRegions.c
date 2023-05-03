@@ -101,11 +101,11 @@ SEXP singlePolygonToCells(SEXP polygon, int res, SEXP isLatLng, int idx) {
   GeoPolygon geoPolygon;
   h3rCoordinatesToGeoPolygon(polygon, &geoPolygon, isLatLng);
 
-  h3error(maxPolygonToCellsSize(&geoPolygon, res, flags, &numHexagons), idx);
+  h3rError(maxPolygonToCellsSize(&geoPolygon, res, flags, &numHexagons), idx);
 
   H3Index *result = (H3Index *)calloc(numHexagons, sizeof(H3Index));
 
-  h3error(polygonToCells(&geoPolygon, res, flags, result), idx);
+  h3rError(polygonToCells(&geoPolygon, res, flags, result), idx);
 
   for (i = 0; i < numHexagons; i++){
     if( isValidCell(result[i])){
@@ -248,7 +248,7 @@ SEXP singleCellsToMultiPolygon(SEXP h3Sets, SEXP isLatLng) {
 
     LinkedGeoPolygon geoPolygon;
 
-    h3error(cellsToLinkedMultiPolygon(cellSet, setSize, &geoPolygon), i);
+    h3rError(cellsToLinkedMultiPolygon(cellSet, setSize, &geoPolygon), i);
 
     SET_VECTOR_ELT(out, i, h3rReadMultiPolygon(&geoPolygon, geoJson));
 
