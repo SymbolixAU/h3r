@@ -18,7 +18,7 @@ SEXP h3rCellToParent(SEXP h3, SEXP parentResolution) {
     int res = INTEGER_ELT(parentResolution, i);
     H3Index index = sexpStringToH3(h3, i);
     H3Index parent;
-    h3error(cellToParent(index, res, &parent), i);
+    h3rError(cellToParent(index, res, &parent), i);
     SET_STRING_ELT(out, i, h3ToSexpString(parent));
   }
 
@@ -43,10 +43,10 @@ SEXP h3rCellToChildren(SEXP h3, SEXP childResolution) {
     int res = INTEGER_ELT(childResolution, i);
 
     int64_t childrenSize;
-    h3error(cellToChildrenSize(index, res, &childrenSize), i);
+    h3rError(cellToChildrenSize(index, res, &childrenSize), i);
 
     H3Index children[ childrenSize ];
-    h3error(cellToChildren(index, res, children), i);
+    h3rError(cellToChildren(index, res, children), i);
 
     SEXP childIndexes = h3VecToSexpString(children, childrenSize);
 
@@ -95,7 +95,7 @@ SEXP h3rCellToCenterChild(SEXP h3, SEXP res) {
   for( i = 0; i < n; i++ ) {
     ires = INTEGER(res)[i];
     h = sexpStringToH3(h3, i);
-    h3error(cellToCenterChild(h, ires, &child), i);
+    h3rError(cellToCenterChild(h, ires, &child), i);
     SET_STRING_ELT(out, i, h3ToSexpString(child));
   }
 
@@ -116,7 +116,7 @@ SEXP h3rCellToChildPos(SEXP h3, SEXP res) {
   for( i = 0; i < n; i++ ) {
     ires = INTEGER(res)[i];
     h = sexpStringToH3(h3, i);
-    h3error(cellToChildPos(h, ires, &num), i);
+    h3rError(cellToChildPos(h, ires, &num), i);
 
     SET_REAL_ELT(out, i, (double)num);
   }
@@ -139,7 +139,7 @@ SEXP h3rChildPosToCell(SEXP pos, SEXP h3, SEXP res) {
     ires = INTEGER(res)[i];
     h = sexpStringToH3(h3, i);
     childPos = (int64_t)REAL(pos)[i];
-    h3error(childPosToCell(childPos, h, ires, &child), i);
+    h3rError(childPosToCell(childPos, h, ires, &child), i);
     SET_STRING_ELT(out, i, h3ToSexpString(child));
   }
 
@@ -165,7 +165,7 @@ SEXP h3rCompactCells(SEXP h3Sets) {
       cellSet[j] = sexpStringToH3(h3Set, j);
     }
 
-    h3error(compactCells(cellSet, compactedSet, setSize), i);
+    h3rError(compactCells(cellSet, compactedSet, setSize), i);
 
     j = 0;
     while (j < setSize && isValidCell(compactedSet[j])) {
@@ -201,10 +201,10 @@ SEXP h3rUncompactCells(SEXP h3Sets, SEXP res) {
       compactedSet[j] = sexpStringToH3(h3Set, j);
     }
 
-    h3error(uncompactCellsSize(compactedSet, setSize, ires, &cellSize), i);
+    h3rError(uncompactCellsSize(compactedSet, setSize, ires, &cellSize), i);
     H3Index cellSet[cellSize];
 
-    h3error(uncompactCells(compactedSet, setSize, cellSet, cellSize, ires), i);
+    h3rError(uncompactCells(compactedSet, setSize, cellSet, cellSize, ires), i);
 
     SET_VECTOR_ELT(out, i, h3VecToSexpString(cellSet, cellSize));
     UNPROTECT(1);
