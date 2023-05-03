@@ -1,6 +1,9 @@
 src/*.o
 src/*.so
 src/*.dll
+inst/cppapi/h3rcpp/src/*.o
+inst/cppapi/h3rcpp/src/*.so
+inst/cppapi/h3rcpp/src/.*dll
 .DS_Store
 .Rproj.user
 .Rhistory
