@@ -34,7 +34,7 @@ SEXP symh3_directions_cell(SEXP origin_vector, SEXP distance_vector, SEXP direct
   R_xlen_t i;
 
   H3Index origin;
-  int distance, j;
+  int distance, j, flag;
   int64_t maxSize, k;
   Direction direction, d;
 
@@ -52,12 +52,20 @@ SEXP symh3_directions_cell(SEXP origin_vector, SEXP distance_vector, SEXP direct
     for( j = 0; j < distance; j++){
       H3Index result[maxSize];
       h3rError(gridDisk(origin, 1, result), i);
-      for( k = 0; k < maxSize; k++){
+
+      k = 0;
+      flag = 0;
+      while( k < maxSize && !flag){
         d = directionForNeighbor(origin, result[k]);
         if (d == direction){
           origin = result[k];
-          break;
+          flag = 1;
         }
+        k++;
+      }
+
+      if(!flag){
+        error("symh3 - Error at item number %td: %s\n", i + 1, "crossed a pentagon");
       }
 
       SET_STRING_ELT(group, j, h3ToSexpString(origin));
