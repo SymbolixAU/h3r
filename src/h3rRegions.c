@@ -150,7 +150,7 @@ SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isLatLng) {
 }
 
 SEXP h3rReadMultiPolygon(LinkedGeoPolygon *polygon, int isLatLng) {
-    SEXP output, loops, coords, coordPair;
+    SEXP output, loops, coords;
     R_xlen_t polygonCount = 0, loopCount, coordCount;
     R_xlen_t pIdx, lIdx, cIdx;
 
