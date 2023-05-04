@@ -7,6 +7,21 @@
 
 #include "h3rUtils.h"
 
+
+void destroyGeoPolygon(GeoPolygon *geoPolygon) {
+  free(geoPolygon->geoloop.verts);
+
+  int numHoles = geoPolygon->numHoles;
+  if (numHoles > 0) {
+    GeoLoop *holes = geoPolygon->holes;
+    for (int i = 0; i < numHoles; i++) {
+      free(holes[i].verts);
+    }
+    free(holes);
+  }
+}
+
+
 void h3rPolygonArrayToGeoLoop(LatLng *polygonArray, int length, GeoLoop *geoLoop){
   R_xlen_t i;
   geoLoop->numVerts = length;
@@ -123,6 +138,7 @@ SEXP singlePolygonToCells(SEXP polygon, int res, SEXP isLatLng, R_xlen_t idx) {
   }
 
   free(result);
+  destroyGeoPolygon(&geoPolygon);
 
   SEXP group = h3VecToSexpString(out, validCount);
 
