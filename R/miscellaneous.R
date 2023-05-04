@@ -305,5 +305,5 @@ greatCircleDistanceKm <- function(aLats, aLons, bLats, bLons) {
 #'
 #' @export
 directionForNeighbor <- function(origin, destination) {
-  .Call(h3rDirectionForNeighbour, origin, destination)
+  .Call(h3rDirectionForNeighbor, origin, destination)
 }
