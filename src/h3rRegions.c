@@ -222,6 +222,8 @@ SEXP h3rReadMultiPolygon(LinkedGeoPolygon *polygon, int isLatLng) {
         pIdx++;
     }
 
+    destroyLinkedMultiPolygon(currentPolygon);
+
     UNPROTECT(1);
 
     return output;
