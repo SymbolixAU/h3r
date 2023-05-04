@@ -102,5 +102,8 @@ SEXP h3rGreatCircleDistanceRads(SEXP aLats, SEXP aLons, SEXP bLats, SEXP bLons);
 SEXP h3rGreatCircleDistanceM(SEXP aLats, SEXP aLons, SEXP bLats, SEXP bLons);
 SEXP h3rGreatCircleDistanceKm(SEXP aLats, SEXP aLons, SEXP bLats, SEXP bLons);
 
+// Test symh3
+SEXP symh3_directions_cell(SEXP origin_vector, SEXP distance_vector, SEXP direction_vector);
+
 
 #endif

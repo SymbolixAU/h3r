@@ -107,6 +107,7 @@ static const R_CallMethodDef callMethods[] = {
   {"h3rGreatCircleDistanceRads", (DL_FUNC) &h3rGreatCircleDistanceRads, 4},
   {"h3rGreatCircleDistanceM",    (DL_FUNC) &h3rGreatCircleDistanceM,    4},
   {"h3rGreatCircleDistanceKm",   (DL_FUNC) &h3rGreatCircleDistanceKm,   4},
+  {"symh3_directions_cell", (DL_FUNC) &symh3_directions_cell,   3},
 
   {NULL,                NULL,                        0}
 };
@@ -370,6 +371,8 @@ void attribute_visible R_init_h3r(DllInfo *info)
   R_RegisterCCallable("h3r", "h3rGreatCircleDistanceRads", (DL_FUNC) &h3rGreatCircleDistanceRads);
   R_RegisterCCallable("h3r", "h3rGreatCircleDistanceM",    (DL_FUNC) &h3rGreatCircleDistanceM);
   R_RegisterCCallable("h3r", "h3rGreatCircleDistanceKm",   (DL_FUNC) &h3rGreatCircleDistanceKm);
+
+  R_RegisterCCallable("h3r", "symh3_directions_cell",   (DL_FUNC) &symh3_directions_cell);
 
 
   R_forceSymbols(info, TRUE);  // controls visibility
