@@ -2,7 +2,8 @@
 % Please edit documentation in R/miscellaneous.R
 \name{getHexagonAreaAvgM2}
 \alias{getHexagonAreaAvgM2}
-\title{Get the average hexagon area in square meters at the given resolution. Excludes pentagons.}
+\title{Get the average hexagon area in square meters at the given resolution.
+Excludes pentagons.}
 \usage{
 getHexagonAreaAvgM2(resolution)
 }
@@ -10,10 +11,12 @@ getHexagonAreaAvgM2(resolution)
 \item{resolution}{cell resolution}
 }
 \value{
-Average hexagon area in square meters at the given resolution. Excludes pentagons.
+Average hexagon area in square meters at the given resolution.
+Excludes pentagons.
 }
 \description{
-Get the average hexagon area in square meters at the given resolution. Excludes pentagons.
+Get the average hexagon area in square meters at the given resolution.
+Excludes pentagons.
 }
 \examples{
 

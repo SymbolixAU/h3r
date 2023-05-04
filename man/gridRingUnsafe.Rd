@@ -12,7 +12,8 @@ gridRingUnsafe(cell, k)
 \item{k}{side length}
 }
 \value{
-the indices of the hollow hexagonal ring centered at origin with sides of length k.
+the indices of the hollow hexagonal ring centered at origin with
+sides of length k.
 }
 \description{
 Produces the hollow hexagonal ring centered at origin with sides of length k.

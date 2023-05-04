@@ -14,8 +14,9 @@ latLngToCell(lat, lng, resolution)
 \item{resolution}{cell resolution}
 }
 \description{
-Indexes the location at the specified resolution, returning the index of the cell
-containing the location. This buckets the geographic point into the H3 grid
+Indexes the location at the specified resolution, returning the index of the
+cell containing the location. This buckets the geographic point into the
+H3 grid
 }
 \examples{
 

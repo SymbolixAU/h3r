@@ -10,7 +10,8 @@ getBaseCellNumber(cell)
 \item{cell}{vector of H3 cells}
 }
 \value{
-a vector the same length as `cell` giving the base cell number of each index
+a vector the same length as `cell` giving the base cell number of
+each index
 }
 \description{
 Returns the base cell number of the index

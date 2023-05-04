@@ -2,7 +2,8 @@
 % Please edit documentation in R/miscellaneous.R
 \name{getHexagonEdgeLengthAvgKm}
 \alias{getHexagonEdgeLengthAvgKm}
-\title{Get the average hexagon edge length in kilometers at the given resolution. Excludes pentagons.}
+\title{Get the average hexagon edge length in kilometers at the given resolution.
+Excludes pentagons.}
 \usage{
 getHexagonEdgeLengthAvgKm(resolution)
 }
@@ -10,10 +11,12 @@ getHexagonEdgeLengthAvgKm(resolution)
 \item{resolution}{cell resolution}
 }
 \value{
-Average hexagon edge length in kilometers at the given resolution. Excludes pentagons.
+Average hexagon edge length in kilometers at the given resolution.
+Excludes pentagons.
 }
 \description{
-Get the average hexagon edge length in kilometers at the given resolution. Excludes pentagons.
+Get the average hexagon edge length in kilometers at the given resolution.
+Excludes pentagons.
 }
 \examples{
 

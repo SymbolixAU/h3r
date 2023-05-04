@@ -10,7 +10,8 @@
 #'
 #' @examples
 #'
-#' areNeighborCells(origin = c("85283473fffffff","85283473fffffff"), destination = c("85283471fffffff","85283477fffffff"))
+#' areNeighborCells(origin = c("85283473fffffff","85283473fffffff")
+#'                 , destination = c("85283471fffffff","85283477fffffff"))
 #'
 #' @export
 areNeighborCells <- function(origin, destination) {
@@ -19,16 +20,19 @@ areNeighborCells <- function(origin, destination) {
 
 #' Cells to directed edge
 #'
-#' Returns a unidirectional edge H3 index based on the provided origin and destination.
+#' Returns a unidirectional edge H3 index based on the provided origin
+#' and destination.
 #'
 #' @param origin vector of origin H3 cell indexes
 #' @param destination vector of destination H3 cell indexes
 #'
-#' @return a unidirectional edge H3 index based on the provided origin and destination.
+#' @return a unidirectional edge H3 index based on the provided origin
+#' and destination.
 #'
 #' @examples
 #'
-#' cellsToDirectedEdge(origin = c("85283471fffffff","85283473fffffff"), destination = c("85283475fffffff","85283477fffffff"))
+#' cellsToDirectedEdge(origin = c("85283471fffffff","85283473fffffff")
+#'                    , destination = c("85283475fffffff","85283477fffffff"))
 #'
 #' @export
 cellsToDirectedEdge <- function(origin, destination) {
@@ -101,7 +105,8 @@ directedEdgeToCells <- function(edge) {
 #'
 #' @param origin vector of origin H3 cell indexes
 #'
-#' @return a vector for each origin with all of the directed edges from the current H3Index
+#' @return a vector for each origin with all of the directed edges from the
+#' current H3Index
 #'
 #' @examples
 #'

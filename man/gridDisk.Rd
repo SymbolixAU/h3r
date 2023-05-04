@@ -15,7 +15,8 @@ gridDisk(cell, k)
 the indices within k distance of the origin index
 }
 \description{
-Elements of the output array may be left as zero, which can happen when crossing a pentagon.
+Elements of the output array may be left as zero, which can happen when
+crossing a pentagon.
 }
 \details{
 k-ring 0 is defined as the origin index, k-ring 1 is defined as k-ring 0

@@ -2,7 +2,8 @@
 % Please edit documentation in R/hierarchy.R
 \name{childPosToCell}
 \alias{childPosToCell}
-\title{Returns the child cell at a given position within an ordered list of all children of parent at the specified resolution childRes.}
+\title{Returns the child cell at a given position within an ordered list of all
+children of parent at the specified resolution childRes.}
 \usage{
 childPosToCell(childPos, cell, childRes)
 }
@@ -11,16 +12,20 @@ childPosToCell(childPos, cell, childRes)
 
 \item{cell}{vector of parent H3 cells}
 
-\item{childRes}{integer vector specifying the child resolution for each `cell`}
+\item{childRes}{integer vector specifying the child resolution for
+each `cell`}
 }
 \value{
 the position of the child cell
 }
 \description{
-Returns the child cell at a given position within an ordered list of all children of parent at the specified resolution childRes.
+Returns the child cell at a given position within an ordered list of all
+children of parent at the specified resolution childRes.
 }
 \examples{
 
-childPosToCell(childPos = c(42, 41), cell = c("85283473fffffff","85283473fffffff"), childRes = c(7L, 7L))
+childPosToCell(childPos = c(42, 41)
+              , cell = c("85283473fffffff","85283473fffffff")
+              , childRes = c(7L, 7L))
 
 }

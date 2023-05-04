@@ -4,21 +4,30 @@
 \alias{cellsToMultiPolygon}
 \title{Cells to GeoPolygons}
 \usage{
-cellsToMultiPolygon(cellSet, isGeoJson = 0L)
+cellsToMultiPolygon(cellSet, isLatLng = TRUE)
 }
 \arguments{
 \item{cellSet}{list of string vectors containing to be H3 cell indexes}
 
-\item{isGeojson}{if the input isGeoJson (each vertex is (lon, lat)). The default is 0L (each vertex is (lat, lon))}
+\item{isLatLng}{`TRUE` (default) if the coordinates are in `lat / lng` order.
+`FALSE` otherwise}
 }
 \value{
-GeoJSON-like MultiPolygon containing the outlines of the set of input H3 hexagons
+GeoJSON-like MultiPolygon containing the outlines of the set of
+input H3 hexagons
 }
 \description{
-Get the outlines of a set of H3 hexagons, returned in GeoJSON-like MultiPolygon.
+Get the outlines of a set of H3 hexagons, returned in GeoJSON-like
+MultiPolygon.
 }
 \examples{
 
-cellsToMultiPolygon(cellSet = list(c("872830828ffffff", "87283082effffff")), 1L)
+cellsToMultiPolygon(
+  cellSet = list(
+    list(c("872830828ffffff", "87283082effffff"))
+    , list(c("872830828ffffff"))
+    )
+    , 1L
+  )
 
 }
