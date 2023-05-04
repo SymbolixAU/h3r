@@ -39,6 +39,7 @@ SEXP symh3_directions_cell(SEXP origin_vector, SEXP distance_vector, SEXP direct
   Direction direction, d;
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
+  SEXP names = PROTECT(Rf_allocVector(STRSXP, n));
 
   maxGridDiskSize(1, &maxSize);
   for( i = 0; i < n; i++ ) {
@@ -62,13 +63,18 @@ SEXP symh3_directions_cell(SEXP origin_vector, SEXP distance_vector, SEXP direct
       SET_STRING_ELT(group, j, h3ToSexpString(origin));
     }
 
+    SET_STRING_ELT(names, i, STRING_ELT(origin_vector, i));
     SET_VECTOR_ELT(out, i, group);
 
     UNPROTECT(1);
   }
 
+  Rf_setAttrib(out, R_NamesSymbol, names);
 
-  UNPROTECT(1);
+
+
+
+  UNPROTECT(2);
   return out;
 
 }
