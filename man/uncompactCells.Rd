@@ -7,18 +7,24 @@
 uncompactCells(compactedSet, res)
 }
 \arguments{
-\item{compactedSet}{list of character vectors containing compacted H3 cell indexes}
+\item{compactedSet}{list of character vectors containing compacted H3 cell
+indexes}
 
 \item{res}{integer specifying the resolution to uncompact the cells to}
 }
 \value{
-a list of character vectors containing the uncompacted H3 cell indexes at the specified resolution
+a list of character vectors containing the uncompacted H3 cell
+indexes at the specified resolution
 }
 \description{
-This function uncompacts the provided set of compacted H3 cell indexes to the specified resolution.
+This function uncompacts the provided set of compacted H3 cell indexes to
+the specified resolution.
 }
 \examples{
 
-uncompactCells(compactCells(gridDisk(cell = c("85283477fffffff","85283423fffffff"), k = c(1L, 2L))), res = c(5L, 5L))
+uncompactCells(compactCells(gridDisk(cell = c("85283477fffffff"
+                                             ,"85283423fffffff")
+                                     , k = c(1L, 2L)))
+               , res = c(5L, 5L))
 
 }

@@ -30,11 +30,13 @@ radsToDegs <- function(rad) {
 }
 
 
-#' Get the average hexagon area in square meters at the given resolution. Excludes pentagons.
+#' Get the average hexagon area in square meters at the given resolution.
+#' Excludes pentagons.
 #'
 #' @param resolution cell resolution
 #'
-#' @return Average hexagon area in square meters at the given resolution. Excludes pentagons.
+#' @return Average hexagon area in square meters at the given resolution.
+#' Excludes pentagons.
 #'
 #' @examples
 #'
@@ -45,11 +47,13 @@ getHexagonAreaAvgM2 <- function(resolution) {
   .Call(h3rGetHexagonAreaAvgM2, resolution)
 }
 
-#' Get the average hexagon area in square kilometers at the given resolution. Excludes pentagons.
+#' Get the average hexagon area in square kilometers at the given resolution.
+#' Excludes pentagons.
 #'
 #' @param resolution cell resolution
 #'
-#' @return Average hexagon area in square kilometers at the given resolution. Excludes pentagons.
+#' @return Average hexagon area in square kilometers at the given resolution.
+#' Excludes pentagons.
 #'
 #' @examples
 #'
@@ -105,11 +109,13 @@ cellAreaKm2 <- function(cell) {
   .Call(h3rCellAreaKm2, cell)
 }
 
-#' Get the average hexagon edge length in meters at the given resolution. Excludes pentagons.
+#' Get the average hexagon edge length in meters at the given resolution.
+#' Excludes pentagons.
 #'
 #' @param resolution cell resolution
 #'
-#' @return Average hexagon edge length in meters at the given resolution. Excludes pentagons.
+#' @return Average hexagon edge length in meters at the given resolution.
+#' Excludes pentagons.
 #'
 #' @examples
 #'
@@ -120,11 +126,13 @@ getHexagonEdgeLengthAvgM <- function(resolution) {
   .Call(h3rGetHexagonEdgeLengthAvgM, resolution)
 }
 
-#' Get the average hexagon edge length in kilometers at the given resolution. Excludes pentagons.
+#' Get the average hexagon edge length in kilometers at the given resolution.
+#' Excludes pentagons.
 #'
 #' @param resolution cell resolution
 #'
-#' @return Average hexagon edge length in kilometers at the given resolution. Excludes pentagons.
+#' @return Average hexagon edge length in kilometers at the given resolution.
+#' Excludes pentagons.
 #'
 #' @examples
 #'
@@ -236,7 +244,8 @@ getPentagons <- function(resolution) {
   .Call(h3rGetPentagons, resolution)
 }
 
-# #' Get the number of pentagon H3 indexes per resolution. This is always 12, but provided as a convenience.
+# #' Get the number of pentagon H3 indexes per resolution. This is always 12,
+# #' but provided as a convenience.
 # #'
 # #' @return the number of pentagon H3 indexes per resolution.
 # #'

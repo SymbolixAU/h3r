@@ -15,11 +15,14 @@ gridPathCells(origin, destination)
 the line of indexes between the two H3 cells
 }
 \description{
-This function may fail to find the line between two indexes, for example if they are very far apart.
-It may also fail when finding distances for indexes on opposite sides of a pentagon.
+This function may fail to find the line between two indexes, for example if
+they are very far apart.
+It may also fail when finding distances for indexes on opposite sides of a
+pentagon.
 }
 \examples{
 
-gridPathCells(origin = c("85283473fffffff","85283473fffffff"), destination = c("85283471fffffff","85283477fffffff"))
+gridPathCells(origin = c("85283473fffffff","85283473fffffff")
+              , destination = c("85283471fffffff","85283477fffffff"))
 
 }

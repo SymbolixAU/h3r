@@ -12,13 +12,16 @@ cellsToDirectedEdge(origin, destination)
 \item{destination}{vector of destination H3 cell indexes}
 }
 \value{
-a unidirectional edge H3 index based on the provided origin and destination.
+a unidirectional edge H3 index based on the provided origin
+and destination.
 }
 \description{
-Returns a unidirectional edge H3 index based on the provided origin and destination.
+Returns a unidirectional edge H3 index based on the provided origin
+and destination.
 }
 \examples{
 
-cellsToDirectedEdge(origin = c("85283471fffffff","85283473fffffff"), destination = c("85283475fffffff","85283477fffffff"))
+cellsToDirectedEdge(origin = c("85283471fffffff","85283473fffffff")
+                   , destination = c("85283475fffffff","85283477fffffff"))
 
 }

@@ -2,7 +2,8 @@
 % Please edit documentation in R/miscellaneous.R
 \name{getHexagonAreaAvgKm2}
 \alias{getHexagonAreaAvgKm2}
-\title{Get the average hexagon area in square kilometers at the given resolution. Excludes pentagons.}
+\title{Get the average hexagon area in square kilometers at the given resolution.
+Excludes pentagons.}
 \usage{
 getHexagonAreaAvgKm2(resolution)
 }
@@ -10,10 +11,12 @@ getHexagonAreaAvgKm2(resolution)
 \item{resolution}{cell resolution}
 }
 \value{
-Average hexagon area in square kilometers at the given resolution. Excludes pentagons.
+Average hexagon area in square kilometers at the given resolution.
+Excludes pentagons.
 }
 \description{
-Get the average hexagon area in square kilometers at the given resolution. Excludes pentagons.
+Get the average hexagon area in square kilometers at the given resolution.
+Excludes pentagons.
 }
 \examples{
 

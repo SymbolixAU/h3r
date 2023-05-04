@@ -2,23 +2,27 @@
 % Please edit documentation in R/hierarchy.R
 \name{cellToChildPos}
 \alias{cellToChildPos}
-\title{Returns the position of the child cell within an ordered list of all children of the cell's parent at the specified resolution parentRes.}
+\title{Returns the position of the child cell within an ordered list of all
+children of the cell's parent at the specified resolution parentRes.}
 \usage{
 cellToChildPos(cell, parentRes)
 }
 \arguments{
 \item{cell}{vector of child H3 cells}
 
-\item{parentRes}{integer vector specifying the parent resolution for each `cell`}
+\item{parentRes}{integer vector specifying the parent resolution for
+each `cell`}
 }
 \value{
 the position of the child cell
 }
 \description{
-Returns the position of the child cell within an ordered list of all children of the cell's parent at the specified resolution parentRes.
+Returns the position of the child cell within an ordered list of all
+children of the cell's parent at the specified resolution parentRes.
 }
 \examples{
 
-cellToChildPos(cell = c("8cbe63562a54bff","8cbe635631103ff"), parentRes = c(1L, 2L))
+cellToChildPos(cell = c("8cbe63562a54bff","8cbe635631103ff")
+              , parentRes = c(1L, 2L))
 
 }

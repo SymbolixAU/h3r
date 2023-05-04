@@ -13,10 +13,12 @@ cellsToMultiPolygon(cellSet, isLatLng = TRUE)
 `FALSE` otherwise}
 }
 \value{
-GeoJSON-like MultiPolygon containing the outlines of the set of input H3 hexagons
+GeoJSON-like MultiPolygon containing the outlines of the set of
+input H3 hexagons
 }
 \description{
-Get the outlines of a set of H3 hexagons, returned in GeoJSON-like MultiPolygon.
+Get the outlines of a set of H3 hexagons, returned in GeoJSON-like
+MultiPolygon.
 }
 \examples{
 

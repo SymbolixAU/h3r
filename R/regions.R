@@ -92,12 +92,14 @@ polygonToCells <- function(polygons, resolution, isLatLng = TRUE) {
 
 #' Cells to GeoPolygons
 #'
-#' Get the outlines of a set of H3 hexagons, returned in GeoJSON-like MultiPolygon.
+#' Get the outlines of a set of H3 hexagons, returned in GeoJSON-like
+#' MultiPolygon.
 #'
 #' @param cellSet list of string vectors containing to be H3 cell indexes
 #' @inheritParams polygonToCells
 #'
-#' @return GeoJSON-like MultiPolygon containing the outlines of the set of input H3 hexagons
+#' @return GeoJSON-like MultiPolygon containing the outlines of the set of
+#' input H3 hexagons
 #'
 #' @examples
 #'

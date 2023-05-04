@@ -2,7 +2,26 @@
 % Please edit documentation in R/traversal.R
 \name{gridDiskDistances}
 \alias{gridDiskDistances}
-\title{Get indices within k distance of the origin index.}
+\title{#' Get the maximum number of indices that result from the gridDisk algorithm
+#' with the given k.
+#'
+#' k-ring 0 is defined as the origin index, k-ring 1 is defined as k-ring 0
+#' and all neighboring indexes, and so on.
+#'
+#' @param k int distance
+#'
+#' @return maximum number of indices that result from the gridDisk algorithm
+#' with the given k.
+#'
+#' @examples
+#'
+#' maxGridDiskSize(k = c(1L, 2L))
+#'
+#' @export
+maxGridDiskSize <- function(k) {
+  .Call(h3rMaxGridDiskSize, k)
+}
+Get indices within k distance of the origin index.}
 \usage{
 gridDiskDistances(cell, k)
 }
@@ -20,6 +39,7 @@ and all neighboring indexes, and so on.
 }
 \examples{
 
-gridDiskDistances(cell = c("8cbe63562a54bff","8cbe635631103ff"), k = c(1L, 2L))
+gridDiskDistances(cell = c("8cbe63562a54bff","8cbe635631103ff")
+                 , k = c(1L, 2L))
 
 }

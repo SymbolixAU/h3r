@@ -10,7 +10,8 @@ originToDirectedEdges(origin)
 \item{origin}{vector of origin H3 cell indexes}
 }
 \value{
-a vector for each origin with all of the directed edges from the current H3Index
+a vector for each origin with all of the directed edges from the
+current H3Index
 }
 \description{
 Get all of the directed edges from an origin

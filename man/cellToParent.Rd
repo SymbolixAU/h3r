@@ -9,7 +9,8 @@ cellToParent(cell, parentRes)
 \arguments{
 \item{cell}{vector of H3 cells}
 
-\item{parentRes}{integer vector specifying the parent resolution for each `cell`}
+\item{parentRes}{integer vector specifying the parent resolution for each
+`cell`}
 }
 \value{
 vector of parent cells for each `cell`
@@ -22,7 +23,8 @@ Provides the parent (coarser) index containing `cell`
 cell <- "8cbe63562a54bff"
 getResolution(cell = cell)2
 
-## The `parentRes` should be a lower value than the result of `getResolution()`
+## The `parentRes` should be a lower value than the result of
+`getResolution()`
 cellToParent(cell = rep(cell, 2), parentRes = c(11L, 10L))
 
 

@@ -9,7 +9,8 @@
 #'
 #' getResolution(cell = c("8cbe63562a54bff","8cbe635631103ff"))
 #'
-#' @return a vector the same length as `cell` giving the resolution of each index
+#' @return a vector the same length as `cell` giving the resolution of each
+#' index
 #'
 #' @export
 getResolution <- function(cell) {
@@ -27,7 +28,8 @@ getResolution <- function(cell) {
 #'
 #' getBaseCellNumber(cell = c("8cbe63562a54bff","8cbe635631103ff"))
 #'
-#' @return a vector the same length as `cell` giving the base cell number of each index
+#' @return a vector the same length as `cell` giving the base cell number of
+#' each index
 #'
 #' @export
 getBaseCellNumber <- function(cell) {
@@ -101,12 +103,14 @@ isPentagon <- function(cell) {
 #'
 #' Find all icosahedron faces intersected by a given H3 index.
 #' Faces are represented as integers from 0-19, inclusive.
-#' The array is sparse, and empty (no intersection) array values are represented by -1.
+#' The array is sparse, and empty (no intersection) array values are
+#' represented by -1.
 #'
 #' @examples
 #' getIcosahedronFaces(cell = c("8cbe63562a54bff","8cbe635631103ff"))
 #'
-#' getIcosahedronFaces(cell = cellToParent(c("8cbe63562a54bff","8cbe635631103ff"), 7L))
+#' getIcosahedronFaces(cell = cellToParent(c("8cbe63562a54bff"
+#'                                          ,"8cbe635631103ff"), 7L))
 #'
 #' @export
 getIcosahedronFaces <- function(cell) {
@@ -115,7 +119,8 @@ getIcosahedronFaces <- function(cell) {
 
 # #' Max Face Count
 # #'
-# #' Returns the maximum number of icosahedron faces the given H3 index may intersect.
+# #' Returns the maximum number of icosahedron faces the given H3 index may
+# #' intersect.
 # #'
 # #' @examples
 # #' maxFaceCount(cell = c("8cbe63562a54bff","8cbe635631103ff"))

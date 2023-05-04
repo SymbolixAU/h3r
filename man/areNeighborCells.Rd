@@ -19,6 +19,7 @@ Returns whether or not the provided H3 cell indexes are neighbors
 }
 \examples{
 
-areNeighborCells(origin = c("85283473fffffff","85283473fffffff"), destination = c("85283471fffffff","85283477fffffff"))
+areNeighborCells(origin = c("85283473fffffff","85283473fffffff")
+                , destination = c("85283471fffffff","85283477fffffff"))
 
 }

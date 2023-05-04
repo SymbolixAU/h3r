@@ -1,7 +1,8 @@
 #' lat lng to cell
 #'
-#' Indexes the location at the specified resolution, returning the index of the cell
-#' containing the location. This buckets the geographic point into the H3 grid
+#' Indexes the location at the specified resolution, returning the index of the
+#' cell containing the location. This buckets the geographic point into the
+#' H3 grid
 #'
 #' @param lat latitude
 #' @param lng longitude
@@ -26,8 +27,8 @@ latLngToCell <- function(lat, lng, resolution) {
 #'
 #' @param cell vector of H3 cells
 #'
-#' @return a list of two vectors, `lat` and `lng`, each the same length as `cell`,
-#' giving the center of `cell`
+#' @return a list of two vectors, `lat` and `lng`, each the same length as
+#' `cell`, giving the center of `cell`
 #'
 #' @examples
 #'
