@@ -33,7 +33,7 @@ SEXP symh3_directions_cell(SEXP origin_vector, SEXP distance_vector, SEXP direct
   R_xlen_t n = Rf_xlength(origin_vector);
   R_xlen_t i;
 
-  H3Index origin;
+  H3Index origin, h;
   int distance, j, flag;
   int64_t maxSize, k;
   Direction direction, d;
@@ -44,6 +44,7 @@ SEXP symh3_directions_cell(SEXP origin_vector, SEXP distance_vector, SEXP direct
   maxGridDiskSize(1, &maxSize);
   for( i = 0; i < n; i++ ) {
     origin = sexpStringToH3(origin_vector, i);
+    h = origin;
     distance = INTEGER(distance_vector)[i];
     direction = sexp_string_to_direction(STRING_ELT(direction_vector, i));
     SEXP group = PROTECT(Rf_allocVector(STRSXP, distance));
@@ -58,14 +59,19 @@ SEXP symh3_directions_cell(SEXP origin_vector, SEXP distance_vector, SEXP direct
       while( k < maxSize && !flag){
         d = directionForNeighbor(origin, result[k]);
         if (d == direction){
+          if(k > 0 && result[k] == h){
+            error("symh3 - Error at item number %td: %s\n", i + 1, "Crossed faces");
+          }
+          h = origin;
           origin = result[k];
           flag = 1;
+          break;
         }
         k++;
       }
 
       if(!flag){
-        error("symh3 - Error at item number %td: %s\n", i + 1, "crossed a pentagon");
+        error("symh3 - Error at item number %td: %s\n", i + 1, "Crossed a pentagon");
       }
 
       SET_STRING_ELT(group, j, h3ToSexpString(origin));

@@ -16,11 +16,14 @@ directions_cell <- function(origin, distance, direction) {
   .Call(symh3_directions_cell, origin, distance, direction)
 }
 
-
-# library(geosphere)
 #
-# cell <- "81283ffffffffff" # Res3: 832800fffffffff
-# cell_path <- c(cell, directions_cell(origin = cell, distance = 20L, direction = "I")[[1]])
+# library(geosphere)
+# library(mapdeck)
+# library(data.table)
+# mapdeck::set_token(secret::get_secret("MAPBOX"))
+#
+# cell <- "83be00fffffffff" # Res0: 80bffffffffffff Res1: 81be3ffffffffff Res3: 83be00fffffffff
+# cell_path <- c(cell, directions_cell(origin = cell, distance = 100L, direction = "K")[[1]])
 #
 # output_df <- NULL
 # for (i in 1:(length(cell_path) - 1)) {
@@ -36,6 +39,14 @@ directions_cell <- function(origin, distance, direction) {
 # }
 # output_df
 #
+# mapdeck(libraries = "h3")  %>%
+#   add_h3(
+#     data = data.frame(x = c("80b9fffffffffff","80c9fffffffffff", "8095fffffffffff", "80d9fffffffffff", "80bffffffffffff", cell_path))
+#     , hexagon = "x"
+#     , fill_colour = "#FF000030"
+#     , tooltip = "x"
+#   )
+
 # output_df_2 <- NULL
 # for (i in 1:(nrow(output_df) - 1)) {
 #   orig <- c(output_df[i,]$point.lon, output_df[i,]$point.lat)
