@@ -1,2 +1,2 @@
-capi/.*
-cppapi/.*
+/capi/.*
+/cppapi/.*
