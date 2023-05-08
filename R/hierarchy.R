@@ -20,7 +20,7 @@
 #'
 #' @export
 cellToParent <- function(cell, parentRes) {
-  .Call(h3rCellToParent, cell, parentRes)
+  .Call(h3rCellToParent, cell, as.integer(parentRes))
 }
 
 
@@ -46,7 +46,7 @@ cellToParent <- function(cell, parentRes) {
 #'
 #' @export
 cellToChildren <- function(cell, childRes) {
-  .Call(h3rCellToChildren, cell, childRes)
+  .Call(h3rCellToChildren, cell, as.integer(childRes))
 }
 
 #' Provies the center child index contained by `cell` at the `childRes`
@@ -65,7 +65,7 @@ cellToChildren <- function(cell, childRes) {
 #'
 #' @export
 cellToCenterChild <- function(cell, childRes) {
-  .Call(h3rCellToCenterChild, cell, childRes)
+  .Call(h3rCellToCenterChild, cell, as.integer(childRes))
 }
 
 #' Returns the position of the child cell within an ordered list of all
@@ -86,7 +86,7 @@ cellToCenterChild <- function(cell, childRes) {
 #'
 #' @export
 cellToChildPos <- function(cell, parentRes) {
-  .Call(h3rCellToChildPos, cell, parentRes)
+  .Call(h3rCellToChildPos, cell, as.integer(parentRes))
 }
 
 #' Returns the child cell at a given position within an ordered list of all
@@ -107,7 +107,7 @@ cellToChildPos <- function(cell, parentRes) {
 #'
 #' @export
 childPosToCell <- function(childPos, cell, childRes) {
-  .Call(h3rChildPosToCell, childPos, cell, childRes)
+  .Call(h3rChildPosToCell, childPos, cell, as.integer(childRes))
 }
 
 #' Compacts the set cellSet of indexes as best as possible, into the array
@@ -134,7 +134,7 @@ compactCells <- function(cellSet) {
 #'
 #' @param compactedSet list of character vectors containing compacted H3 cell
 #' indexes
-#' @param res integer specifying the resolution to uncompact the cells to
+#' @param resolution integer specifying the resolution for the uncompacted cells
 #'
 #' @return a list of character vectors containing the uncompacted H3 cell
 #' indexes at the specified resolution
@@ -152,6 +152,6 @@ compactCells <- function(cellSet) {
 #'  )
 #'
 #' @export
-uncompactCells <- function(compactedSet, res) {
-.Call(h3rUncompactCells, compactedSet, res)
+uncompactCells <- function(compactedSet, resolution) {
+.Call(h3rUncompactCells, compactedSet, as.integer(resolution))
 }

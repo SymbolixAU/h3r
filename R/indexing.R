@@ -18,7 +18,7 @@
 #'
 #' @export
 latLngToCell <- function(lat, lng, resolution) {
-  .Call(h3rLatLngToCell, lat, lng, resolution)
+  .Call(h3rLatLngToCell, lat, lng, as.integer(resolution))
 }
 
 #' Cell To Lat Lon

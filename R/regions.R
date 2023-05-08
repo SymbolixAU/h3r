@@ -86,7 +86,7 @@
 #'
 #' @export
 polygonToCells <- function(polygons, resolution, isLatLng = TRUE) {
-  .Call(h3rPolygonToCells, polygons, resolution, as.integer(isLatLng))
+  .Call(h3rPolygonToCells, polygons, as.integer(resolution), as.integer(isLatLng))
 }
 
 

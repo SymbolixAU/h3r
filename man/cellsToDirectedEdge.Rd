@@ -21,7 +21,9 @@ and destination.
 }
 \examples{
 
-cellsToDirectedEdge(origin = c("85283471fffffff","85283473fffffff")
-                   , destination = c("85283475fffffff","85283477fffffff"))
+cellsToDirectedEdge(
+  origin = c("85283471fffffff","85283473fffffff")
+  , destination = c("85283475fffffff","85283477fffffff")
+ )
 
 }

@@ -4,13 +4,13 @@
 \alias{uncompactCells}
 \title{Uncompacts a set of compacted H3 cell indexes to a given resolution.}
 \usage{
-uncompactCells(compactedSet, res)
+uncompactCells(compactedSet, resolution)
 }
 \arguments{
 \item{compactedSet}{list of character vectors containing compacted H3 cell
 indexes}
 
-\item{res}{integer specifying the resolution to uncompact the cells to}
+\item{resolution}{integer specifying the resolution for the uncompacted cells}
 }
 \value{
 a list of character vectors containing the uncompacted H3 cell
