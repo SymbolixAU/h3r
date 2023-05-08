@@ -6,6 +6,9 @@
 \usage{
 cellToVertexes(cell)
 }
+\arguments{
+\item{cell}{vector of H3 cells}
+}
 \description{
 Returns the indexes for all vertices of the given `cell`. The
 Output will have a 0 in the result if the input `cell` is a pentagon

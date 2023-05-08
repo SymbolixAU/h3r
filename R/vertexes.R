@@ -25,7 +25,7 @@ cellToVertex <- function(cell, vertexNum) {
 #' Returns the indexes for all vertices of the given `cell`. The
 #' Output will have a 0 in the result if the input `cell` is a pentagon
 #'
-#' @inheritParams latLngToCell
+#' @inheritParams cellToLatLng
 #'
 #' @examples
 #'
@@ -46,11 +46,12 @@ cellToVertexes <- function(cell) {
 #'
 #' @examples
 #'
-#' vertexToLatLng(
-#'   vertex = cellToVertex(
-#'     vertex = c("24cbe63562a549ff","255283463fffffff")
-#'     )
-#' )
+#' vertices <- cellToVertex(
+#'   cell = c(rep("8cbe63562a54bff", 6))
+#'   , vertexNum = c(0L:5L)
+#'   )
+#'
+#' vertexToLatLng(vertex = vertices)
 #'
 #'
 #' @export

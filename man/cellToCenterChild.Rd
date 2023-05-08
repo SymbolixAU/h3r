@@ -22,7 +22,9 @@ resolution
 }
 \examples{
 
-cellToCenterChild(cell = c("85283473fffffff","85283473fffffff")
-                 , childRes = c(7L, 8L))
+cellToCenterChild(
+  cell = c("85283473fffffff","85283473fffffff")
+  , childRes = c(7L, 8L)
+ )
 
 }

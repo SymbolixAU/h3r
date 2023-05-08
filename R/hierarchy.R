@@ -14,8 +14,7 @@
 #' cell <- "8cbe63562a54bff"
 #' getResolution(cell = cell)
 #'
-#' ## The `parentRes` should be a lower value than the result of
-#' `getResolution()`
+#' ## The `parentRes` should be a lower value than the result of  `getResolution()`
 #' cellToParent(cell = rep(cell, 2), parentRes = c(11L, 10L))
 #'
 #'
@@ -30,15 +29,20 @@ cellToParent <- function(cell, parentRes) {
 #' Returns all the H3 indexes contained by the input `cell` and the defined
 #' child resolution
 #'
+#' @inheritParams cellToLatLng
+#' @param childRes integer vector specifying the child resolution for each
+#' `cell`
+#'
 #' @return a named list, where each element is the input `cell`, and the values
 #' of each element are the child H3 cells
 #'
 #' @examples
 #'
 #' cell <- "8cbe63562a54bff"
-#' getResolution(cell = cell)
+#' currentResolution <- getResolution(cell = cell)
 #'
-#' cellToChildren(cell, childRes = 13L)
+#' cellToChildren(cell, childRes = currentResolution + 1L)
+#' cellToChildren(cell, childRes = currentResolution + 2L)
 #'
 #' @export
 cellToChildren <- function(cell, childRes) {
@@ -48,16 +52,16 @@ cellToChildren <- function(cell, childRes) {
 #' Provies the center child index contained by `cell` at the `childRes`
 #' resolution
 #'
-#' @param cell vector of H3 cells
-#' @param childRes integer vector specifying the child resolution for each
-#' `cell`
+#' @inheritParams cellToChildren
 #'
 #' @return index of the child cells
 #'
 #' @examples
 #'
-#' cellToCenterChild(cell = c("85283473fffffff","85283473fffffff")
-#'                  , childRes = c(7L, 8L))
+#' cellToCenterChild(
+#'   cell = c("85283473fffffff","85283473fffffff")
+#'   , childRes = c(7L, 8L)
+#'  )
 #'
 #' @export
 cellToCenterChild <- function(cell, childRes) {
@@ -67,7 +71,7 @@ cellToCenterChild <- function(cell, childRes) {
 #' Returns the position of the child cell within an ordered list of all
 #' children of the cell's parent at the specified resolution parentRes.
 #'
-#' @param cell vector of child H3 cells
+#' @inheritParams cellToChildren
 #' @param parentRes integer vector specifying the parent resolution for
 #' each `cell`
 #'
@@ -75,8 +79,10 @@ cellToCenterChild <- function(cell, childRes) {
 #'
 #' @examples
 #'
-#' cellToChildPos(cell = c("8cbe63562a54bff","8cbe635631103ff")
-#'               , parentRes = c(1L, 2L))
+#' cellToChildPos(
+#'   cell = c("8cbe63562a54bff","8cbe635631103ff")
+#'   , parentRes = c(1L, 2L)
+#'  )
 #'
 #' @export
 cellToChildPos <- function(cell, parentRes) {
@@ -86,18 +92,18 @@ cellToChildPos <- function(cell, parentRes) {
 #' Returns the child cell at a given position within an ordered list of all
 #' children of parent at the specified resolution childRes.
 #'
+#' @inheritParams cellToChildren
 #' @param childPos the position of the child cell
-#' @param cell vector of parent H3 cells
-#' @param childRes integer vector specifying the child resolution for
-#' each `cell`
 #'
 #' @return the position of the child cell
 #'
 #' @examples
 #'
-#' childPosToCell(childPos = c(42, 41)
-#'               , cell = c("85283473fffffff","85283473fffffff")
-#'               , childRes = c(7L, 7L))
+#' childPosToCell(
+#'   childPos = c(42, 41)
+#'   , cell = c("85283473fffffff","85283473fffffff")
+#'   , childRes = c(7L, 7L)
+#' )
 #'
 #' @export
 childPosToCell <- function(childPos, cell, childRes) {
@@ -114,8 +120,7 @@ childPosToCell <- function(childPos, cell, childRes) {
 #'
 #' @examples
 #'
-#' compactCells(gridDisk(cell = c("8cbe63562a54bff","8cbe635631103ff")
-#'                       , k = c(1L, 2L)))
+#' compactCells(gridDisk(cell = c("8cbe63562a54bff","8cbe635631103ff"), k = c(1L, 2L)))
 #'
 #' @export
 compactCells <- function(cellSet) {
@@ -136,10 +141,15 @@ compactCells <- function(cellSet) {
 #'
 #' @examples
 #'
-#' uncompactCells(compactCells(gridDisk(cell = c("85283477fffffff"
-#'                                              ,"85283423fffffff")
-#'                                      , k = c(1L, 2L)))
-#'                , res = c(5L, 5L))
+#' uncompactCells(
+#'   compactCells(
+#'     gridDisk(
+#'       cell = c("85283477fffffff", "85283423fffffff")
+#'       , k = c(1L, 2L)
+#'      )
+#'    )
+#'    , res = c(5L, 5L)
+#'  )
 #'
 #' @export
 uncompactCells <- function(compactedSet, res) {

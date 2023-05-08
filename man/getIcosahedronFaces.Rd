@@ -6,6 +6,9 @@
 \usage{
 getIcosahedronFaces(cell)
 }
+\arguments{
+\item{cell}{vector of H3 cells}
+}
 \description{
 Find all icosahedron faces intersected by a given H3 index.
 Faces are represented as integers from 0-19, inclusive.
@@ -15,7 +18,6 @@ represented by -1.
 \examples{
 getIcosahedronFaces(cell = c("8cbe63562a54bff","8cbe635631103ff"))
 
-getIcosahedronFaces(cell = cellToParent(c("8cbe63562a54bff"
-                                         ,"8cbe635631103ff"), 7L))
+getIcosahedronFaces(cell = cellToParent(c("8cbe63562a54bff" ,"8cbe635631103ff"), c(7L, 7L)))
 
 }

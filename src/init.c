@@ -71,7 +71,7 @@ static const R_CallMethodDef callMethods[] = {
 
 
   // Vertexes
-  {"h3rCellToVertex",      (DL_FUNC) &h3rCellToVertex,   1},
+  {"h3rCellToVertex",      (DL_FUNC) &h3rCellToVertex,   2},
   {"h3rCellToVertexes",    (DL_FUNC) &h3rCellToVertexes, 1},
   {"h3rVertexToLatLng",    (DL_FUNC) &h3rVertexToLatLng, 1},
   {"h3rIsValidVertex",     (DL_FUNC) &h3rIsValidVertex,  1},

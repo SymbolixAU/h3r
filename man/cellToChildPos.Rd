@@ -8,7 +8,7 @@ children of the cell's parent at the specified resolution parentRes.}
 cellToChildPos(cell, parentRes)
 }
 \arguments{
-\item{cell}{vector of child H3 cells}
+\item{cell}{vector of H3 cells}
 
 \item{parentRes}{integer vector specifying the parent resolution for
 each `cell`}
@@ -22,7 +22,9 @@ children of the cell's parent at the specified resolution parentRes.
 }
 \examples{
 
-cellToChildPos(cell = c("8cbe63562a54bff","8cbe635631103ff")
-              , parentRes = c(1L, 2L))
+cellToChildPos(
+  cell = c("8cbe63562a54bff","8cbe635631103ff")
+  , parentRes = c(1L, 2L)
+ )
 
 }

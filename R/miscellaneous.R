@@ -260,6 +260,14 @@ getPentagons <- function(resolution) {
 
 #' Great Circle Distance In Radians
 #'
+#' Gives the "great circle" or "haversine" distance between pairs of lat/lng coordinates
+#' in radians
+#'
+#' @param aLats vector of latitude cooridnates (from)
+#' @param aLons vector of longitude coordinates (from)
+#' @param bLats vector of latitude coordinates (to)
+#' @param bLons vector of longitude coordinates (to)
+#'
 #' @examples
 #'
 #' greatCircleDistanceRads(
@@ -277,6 +285,11 @@ greatCircleDistanceRads <- function(aLats, aLons, bLats, bLons) {
 
 #' Great Circle Distance In Meters
 #'
+#' Gives the "great circle" or "haversine" distance between pairs of lat/lng coordinates
+#' in meters.
+#'
+#' @inheritParams greatCircleDistanceRads
+#'
 #' @examples
 #'
 #' greatCircleDistanceM(
@@ -293,6 +306,11 @@ greatCircleDistanceM <- function(aLats, aLons, bLats, bLons) {
 
 #' Great Circle Distance In Kilometers
 #'
+#' Gives the "great circle" or "haversine" distance between pairs of lat/lng coordinates
+#' in kilometers.
+#'
+#' @inheritParams greatCircleDistanceRads
+#'
 #' @examples
 #'
 #' greatCircleDistanceKm(
@@ -308,11 +326,19 @@ greatCircleDistanceKm <- function(aLats, aLons, bLats, bLons) {
 }
 
 
-
-#' Direction For Neighbor
-#'
-#'
-#' @export
-directionForNeighbor <- function(origin, destination) {
-  .Call(h3rDirectionForNeighbor, origin, destination)
-}
+#' #' Direction For Neighbor
+#' #'
+#' #' Returns the direction between origin / destination pairs.
+#' #'
+#' #' @param origin vector of `cells`
+#' #' @param destination vector of `cells`
+#' #'
+#' #' @examples
+#' #'
+#' #' directionForNeighbor(origin = "", destination = "")
+#' #'
+#' #'
+#' #' @export
+#' directionForNeighbor <- function(origin, destination) {
+#'   .Call(h3rDirectionForNeighbor, origin, destination)
+#' }

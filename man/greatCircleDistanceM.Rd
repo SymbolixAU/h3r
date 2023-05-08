@@ -6,8 +6,18 @@
 \usage{
 greatCircleDistanceM(aLats, aLons, bLats, bLons)
 }
+\arguments{
+\item{aLats}{vector of latitude cooridnates (from)}
+
+\item{aLons}{vector of longitude coordinates (from)}
+
+\item{bLats}{vector of latitude coordinates (to)}
+
+\item{bLons}{vector of longitude coordinates (to)}
+}
 \description{
-Great Circle Distance In Meters
+Gives the "great circle" or "haversine" distance between pairs of lat/lng coordinates
+in meters.
 }
 \examples{
 

@@ -106,11 +106,12 @@ isPentagon <- function(cell) {
 #' The array is sparse, and empty (no intersection) array values are
 #' represented by -1.
 #'
+#' @inheritParams cellToLatLng
+#'
 #' @examples
 #' getIcosahedronFaces(cell = c("8cbe63562a54bff","8cbe635631103ff"))
 #'
-#' getIcosahedronFaces(cell = cellToParent(c("8cbe63562a54bff"
-#'                                          ,"8cbe635631103ff"), 7L))
+#' getIcosahedronFaces(cell = cellToParent(c("8cbe63562a54bff" ,"8cbe635631103ff"), c(7L, 7L)))
 #'
 #' @export
 getIcosahedronFaces <- function(cell) {

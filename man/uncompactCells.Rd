@@ -22,9 +22,14 @@ the specified resolution.
 }
 \examples{
 
-uncompactCells(compactCells(gridDisk(cell = c("85283477fffffff"
-                                             ,"85283423fffffff")
-                                     , k = c(1L, 2L)))
-               , res = c(5L, 5L))
+uncompactCells(
+  compactCells(
+    gridDisk(
+      cell = c("85283477fffffff", "85283423fffffff")
+      , k = c(1L, 2L)
+     )
+   )
+   , res = c(5L, 5L)
+ )
 
 }
