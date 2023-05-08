@@ -12,7 +12,7 @@
 #' @examples
 #'
 #' cell <- "8cbe63562a54bff"
-#' getResolution(cell = cell)2
+#' getResolution(cell = cell)
 #'
 #' ## The `parentRes` should be a lower value than the result of
 #' `getResolution()`

@@ -70,13 +70,8 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isLa
   // Convert the SEXP polygon[][][lat, lng] to LatLng[][]
   for (i = 0; i < n; i++) {
     SEXP polygon = VECTOR_ELT(polygons, i);
-
-    // TODO:
-    // - shouldn need to access this infor here _AND_ within `h3rMatrixToLatLng()`
-    // - think of a better way
     SEXP dim = Rf_getAttrib(polygon, R_DimSymbol);
     int nrow = INTEGER(dim)[0];
-    // int ncol = INTEGER(dim)[1];
     numVerts[i] = nrow;
 
     polygonArray[i] = (LatLng *)malloc(numVerts[i] * sizeof(LatLng));

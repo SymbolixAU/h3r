@@ -14,4 +14,6 @@ Depends:
   h3lib
 LinkingTo:
   h3lib
+Suggests:
+  tinytest
 RoxygenNote: 7.2.3
