@@ -28,4 +28,10 @@ currentResolution <- getResolution(cell = cell)
 cellToChildren(cell, childRes = currentResolution + 1L)
 cellToChildren(cell, childRes = currentResolution + 2L)
 
+res0 <- getRes0Cells()
+cellToChildren(res0[1], 1L)
+cellToChildren(res0[1], 2L)
+
+cellToChildren(res0[1:3], 1L:2L)
+
 }
