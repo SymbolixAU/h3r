@@ -2,7 +2,7 @@
 % Please edit documentation in R/direcetedEdges.R
 \name{directedEdgeToCells}
 \alias{directedEdgeToCells}
-\title{Get the origin and destination cells of the unidirectional edge}
+\title{Directed Edge To Cells}
 \usage{
 directedEdgeToCells(edge)
 }

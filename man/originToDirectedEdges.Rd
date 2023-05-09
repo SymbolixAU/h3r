@@ -2,7 +2,7 @@
 % Please edit documentation in R/direcetedEdges.R
 \name{originToDirectedEdges}
 \alias{originToDirectedEdges}
-\title{Get all of the directed edges from an origin}
+\title{Origin To Directed Edges}
 \usage{
 originToDirectedEdges(origin)
 }

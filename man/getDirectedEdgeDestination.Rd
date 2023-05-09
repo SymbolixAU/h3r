@@ -2,7 +2,7 @@
 % Please edit documentation in R/direcetedEdges.R
 \name{getDirectedEdgeDestination}
 \alias{getDirectedEdgeDestination}
-\title{Get the destination cell of the unidirectional edge}
+\title{Get Directed Edge Destination}
 \usage{
 getDirectedEdgeDestination(edge)
 }

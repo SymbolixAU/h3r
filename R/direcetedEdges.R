@@ -60,6 +60,8 @@ isValidDirectedEdge <- function(edge) {
   .Call(h3rIsValidDirectedEdge, edge)
 }
 
+#' Get Directed Edge Origin
+#'
 #' Get the origin cell of the unidirectional edge
 #'
 #' @param edge vector of unidirectional edge H3 indexes
@@ -75,6 +77,8 @@ getDirectedEdgeOrigin <- function(edge) {
   .Call(h3rGetDirectedEdgeOrigin, edge)
 }
 
+#' Get Directed Edge Destination
+#'
 #' Get the destination cell of the unidirectional edge
 #'
 #' @param edge vector of unidirectional edge H3 indexes
@@ -90,6 +94,8 @@ getDirectedEdgeDestination <- function(edge) {
   .Call(h3rGetDirectedEdgeDestination, edge)
 }
 
+#' Directed Edge To Cells
+#'
 #' Get the origin and destination cells of the unidirectional edge
 #'
 #' @param edge vector of unidirectional edge H3 indexes
@@ -105,6 +111,8 @@ directedEdgeToCells <- function(edge) {
   .Call(h3rDirectedEdgeToCells, edge)
 }
 
+#' Origin To Directed Edges
+#'
 #' Get all of the directed edges from an origin
 #'
 #' @param origin vector of origin H3 cell indexes
