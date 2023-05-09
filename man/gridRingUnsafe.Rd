@@ -2,7 +2,7 @@
 % Please edit documentation in R/traversal.R
 \name{gridRingUnsafe}
 \alias{gridRingUnsafe}
-\title{Produces the hollow hexagonal ring centered at origin with sides of length k.}
+\title{Grid Ring Unsafe}
 \usage{
 gridRingUnsafe(cell, k)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/traversal.R
 \name{gridPathCells}
 \alias{gridPathCells}
-\title{Given two H3 indexes, return the line of indexes between them (inclusive).}
+\title{Grid Path Cells}
 \usage{
 gridPathCells(origin, destination)
 }
@@ -15,6 +15,9 @@ gridPathCells(origin, destination)
 the line of indexes between the two H3 cells
 }
 \description{
+Given two H3 indexes, return the line of indexes between them (inclusive).
+}
+\details{
 This function may fail to find the line between two indexes, for example if
 they are very far apart.
 It may also fail when finding distances for indexes on opposite sides of a

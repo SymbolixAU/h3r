@@ -21,7 +21,7 @@
 maxGridDiskSize <- function(k) {
   .Call(h3rMaxGridDiskSize, k)
 }
-Get indices within k distance of the origin index.}
+Grid Disk Distances}
 \usage{
 gridDiskDistances(cell, k)
 }
@@ -34,6 +34,9 @@ gridDiskDistances(cell, k)
 indices within k distance of the origin index.
 }
 \description{
+Get indices within k distance of the origin index.
+}
+\details{
 k-ring 0 is defined as the origin index, k-ring 1 is defined as k-ring 0
 and all neighboring indexes, and so on.
 }

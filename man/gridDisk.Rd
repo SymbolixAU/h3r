@@ -2,7 +2,7 @@
 % Please edit documentation in R/traversal.R
 \name{gridDisk}
 \alias{gridDisk}
-\title{Get indices within k distance of the origin index.}
+\title{Grid Disk}
 \usage{
 gridDisk(cell, k)
 }
@@ -15,10 +15,12 @@ gridDisk(cell, k)
 the indices within k distance of the origin index
 }
 \description{
-Elements of the output array may be left as zero, which can happen when
-crossing a pentagon.
+Get indices within k distance of the origin index.
 }
 \details{
+Elements of the output array may be left as zero, which can happen when
+crossing a pentagon.
+
 k-ring 0 is defined as the origin index, k-ring 1 is defined as k-ring 0
 and all neighboring indexes, and so on.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/traversal.R
 \name{cellToLocalIj}
 \alias{cellToLocalIj}
-\title{Produces local IJ coordinates for an H3 index anchored by an origin.}
+\title{Cell to Local IJ}
 \usage{
 cellToLocalIj(origin, cell)
 }

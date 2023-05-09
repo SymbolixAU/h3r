@@ -20,7 +20,7 @@
 gridPathCellsSize <- function(origin, destination) {
   .Call(h3rGridPathCellsSize, origin, destination)
 }
-Provides the distance in grid cells between the two indexes.}
+Grid Distance}
 \usage{
 gridDistance(origin, destination)
 }
@@ -33,24 +33,6 @@ gridDistance(origin, destination)
 the grid distance between the two H3 cells
 }
 \description{
-#' Get the size of the grid of cells forming the shortest path between two H3
-#' cells.
-#'
-#' @param origin vector of origin H3 cell indexes
-#' @param destination vector of destination H3 cell indexes
-#'
-#' @return the size of the grid of cells forming the shortest path between
-#' the two H3 cells
-#'
-#' @examples
-#'
-# gridPathCellsSize(origin = c("85283473fffffff","85283473fffffff")
-#                   , destination = c("85283471fffffff","85283477fffffff"))
-#'
-#' @export
-gridPathCellsSize <- function(origin, destination) {
-  .Call(h3rGridPathCellsSize, origin, destination)
-}
 Provides the distance in grid cells between the two indexes.
 }
 \examples{

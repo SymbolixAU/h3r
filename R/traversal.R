@@ -1,4 +1,6 @@
 
+#' Grid Disk
+#'
 #' Get indices within k distance of the origin index.
 #'
 #' Elements of the output array may be left as zero, which can happen when
@@ -41,6 +43,8 @@ gridDisk <- function(cell, k) {
 #'   .Call(h3rMaxGridDiskSize, k)
 #' }
 
+#' Grid Disk Distances
+#'
 #' Get indices within k distance of the origin index.
 #'
 #' k-ring 0 is defined as the origin index, k-ring 1 is defined as k-ring 0
@@ -121,6 +125,8 @@ gridDiskDistances <- function(cell, k) {
 #   .Call(h3rGridDiskDistancesSafe, cell, k)
 # }
 
+#' Grid Ring Unsafe
+#'
 #' Produces the hollow hexagonal ring centered at origin with sides of length k.
 #'
 #' @param cell vector of H3 cells
@@ -138,6 +144,8 @@ gridRingUnsafe <- function(cell, k) {
   .Call(h3rGridRingUnsafe, cell, as.integer(k))
 }
 
+#' Grid Path Cells
+#'
 #' Given two H3 indexes, return the line of indexes between them (inclusive).
 #'
 #' This function may fail to find the line between two indexes, for example if
@@ -179,6 +187,8 @@ gridPathCells <- function(origin, destination) {
 #'   .Call(h3rGridPathCellsSize, origin, destination)
 #' }
 
+#' Grid Distance
+#'
 #' Provides the distance in grid cells between the two indexes.
 #'
 #' @param origin vector of origin H3 cell indexes
@@ -196,6 +206,8 @@ gridDistance <- function(origin, destination) {
   .Call(h3rGridDistance, origin, destination)
 }
 
+#' Cell to Local IJ
+#'
 #' Produces local IJ coordinates for an H3 index anchored by an origin.
 #'
 #' @param origin vector of anchor cell
@@ -213,6 +225,8 @@ cellToLocalIj <- function(origin, cell) {
   .Call(h3rCellToLocalIj, origin, cell)
 }
 
+#' Local IJ To Cell
+#'
 #' Produces an H3 index from local IJ coordinates anchored by an origin.
 #'
 #' @param origin vector of anchor cell
