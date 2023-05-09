@@ -217,8 +217,10 @@ gridDistance <- function(origin, destination) {
 #'
 #' @examples
 #'
-#' cellToLocalIj(origin = c("85283473fffffff","85283473fffffff")
-#'              , cell = c("8528342bfffffff","85283477fffffff"))
+#' cellToLocalIj(
+#'   origin = c("85283473fffffff","85283473fffffff")
+#'   , cell = c("8528342bfffffff","85283477fffffff")
+#'  )
 #'
 #' @export
 cellToLocalIj <- function(origin, cell) {
@@ -237,8 +239,11 @@ cellToLocalIj <- function(origin, cell) {
 #'
 #' @examples
 #'
-#' localIjToCell(origin = c("85283473fffffff","85283473fffffff")
-#'              , i = c(1L, 2L), j = c(2L, 1L))
+#' localIjToCell(
+#'   origin = c("85283473fffffff","85283473fffffff")
+#'   , i = c(1L, 2L)
+#'   , j = c(2L, 1L)
+#'  )
 #'
 #' @export
 localIjToCell <- function(origin, i, j) {

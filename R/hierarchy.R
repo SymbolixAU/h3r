@@ -26,7 +26,7 @@ cellToParent <- function(cell, parentRes) {
 
 #' Cell To Children
 #'
-#' Returns all the H3 indexes contained by the input `cell` and the defined
+#' Returns all the H3 indexes contained by the input `cell` at the defined
 #' child resolution
 #'
 #' @inheritParams cellToLatLng

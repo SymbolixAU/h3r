@@ -17,7 +17,7 @@ a named list, where each element is the input `cell`, and the values
 of each element are the child H3 cells
 }
 \description{
-Returns all the H3 indexes contained by the input `cell` and the defined
+Returns all the H3 indexes contained by the input `cell` at the defined
 child resolution
 }
 \examples{
