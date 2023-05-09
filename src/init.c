@@ -52,10 +52,6 @@ static const R_CallMethodDef callMethods[] = {
   {"h3rCompactCells", (DL_FUNC) &h3rCompactCells, 1},
   {"h3rUncompactCells", (DL_FUNC) &h3rUncompactCells, 2},
 
-  // {"h3rH3ToString",     (DL_FUNC) &h3H3ToString,     1},
-  // {"h3rStringToH3",     (DL_FUNC) &h3StringToH3,     1},
-  // {"h3rDirectionForNeighbor", (DL_FUNC) &h3DirectionForNeighbor, 2},
-
   // Regions
   {"h3rPolygonToCells",                 (DL_FUNC) &h3rPolygonToCells,   3},
   {"h3rCellsToMultiPolygon",                 (DL_FUNC) &h3rCellsToMultiPolygon,   2},
@@ -276,16 +272,6 @@ void attribute_visible R_init_h3r(DllInfo *info)
 
   R_useDynamicSymbols(info, FALSE);
 
-  /* Imports from h3lib */
-  // degsToRads = (double(*)(double degrees)) R_GetCCallable("h3lib", "degsToRads");
-  // radsToDegs = (double(*)(double radians)) R_GetCCallable("h3lib", "radsToDegs");
-  // areNeighborCells = (H3Error(*)(H3Index, H3Index, int*)) R_GetCCallable("h3lib", "areNeighborCells");
-
-
-  /* Exports from h3r */
-  // Indexing
-  // R_RegisterCCallable("h3r", "latLngToCell",       (DL_FUNC) &latLngToCell);       // H3 Internal
-
   R_RegisterCCallable("h3r", "h3rLatLngToCell",    (DL_FUNC) &h3rLatLngToCell);
   R_RegisterCCallable("h3r", "h3rCellToLatLng",    (DL_FUNC) &h3rCellToLatLng);
   R_RegisterCCallable("h3r", "h3rCellToBoundary",  (DL_FUNC) &h3rCellToBoundary);
@@ -322,11 +308,6 @@ void attribute_visible R_init_h3r(DllInfo *info)
   R_RegisterCCallable("h3r", "h3rChildPosToCell",        (DL_FUNC) &h3rChildPosToCell);
   R_RegisterCCallable("h3r", "h3rCompactCells",          (DL_FUNC) &h3rCompactCells);
   R_RegisterCCallable("h3r", "h3rUncompactCells",        (DL_FUNC) &h3rUncompactCells);
-  // R_RegisterCCallable("h3r", "h3rCellToChildrenSize",        (DL_FUNC) &h3rCellToChildrenSize);
-
-  // R_RegisterCCallable("h3r", "h3r_h3ToString",   (DL_FUNC) &h3H3ToString);
-  // R_RegisterCCallable("h3r", "h3r_stringToH3",   (DL_FUNC) &h3StringToH3);
-  // R_RegisterCCallable("h3r", "h3r_directionForNeighbor", (DL_FUNC) &h3DirectionForNeighbor);
 
   // Regions
   R_RegisterCCallable("h3r", "h3rPolygonToCells",             (DL_FUNC) &h3rPolygonToCells);
@@ -370,7 +351,6 @@ void attribute_visible R_init_h3r(DllInfo *info)
   R_RegisterCCallable("h3r", "h3rGreatCircleDistanceRads", (DL_FUNC) &h3rGreatCircleDistanceRads);
   R_RegisterCCallable("h3r", "h3rGreatCircleDistanceM",    (DL_FUNC) &h3rGreatCircleDistanceM);
   R_RegisterCCallable("h3r", "h3rGreatCircleDistanceKm",   (DL_FUNC) &h3rGreatCircleDistanceKm);
-
 
   R_forceSymbols(info, TRUE);  // controls visibility
 

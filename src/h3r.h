@@ -5,10 +5,6 @@
 #ifndef R_H3R_H
 #define R_H3R_H
 
-
-// h3api.h     -> h3r.h          ->  h3rapi.h ( C || C++)
-// latLngToCel -> h3LatLngToCell ->  h3rLatLngToCell || h3r::latLngToCell
-
 // Indexing
 SEXP h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res);
 SEXP h3rCellToLatLng(SEXP h3);
@@ -101,6 +97,5 @@ SEXP h3rGreatCircleDistance(SEXP aLats, SEXP aLons, SEXP bLats, SEXP bLons, int 
 SEXP h3rGreatCircleDistanceRads(SEXP aLats, SEXP aLons, SEXP bLats, SEXP bLons);
 SEXP h3rGreatCircleDistanceM(SEXP aLats, SEXP aLons, SEXP bLats, SEXP bLons);
 SEXP h3rGreatCircleDistanceKm(SEXP aLats, SEXP aLons, SEXP bLats, SEXP bLons);
-
 
 #endif
