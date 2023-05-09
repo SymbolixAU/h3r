@@ -5,10 +5,6 @@
 #ifndef R_H3R_H
 #define R_H3R_H
 
-
-// h3api.h     -> h3r.h          ->  h3rapi.h ( C || C++)
-// latLngToCel -> h3LatLngToCell ->  h3rLatLngToCell || h3r::latLngToCell
-
 // Indexing
 SEXP h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res);
 SEXP h3rCellToLatLng(SEXP h3);
@@ -104,6 +100,5 @@ SEXP h3rGreatCircleDistanceKm(SEXP aLats, SEXP aLons, SEXP bLats, SEXP bLons);
 
 // Test symh3
 SEXP symh3_directions_cell(SEXP origin_vector, SEXP distance_vector, SEXP direction_vector);
-
 
 #endif

@@ -44,7 +44,7 @@ radsToDegs <- function(rad) {
 #'
 #' @export
 getHexagonAreaAvgM2 <- function(resolution) {
-  .Call(h3rGetHexagonAreaAvgM2, resolution)
+  .Call(h3rGetHexagonAreaAvgM2, as.integer(resolution))
 }
 
 #' Get the average hexagon area in square kilometers at the given resolution.
@@ -61,7 +61,7 @@ getHexagonAreaAvgM2 <- function(resolution) {
 #'
 #' @export
 getHexagonAreaAvgKm2 <- function(resolution) {
-  .Call(h3rGetHexagonAreaAvgKm2, resolution)
+  .Call(h3rGetHexagonAreaAvgKm2, as.integer(resolution))
 }
 
 #' Exact area of specific cell in square radians.
@@ -123,7 +123,7 @@ cellAreaKm2 <- function(cell) {
 #'
 #' @export
 getHexagonEdgeLengthAvgM <- function(resolution) {
-  .Call(h3rGetHexagonEdgeLengthAvgM, resolution)
+  .Call(h3rGetHexagonEdgeLengthAvgM, as.integer(resolution))
 }
 
 #' Get the average hexagon edge length in kilometers at the given resolution.
@@ -140,7 +140,7 @@ getHexagonEdgeLengthAvgM <- function(resolution) {
 #'
 #' @export
 getHexagonEdgeLengthAvgKm <- function(resolution) {
-  .Call(h3rGetHexagonEdgeLengthAvgKm, resolution)
+  .Call(h3rGetHexagonEdgeLengthAvgKm, as.integer(resolution))
 }
 
 #' Get the exact edge length of specific unidirectional edge in radians.
@@ -200,7 +200,7 @@ edgeLengthKm <- function(edge) {
 #'
 #' @export
 getNumCells <- function(resolution) {
-  .Call(h3rGetNumCells, resolution)
+  .Call(h3rGetNumCells, as.integer(resolution))
 }
 
 #' Get all the resolution 0 H3 indexes.
@@ -241,7 +241,7 @@ getRes0Cells <- function() {
 #'
 #' @export
 getPentagons <- function(resolution) {
-  .Call(h3rGetPentagons, resolution)
+  .Call(h3rGetPentagons, as.integer(resolution))
 }
 
 # #' Get the number of pentagon H3 indexes per resolution. This is always 12,
@@ -260,6 +260,14 @@ getPentagons <- function(resolution) {
 
 #' Great Circle Distance In Radians
 #'
+#' Gives the "great circle" or "haversine" distance between pairs of lat/lng coordinates
+#' in radians
+#'
+#' @param aLats vector of latitude cooridnates (from)
+#' @param aLons vector of longitude coordinates (from)
+#' @param bLats vector of latitude coordinates (to)
+#' @param bLons vector of longitude coordinates (to)
+#'
 #' @examples
 #'
 #' greatCircleDistanceRads(
@@ -277,6 +285,11 @@ greatCircleDistanceRads <- function(aLats, aLons, bLats, bLons) {
 
 #' Great Circle Distance In Meters
 #'
+#' Gives the "great circle" or "haversine" distance between pairs of lat/lng coordinates
+#' in meters.
+#'
+#' @inheritParams greatCircleDistanceRads
+#'
 #' @examples
 #'
 #' greatCircleDistanceM(
@@ -293,6 +306,11 @@ greatCircleDistanceM <- function(aLats, aLons, bLats, bLons) {
 
 #' Great Circle Distance In Kilometers
 #'
+#' Gives the "great circle" or "haversine" distance between pairs of lat/lng coordinates
+#' in kilometers.
+#'
+#' @inheritParams greatCircleDistanceRads
+#'
 #' @examples
 #'
 #' greatCircleDistanceKm(
@@ -308,11 +326,19 @@ greatCircleDistanceKm <- function(aLats, aLons, bLats, bLons) {
 }
 
 
-
-#' Direction For Neighbor
-#'
-#'
-#' @export
-directionForNeighbor <- function(origin, destination) {
-  .Call(h3rDirectionForNeighbor, origin, destination)
-}
+#' #' Direction For Neighbor
+#' #'
+#' #' Returns the direction between origin / destination pairs.
+#' #'
+#' #' @param origin vector of `cells`
+#' #' @param destination vector of `cells`
+#' #'
+#' #' @examples
+#' #'
+#' #' directionForNeighbor(origin = "", destination = "")
+#' #'
+#' #'
+#' #' @export
+#' directionForNeighbor <- function(origin, destination) {
+#'   .Call(h3rDirectionForNeighbor, origin, destination)
+#' }

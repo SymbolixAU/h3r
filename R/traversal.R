@@ -18,7 +18,7 @@
 #'
 #' @export
 gridDisk <- function(cell, k) {
-  .Call(h3rGridDisk, cell, k)
+  .Call(h3rGridDisk, cell, as.integer(k))
 }
 
 #' #' Get the maximum number of indices that result from the gridDisk algorithm
@@ -58,7 +58,7 @@ gridDisk <- function(cell, k) {
 #'
 #' @export
 gridDiskDistances <- function(cell, k) {
-  .Call(h3rGridDiskDistances, cell, k)
+  .Call(h3rGridDiskDistances, cell, as.integer(k))
 }
 
 # #' Get indices within k distance of the origin index (unsafe version).
@@ -135,7 +135,7 @@ gridDiskDistances <- function(cell, k) {
 #'
 #' @export
 gridRingUnsafe <- function(cell, k) {
-  .Call(h3rGridRingUnsafe, cell, k)
+  .Call(h3rGridRingUnsafe, cell, as.integer(k))
 }
 
 #' Given two H3 indexes, return the line of indexes between them (inclusive).
@@ -228,5 +228,5 @@ cellToLocalIj <- function(origin, cell) {
 #'
 #' @export
 localIjToCell <- function(origin, i, j) {
-  .Call(h3rLocalIjToCell, origin, i, j)
+  .Call(h3rLocalIjToCell, origin, as.integer(i), as.integer(j))
 }

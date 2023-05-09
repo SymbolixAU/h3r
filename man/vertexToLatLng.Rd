@@ -14,11 +14,12 @@ Returns the latitude and longitude of the given vertex
 }
 \examples{
 
-vertexToLatLng(
-  vertex = cellToVertex(
-    vertex = c("24cbe63562a549ff","255283463fffffff")
-    )
-)
+vertices <- cellToVertex(
+  cell = c(rep("8cbe63562a54bff", 6))
+  , vertexNum = c(0L:5L)
+  )
+
+vertexToLatLng(vertex = vertices)
 
 
 }

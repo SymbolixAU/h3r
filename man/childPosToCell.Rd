@@ -10,10 +10,10 @@ childPosToCell(childPos, cell, childRes)
 \arguments{
 \item{childPos}{the position of the child cell}
 
-\item{cell}{vector of parent H3 cells}
+\item{cell}{vector of H3 cells}
 
-\item{childRes}{integer vector specifying the child resolution for
-each `cell`}
+\item{childRes}{integer vector specifying the child resolution for each
+`cell`}
 }
 \value{
 the position of the child cell
@@ -24,8 +24,10 @@ children of parent at the specified resolution childRes.
 }
 \examples{
 
-childPosToCell(childPos = c(42, 41)
-              , cell = c("85283473fffffff","85283473fffffff")
-              , childRes = c(7L, 7L))
+childPosToCell(
+  childPos = c(42, 41)
+  , cell = c("85283473fffffff","85283473fffffff")
+  , childRes = c(7L, 7L)
+)
 
 }

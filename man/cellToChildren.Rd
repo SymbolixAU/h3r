@@ -6,6 +6,12 @@
 \usage{
 cellToChildren(cell, childRes)
 }
+\arguments{
+\item{cell}{vector of H3 cells}
+
+\item{childRes}{integer vector specifying the child resolution for each
+`cell`}
+}
 \value{
 a named list, where each element is the input `cell`, and the values
 of each element are the child H3 cells
@@ -17,8 +23,9 @@ child resolution
 \examples{
 
 cell <- "8cbe63562a54bff"
-getResolution(cell = cell)
+currentResolution <- getResolution(cell = cell)
 
-cellToChildren(cell, childRes = 13L)
+cellToChildren(cell, childRes = currentResolution + 1L)
+cellToChildren(cell, childRes = currentResolution + 2L)
 
 }

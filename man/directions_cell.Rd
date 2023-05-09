@@ -4,14 +4,14 @@
 \alias{directions_cell}
 \title{Get the h3 cells from the origin to an direction within a certain distance}
 \usage{
-directions_cell(origin_vector, distance_vector, direction_vector)
+directions_cell(origin, distance, direction)
 }
 \arguments{
-\item{origin_vector}{vector of origin H3 cell indexes}
+\item{origin}{a vector of origin H3 cell indexes}
 
-\item{distance_vector}{int vector of distance}
+\item{distance}{a int vector of distance}
 
-\item{direction_vector}{string vector of direction. Choices are `c('I', 'J', 'K', 'IJ', 'IK', 'JK')`}
+\item{direction}{a string vector of direction. Choices are `c('I', 'J', 'K', 'IJ', 'IK', 'JK')`}
 }
 \value{
 a list of lists of h3 cells on the path of an origin to distance away on direction
@@ -20,8 +20,8 @@ a list of lists of h3 cells on the path of an origin to distance away on directi
 Get the h3 cells from the origin to an direction within a certain distance
 }
 \examples{
-directions_cell(origin_vector = c("8cbe63562a54bff", "8cbe635631103ff")
-               , distance_vector = c(5L, 100L)
-               , direction_vector = c("I", "JK"))
+directions_cell(origin = c("8cbe63562a54bff", "8cbe635631103ff")
+               , distance = c(5L, 100L)
+               , direction = c("I", "JK"))
 
 }

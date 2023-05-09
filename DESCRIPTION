@@ -1,12 +1,12 @@
 Package: h3r
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Hexagonal Hierarchical Geospatial Indexing System
 Version: 0.1.0
 Authors@R: c(
-    person("David", "Cooley", ,"dcooley@symbolix.com.au", role = c("aut", "cre"))
+    person("David", "Cooley", ,"dcooley@symbolix.com.au", role = c("aut", "cre")),
+    person("Ray", "Shao", ,"rshao@symbolix.com.au", role = c("ctb"))
     )
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Provides access to Uber's 'H3' geospatial indexing system.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -14,4 +14,6 @@ Depends:
   h3lib
 LinkingTo:
   h3lib
+Suggests:
+  tinytest
 RoxygenNote: 7.2.3
