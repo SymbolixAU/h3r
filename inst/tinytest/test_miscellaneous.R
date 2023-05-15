@@ -22,6 +22,6 @@ expect_equal(getPentagons(res = c(5L, 15L)), list(c("85080003fffffff","851c0003f
 expect_equal(edgeLengthKm(edge = c("16a2a1072b59ffff", "115283473fffffff")), c(0.07854126606369648, 10.294736086198531))
 expect_equal(edgeLengthM(edge = c("16a2a1072b59ffff", "115283473fffffff")), c(78.54126606369648, 10294.73608619853))
 
-expect_equal(greatCircleDistanceKm(aLats = c(-37.820197, -10), aLons = c(144.983324, 0), bLats = c(-37.818476, 10), bLons = c(144.967354, 0)), c(1.41577093439477, 2223.9010395045884))
-expect_equal(greatCircleDistanceM(aLats = c(-37.820197, -10), aLons = c(144.983324, 0), bLats = c(-37.818476, 10), bLons = c(144.967354, 0)), c(1415.77093439477, 2223901.0395045886))
-expect_equal(greatCircleDistanceRads(aLats = c(-37.820197, -10), aLons = c(144.983324, 0), bLats = c(-37.818476, 10), bLons = c(144.967354, 0)), c(0.00022222089760549693, 0.3490658503988659))
+expect_equal(greatCircleDistanceKm(aLat = c(-37.820197, -10), aLng = c(144.983324, 0), bLat = c(-37.818476, 10), bLng = c(144.967354, 0)), c(1.41577093439477, 2223.9010395045884))
+expect_equal(greatCircleDistanceM(aLat = c(-37.820197, -10), aLng = c(144.983324, 0), bLat = c(-37.818476, 10), bLng = c(144.967354, 0)), c(1415.77093439477, 2223901.0395045886))
+expect_equal(greatCircleDistanceRads(aLat = c(-37.820197, -10), aLng = c(144.983324, 0), bLat = c(-37.818476, 10), bLng = c(144.967354, 0)), c(0.00022222089760549693, 0.3490658503988659))

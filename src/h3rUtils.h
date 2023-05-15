@@ -9,13 +9,13 @@
  //' Fill Lat Lng
  //'
  //' fills the `latLng` object with the contents of SEXP lat/lon vectors
- void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lon, R_xlen_t idx);
+ void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lng, R_xlen_t idx);
 
 
  //' Fill Lat Lng
  //'
  //' fills the `latLng` object with the contents of doubles
- void doubleToLatLng(LatLng *latLng, double lat, double lon);
+ void doubleToLatLng(LatLng *latLng, double lat, double lng);
 
  //' H3 To Sexp String
  //'

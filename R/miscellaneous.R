@@ -263,23 +263,23 @@ getPentagons <- function(resolution) {
 #' Gives the "great circle" or "haversine" distance between pairs of lat/lng coordinates
 #' in radians
 #'
-#' @param aLats vector of latitude cooridnates (from)
-#' @param aLons vector of longitude coordinates (from)
-#' @param bLats vector of latitude coordinates (to)
-#' @param bLons vector of longitude coordinates (to)
+#' @param aLat vector of latitude cooridnates (from)
+#' @param aLng vector of longitude coordinates (from)
+#' @param bLat vector of latitude coordinates (to)
+#' @param bLng vector of longitude coordinates (to)
 #'
 #' @examples
 #'
 #' greatCircleDistanceRads(
-#'   aLats = c(-37.820197)
-#'   , aLons = c(144.983324)
-#'   , bLats = c(-37.818476)
-#'   , bLons = c(144.967354)
+#'   aLat = c(-37.820197)
+#'   , aLng = c(144.983324)
+#'   , bLat = c(-37.818476)
+#'   , bLng = c(144.967354)
 #' )
 #'
 #' @export
-greatCircleDistanceRads <- function(aLats, aLons, bLats, bLons) {
-  .Call(h3rGreatCircleDistanceRads, aLats, aLons, bLats, bLons)
+greatCircleDistanceRads <- function(aLat, aLng, bLat, bLng) {
+  .Call(h3rGreatCircleDistanceRads, aLat, aLng, bLat, bLng)
 }
 
 
@@ -293,15 +293,15 @@ greatCircleDistanceRads <- function(aLats, aLons, bLats, bLons) {
 #' @examples
 #'
 #' greatCircleDistanceM(
-#'   aLats = c(-37.820197)
-#'   , aLons = c(144.983324)
-#'   , bLats = c(-37.818476)
-#'   , bLons = c(144.967354)
+#'   aLat = c(-37.820197)
+#'   , aLng = c(144.983324)
+#'   , bLat = c(-37.818476)
+#'   , bLng = c(144.967354)
 #' )
 #'
 #' @export
-greatCircleDistanceM <- function(aLats, aLons, bLats, bLons) {
-  .Call(h3rGreatCircleDistanceM, aLats, aLons, bLats, bLons)
+greatCircleDistanceM <- function(aLat, aLng, bLat, bLng) {
+  .Call(h3rGreatCircleDistanceM, aLat, aLng, bLat, bLng)
 }
 
 #' Great Circle Distance In Kilometers
@@ -314,15 +314,15 @@ greatCircleDistanceM <- function(aLats, aLons, bLats, bLons) {
 #' @examples
 #'
 #' greatCircleDistanceKm(
-#'   aLats = c(-37.820197)
-#'   , aLons = c(144.983324)
-#'   , bLats = c(-37.818476)
-#'   , bLons = c(144.967354)
+#'   aLat = c(-37.820197)
+#'   , aLng = c(144.983324)
+#'   , bLat = c(-37.818476)
+#'   , bLng = c(144.967354)
 #' )
 #'
 #' @export
-greatCircleDistanceKm <- function(aLats, aLons, bLats, bLons) {
-  .Call(h3rGreatCircleDistanceKm, aLats, aLons, bLats, bLons)
+greatCircleDistanceKm <- function(aLat, aLng, bLat, bLng) {
+  .Call(h3rGreatCircleDistanceKm, aLat, aLng, bLat, bLng)
 }
 
 

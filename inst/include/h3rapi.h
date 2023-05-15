@@ -16,10 +16,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-  inline SEXP attribute_hidden h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res) {
+  inline SEXP attribute_hidden h3rLatLngToCell(SEXP lat, SEXP lng, SEXP res) {
     SEXP(*fun)(SEXP, SEXP, SEXP) =
       (SEXP(*)(SEXP, SEXP, SEXP)) R_GetCCallable("h3r", "h3rLatLngToCell");
-    return fun(lat, lon, res);
+    return fun(lat, lng, res);
   }
   inline SEXP attribute_hidden h3rCellToLatLng(SEXP h3) {
     SEXP(*fun)(SEXP) =
@@ -341,8 +341,8 @@ extern "C" {
 
 
 namespace h3r {
-    inline SEXP latLngToCell(SEXP lat, SEXP lon, SEXP res) {
-    return h3rLatLngToCell(lat, lon, res);
+    inline SEXP latLngToCell(SEXP lat, SEXP lng, SEXP res) {
+    return h3rLatLngToCell(lat, lng, res);
   }
     inline SEXP cellToLatLng(SEXP h3) {
     return h3rCellToLatLng(h3);
@@ -533,7 +533,7 @@ namespace h3r {
     inline SEXP greatCircleDistanceKm(SEXP aLats, SEXP aLons, SEXP bLats, SEXP bLons) {
     return h3rGreatCircleDistanceKm(aLats, aLons, bLats, bLons);
   }
-  
+
 }
 
 

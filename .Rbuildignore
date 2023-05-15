@@ -3,3 +3,4 @@
 ^LICENSE\.md$
 ^data-raw$
 update_h3rapi.sh
+^README\.Rmd$

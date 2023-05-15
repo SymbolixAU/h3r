@@ -4,16 +4,16 @@
 \alias{greatCircleDistanceRads}
 \title{Great Circle Distance In Radians}
 \usage{
-greatCircleDistanceRads(aLats, aLons, bLats, bLons)
+greatCircleDistanceRads(aLat, aLng, bLat, bLng)
 }
 \arguments{
-\item{aLats}{vector of latitude cooridnates (from)}
+\item{aLat}{vector of latitude cooridnates (from)}
 
-\item{aLons}{vector of longitude coordinates (from)}
+\item{aLng}{vector of longitude coordinates (from)}
 
-\item{bLats}{vector of latitude coordinates (to)}
+\item{bLat}{vector of latitude coordinates (to)}
 
-\item{bLons}{vector of longitude coordinates (to)}
+\item{bLng}{vector of longitude coordinates (to)}
 }
 \description{
 Gives the "great circle" or "haversine" distance between pairs of lat/lng coordinates
@@ -22,10 +22,10 @@ in radians
 \examples{
 
 greatCircleDistanceRads(
-  aLats = c(-37.820197)
-  , aLons = c(144.983324)
-  , bLats = c(-37.818476)
-  , bLons = c(144.967354)
+  aLat = c(-37.820197)
+  , aLng = c(144.983324)
+  , bLat = c(-37.818476)
+  , bLng = c(144.967354)
 )
 
 }

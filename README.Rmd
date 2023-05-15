@@ -1,4 +1,48 @@
-# C API
+---
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# h3r
+
+Interface to {h3lib}
+
+R wrappers around Uber's H3 library. 
+
+The wrappers are all vectorised, meaning each input can take a vector, and / or return a vector. 
+
+e.g:
+
+```r
+
+```
+
+
+
+## Design Choices
+
+- There is no `h3` class, or nice printing, or any fancy sugar-coating of what's returned from the functions. I've kept the outputs as raw / primitive as possible
+- All H3Indexes are returned as the String representation. If you want the `H3Index` / `uint64_t` type you need to use the C / C++ functions directly
+
+## API
+
+`inst/include/h3rapi.h`
+
+
+## C API
+
+
+An example package showing how to call the C API is in `/inst/capi`
 
 {h3rc} is a demo package showing how to include the C code from {h3r} into another package.
 
@@ -72,3 +116,29 @@ NULL
 ```
 
 and it will be built and added to your NAMESPACE automatically
+
+
+
+## C++ API
+
+An example package showing how to call the C++ API is in `/inst/cppapi`
+
+
+
+
+```{r}
+
+library(sfheaders)
+library(h3r)
+
+
+cellToBoundary(cell = c("8cbe63562a54bff","8cbe635631103ff"))
+
+
+
+```
+
+
+
+
+

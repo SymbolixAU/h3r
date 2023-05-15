@@ -23,7 +23,7 @@ Inclue the `h3rapi.h` header, and use the `h3r` namespace (see example in `/src/
 
 // [[Rcpp::export]]
 SEXP h3rcppLatLngToCell(SEXP lat, SEXP lon, SEXP res) {
-  return h3r::latLngToCell(lat, lon, res);
+  return h3r::latLngToCell(lat, lng, res);
 }
 
 ```
@@ -32,7 +32,7 @@ Call your C++ function within R (see example in `/R/h3rr.R`)
 
 ```r
 ll2Cell <- function(lat, lon, res) {
-  return( h3rcppLatLngToCell(lat, lon, res))
+  return( h3rcppLatLngToCell(lat, lng, res))
 }
 ```
 

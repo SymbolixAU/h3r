@@ -6,7 +6,7 @@
 #define R_H3R_H
 
 // Indexing
-SEXP h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res);
+SEXP h3rLatLngToCell(SEXP lat, SEXP lng, SEXP res);
 SEXP h3rCellToLatLng(SEXP h3);
 SEXP h3rCellToBoundary(SEXP h3);
 

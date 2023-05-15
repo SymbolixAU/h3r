@@ -8,7 +8,7 @@
 
 #include "h3rUtils.h"
 
-SEXP h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res) {
+SEXP h3rLatLngToCell(SEXP lat, SEXP lng, SEXP res) {
 
   R_xlen_t n = Rf_xlength(lat);
   R_xlen_t i;
@@ -21,7 +21,7 @@ SEXP h3rLatLngToCell(SEXP lat, SEXP lon, SEXP res) {
   for( i = 0; i < n; i++ ) {
     int ires = INTEGER(res)[i];
 
-    sexpToLatLng(&latLng, lat, lon, i);
+    sexpToLatLng(&latLng, lat, lng, i);
 
     h3rError(latLngToCell(&latLng, ires, &h3Index), i);
     // h3ToString(h3Index, str, 17);

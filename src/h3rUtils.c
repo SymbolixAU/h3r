@@ -1,14 +1,14 @@
 
 #include "h3rUtils.h"
 
-void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lon, R_xlen_t idx) {
+void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lng, R_xlen_t idx) {
   latLng->lat = degsToRads(REAL(lat)[idx]);
-  latLng->lng = degsToRads(REAL(lon)[idx]);
+  latLng->lng = degsToRads(REAL(lng)[idx]);
 }
 
-void doubleToLatLng(LatLng *latLng, double lat, double lon) {
+void doubleToLatLng(LatLng *latLng, double lat, double lng) {
   latLng->lat = degsToRads(lat);
-  latLng->lng = degsToRads(lon);
+  latLng->lng = degsToRads(lng);
 }
 
 
@@ -38,10 +38,10 @@ SEXP h3VecToSexpString(H3Index *h3, R_xlen_t n) {
 
 void latLngToSexp(LatLng *latLng, SEXP lats, SEXP lons, R_xlen_t idx) {
   double lat = radsToDegs(latLng->lat);
-  double lon = radsToDegs(latLng->lng);
+  double lng = radsToDegs(latLng->lng);
 
   SET_REAL_ELT(lats, idx, lat);
-  SET_REAL_ELT(lons, idx, lon);
+  SET_REAL_ELT(lons, idx, lng);
 }
 
 SEXP latLngList(SEXP lats, SEXP lons) {

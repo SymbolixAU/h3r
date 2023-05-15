@@ -4,6 +4,6 @@
 
 #include <Rinternals.h>
 
-SEXP h3rcLatLngToCell(SEXP lat, SEXP lon, SEXP res);
+SEXP h3rcLatLngToCell(SEXP lat, SEXP lng, SEXP res);
 
 #endif
