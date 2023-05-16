@@ -23,7 +23,7 @@ H3 grid
 latLngToCell(
   lat = c(-37.820197, -37.818476)
   , lng = c(144.983324, 144.967354)
-  , resolution = 12L
+  , resolution = c(12, 12)
   )
 
 }
