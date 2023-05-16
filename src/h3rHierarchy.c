@@ -9,9 +9,13 @@
 #include "h3rUtils.h"
 
 SEXP h3rCellToParent(SEXP h3, SEXP parentResolution) {
-
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
+
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(parentResolution);
+  h3rVectorError(vectorLength, 2);
 
   SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
   for(i = 0; i < n; i++) {
@@ -31,6 +35,11 @@ SEXP h3rCellToParent(SEXP h3, SEXP parentResolution) {
 SEXP h3rCellToChildren(SEXP h3, SEXP childResolution) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
+
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(childResolution);
+  h3rVectorError(vectorLength, 2);
 
   SEXP names = PROTECT(Rf_allocVector(STRSXP, n));
   SEXP out = PROTECT(Rf_allocVector(VECSXP, n)); // store the results in a list
