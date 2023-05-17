@@ -2,25 +2,7 @@
 % Please edit documentation in R/traversal.R
 \name{gridDistance}
 \alias{gridDistance}
-\title{#' Get the size of the grid of cells forming the shortest path between two H3
-#' cells.
-#'
-#' @param origin vector of origin H3 cell indexes
-#' @param destination vector of destination H3 cell indexes
-#'
-#' @return the size of the grid of cells forming the shortest path between
-#' the two H3 cells
-#'
-#' @examples
-#'
-# gridPathCellsSize(origin = c("85283473fffffff","85283473fffffff")
-#                   , destination = c("85283471fffffff","85283477fffffff"))
-#'
-#' @export
-gridPathCellsSize <- function(origin, destination) {
-  .Call(h3rGridPathCellsSize, origin, destination)
-}
-Grid Distance}
+\title{Grid Distance}
 \usage{
 gridDistance(origin, destination)
 }
