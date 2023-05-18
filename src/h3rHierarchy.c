@@ -54,10 +54,16 @@ SEXP h3rCellToChildren(SEXP h3, SEXP childResolution) {
     int64_t childrenSize;
     h3rError(cellToChildrenSize(index, res, &childrenSize), i);
 
-    H3Index children[ childrenSize ];
+    if (childrenSize > 282000000){
+      error("h3r - Error at item number %td: children size is too large to process \n", i);
+    }
+
+    H3Index* children = (H3Index*) malloc(childrenSize * sizeof(H3Index));
     h3rError(cellToChildren(index, res, children), i);
 
     SEXP childIndexes = h3VecToSexpString(children, childrenSize);
+
+    free(children);
 
     SET_VECTOR_ELT(out, i, childIndexes);
     SET_STRING_ELT(names, i, STRING_ELT(h3, i));

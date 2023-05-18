@@ -29,6 +29,19 @@ expect_error(
   , pattern = "h3r - Error: Input vectors do not have consistent length"
 )
 
+res0 <- h3r::getRes0Cells()
+expect_error(
+  h3r::cellToChildren(
+    res0
+    , 1L
+    )
+  , pattern = "h3r - Error: Input vectors do not have consistent length"
+)
+
+expect_error(
+  h3r::cellToChildren(res0, rep(15, length(res0)))
+)
+
 expect_equal(
   cellToCenterChild(
     cell = c("83be63fffffffff","85283473fffffff")
