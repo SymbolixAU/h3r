@@ -11,6 +11,11 @@ SEXP h3rGridDisk(SEXP h3, SEXP k) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
 
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(k);
+  h3rVectorError(vectorLength, 2);
+
   H3Index h;
   int distance;
   int64_t maxSize, j;
@@ -65,6 +70,11 @@ SEXP h3rGridDiskDistances(SEXP h3, SEXP k) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
 
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(k);
+  h3rVectorError(vectorLength, 2);
+
   H3Index h;
   int distance;
   int64_t maxSize, j;
@@ -78,7 +88,7 @@ SEXP h3rGridDiskDistances(SEXP h3, SEXP k) {
     H3Index result[maxSize];
     int distances[maxSize];
     SEXP cell = PROTECT(Rf_allocVector(STRSXP, maxSize));
-    SEXP dist = PROTECT(Rf_allocVector(INTSXP, maxSize)); 
+    SEXP dist = PROTECT(Rf_allocVector(INTSXP, maxSize));
 
     h3rError(gridDiskDistances(h, distance, result, distances), i);
 
@@ -101,6 +111,11 @@ SEXP h3rGridDiskDistances(SEXP h3, SEXP k) {
 SEXP h3rGridDiskUnsafe(SEXP h3, SEXP k) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
+
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(k);
+  h3rVectorError(vectorLength, 2);
 
   H3Index h;
   int distance;
@@ -136,6 +151,11 @@ SEXP h3rGridDiskDistancesUnsafe(SEXP h3, SEXP k) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
 
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(k);
+  h3rVectorError(vectorLength, 2);
+
   H3Index h;
   int distance;
   int64_t maxSize, j;
@@ -149,7 +169,7 @@ SEXP h3rGridDiskDistancesUnsafe(SEXP h3, SEXP k) {
     H3Index result[maxSize];
     int distances[maxSize];
     SEXP cell = PROTECT(Rf_allocVector(STRSXP, maxSize));
-    SEXP dist = PROTECT(Rf_allocVector(INTSXP, maxSize)); 
+    SEXP dist = PROTECT(Rf_allocVector(INTSXP, maxSize));
 
     h3rError(gridDiskDistancesUnsafe(h, distance, result, distances), i);
 
@@ -173,6 +193,11 @@ SEXP h3rGridDiskDistancesSafe(SEXP h3, SEXP k) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
 
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(k);
+  h3rVectorError(vectorLength, 2);
+
   H3Index h;
   int distance;
   int64_t maxSize, j;
@@ -186,7 +211,7 @@ SEXP h3rGridDiskDistancesSafe(SEXP h3, SEXP k) {
     H3Index result[maxSize];
     int distances[maxSize];
     SEXP cell = PROTECT(Rf_allocVector(STRSXP, maxSize));
-    SEXP dist = PROTECT(Rf_allocVector(INTSXP, maxSize)); 
+    SEXP dist = PROTECT(Rf_allocVector(INTSXP, maxSize));
 
     h3rError(gridDiskDistancesSafe(h, distance, result, distances), i);
 
@@ -209,6 +234,11 @@ SEXP h3rGridDiskDistancesSafe(SEXP h3, SEXP k) {
 SEXP h3rGridRingUnsafe(SEXP h3, SEXP k) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
+
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(k);
+  h3rVectorError(vectorLength, 2);
 
   H3Index h;
   int length;
@@ -246,6 +276,11 @@ SEXP h3rGridPathCells(SEXP origH3, SEXP destH3) {
   R_xlen_t n = Rf_xlength(origH3);
   R_xlen_t i;
 
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(destH3);
+  h3rVectorError(vectorLength, 2);
+
   H3Index origin, destination;
   int64_t maxSize, j;
 
@@ -279,6 +314,11 @@ SEXP h3rGridPathCellsSize(SEXP origH3, SEXP destH3) {
   R_xlen_t n = Rf_xlength(origH3);
   R_xlen_t i;
 
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(destH3);
+  h3rVectorError(vectorLength, 2);
+
   SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
 
   H3Index origin, destination;
@@ -298,6 +338,11 @@ SEXP h3rGridPathCellsSize(SEXP origH3, SEXP destH3) {
 SEXP h3rGridDistance(SEXP origH3, SEXP destH3) {
   R_xlen_t n = Rf_xlength(origH3);
   R_xlen_t i;
+
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(destH3);
+  h3rVectorError(vectorLength, 2);
 
   SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
 
@@ -319,6 +364,11 @@ SEXP h3rGridDistance(SEXP origH3, SEXP destH3) {
 SEXP h3rCellToLocalIj(SEXP orig, SEXP h3) {
   R_xlen_t n = Rf_xlength(orig);
   R_xlen_t i;
+
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(h3);
+  h3rVectorError(vectorLength, 2);
 
   SEXP coordI = PROTECT(Rf_allocVector(INTSXP, n));
   SEXP coordJ = PROTECT(Rf_allocVector(INTSXP, n));
@@ -342,8 +392,16 @@ SEXP h3rCellToLocalIj(SEXP orig, SEXP h3) {
 }
 
 SEXP h3rLocalIjToCell(SEXP orig, SEXP coordI, SEXP coordJ) {
+
+
   R_xlen_t n = Rf_xlength(coordI);
   R_xlen_t i;
+
+  R_xlen_t vectorLength[3];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(orig);
+  vectorLength[2] = Rf_length(coordJ);
+  h3rVectorError(vectorLength, 3);
 
   SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
 

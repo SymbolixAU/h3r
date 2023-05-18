@@ -151,3 +151,11 @@ void h3rError(int err, R_xlen_t i) {
     error("h3r - Error at item number %td: %s\n", i + 1, errStr);
   }
 }
+
+void h3rVectorError(R_xlen_t *lengthVector, int size) {
+  for (int i = 1; i < size; i++){
+    if (lengthVector[i] != lengthVector[0]){
+      error("h3r - Error: Input vectors do not have consistent length\n");
+    }
+  }
+}
