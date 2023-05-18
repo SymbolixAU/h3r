@@ -11,6 +11,11 @@ SEXP h3rCellToVertex(SEXP h3, SEXP vertexNum) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
 
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(vertexNum);
+  h3rVectorError(vectorLength, 2);
+
   SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
 
   for( i = 0; i < n; i++ ) {

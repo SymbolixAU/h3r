@@ -74,6 +74,11 @@ SEXP h3rCellToChildrenSize(SEXP h3, SEXP res) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
 
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(res);
+  h3rVectorError(vectorLength, 2);
+
   SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
 
   H3Index h;
@@ -96,6 +101,11 @@ SEXP h3rCellToCenterChild(SEXP h3, SEXP res) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
 
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(res);
+  h3rVectorError(vectorLength, 2);
+
   SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
 
   H3Index h, child;
@@ -115,6 +125,11 @@ SEXP h3rCellToCenterChild(SEXP h3, SEXP res) {
 SEXP h3rCellToChildPos(SEXP h3, SEXP res) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
+
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(res);
+  h3rVectorError(vectorLength, 2);
 
   SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
 
@@ -137,6 +152,12 @@ SEXP h3rCellToChildPos(SEXP h3, SEXP res) {
 SEXP h3rChildPosToCell(SEXP pos, SEXP h3, SEXP res) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
+
+  R_xlen_t vectorLength[3];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(res);
+  vectorLength[2] = Rf_xlength(pos);
+  h3rVectorError(vectorLength, 3);
 
   SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
 
@@ -193,6 +214,12 @@ SEXP h3rCompactCells(SEXP h3Sets) {
 SEXP h3rUncompactCells(SEXP h3Sets, SEXP res) {
   R_xlen_t n = Rf_xlength(h3Sets);
   R_xlen_t i;
+
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(res);
+  h3rVectorError(vectorLength, 2);
+
   int64_t j, setSize, cellSize;
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
