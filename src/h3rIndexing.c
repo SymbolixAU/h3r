@@ -12,6 +12,13 @@ SEXP h3rLatLngToCell(SEXP lat, SEXP lng, SEXP res) {
 
   R_xlen_t n = Rf_xlength(lat);
   R_xlen_t i;
+
+  R_xlen_t vectorLength[3];
+  vectorLength[0] = n;
+  vectorLength[1] = Rf_xlength(lng);
+  vectorLength[2] = Rf_xlength(res);
+  h3rVectorError(vectorLength, 3);
+
   SEXP cells = PROTECT(Rf_allocVector(STRSXP, n));
 
   LatLng latLng;

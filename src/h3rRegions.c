@@ -57,13 +57,11 @@ void h3rMatrixToLatLng(SEXP matrix, LatLng *latLng, int reverseCoordinates, int 
   }
 }
 
-void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isLatLng){
+void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, int isLatLng){
   R_xlen_t n = Rf_xlength(polygons);
   R_xlen_t i, numVerts[n], numHoles;
 
   numHoles = n - 1;
-
-  int reverseCoordinates = INTEGER(isLatLng)[0];
 
   LatLng **polygonArray = (LatLng **)malloc(n * sizeof(LatLng*));
 
@@ -76,7 +74,7 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, SEXP isLa
 
     polygonArray[i] = (LatLng *)malloc(numVerts[i] * sizeof(LatLng));
 
-    h3rMatrixToLatLng(polygon, polygonArray[i], reverseCoordinates, nrow);
+    h3rMatrixToLatLng(polygon, polygonArray[i], isLatLng, nrow);
   }
 
   // Convert the outer loop
@@ -109,7 +107,10 @@ SEXP singlePolygonToCells(SEXP polygon, int res, SEXP isLatLng, R_xlen_t idx) {
   int64_t j = 0;
 
   GeoPolygon geoPolygon;
-  h3rCoordinatesToGeoPolygon(polygon, &geoPolygon, isLatLng);
+
+  int reverseCoordinates = INTEGER(isLatLng)[0];
+
+  h3rCoordinatesToGeoPolygon(polygon, &geoPolygon, reverseCoordinates);
 
   h3rError(maxPolygonToCellsSize(&geoPolygon, res, flags, &numHexagons), idx);
 
@@ -146,6 +147,12 @@ SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isLatLng) {
 
   R_xlen_t nPolygons = Rf_xlength(polygonArray);
   R_xlen_t i;
+
+
+  R_xlen_t vectorLength[2];
+  vectorLength[0] = nPolygons;
+  vectorLength[1] = Rf_xlength(res);
+  h3rVectorError(vectorLength, 2);
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, nPolygons));
 
@@ -241,7 +248,7 @@ SEXP h3rReadMultiPolygon(LinkedGeoPolygon *polygon, int isLatLng) {
 }
 
 
-SEXP singleCellsToMultiPolygon(SEXP h3Sets, SEXP isLatLng, R_xlen_t idx) {
+SEXP singleCellsToMultiPolygon(SEXP h3Sets, int geojson, R_xlen_t idx) {
   R_xlen_t n = Rf_xlength(h3Sets);
   R_xlen_t i;
   int64_t j, setSize;
@@ -249,7 +256,6 @@ SEXP singleCellsToMultiPolygon(SEXP h3Sets, SEXP isLatLng, R_xlen_t idx) {
   SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
 
   for (i = 0; i < n; i++) {
-    int geoJson = INTEGER(isLatLng)[i];
     SEXP h3Set = VECTOR_ELT(h3Sets, i);
     setSize = Rf_xlength(h3Set);
 
@@ -263,7 +269,7 @@ SEXP singleCellsToMultiPolygon(SEXP h3Sets, SEXP isLatLng, R_xlen_t idx) {
 
     h3rError(cellsToLinkedMultiPolygon(cellSet, setSize, &geoPolygon), idx);
 
-    SET_VECTOR_ELT(out, i, h3rReadMultiPolygon(&geoPolygon, geoJson));
+    SET_VECTOR_ELT(out, i, h3rReadMultiPolygon(&geoPolygon, geojson));
 
     UNPROTECT(1);
   }
@@ -276,11 +282,13 @@ SEXP h3rCellsToMultiPolygon(SEXP h3Sets, SEXP isLatLng) {
   R_xlen_t n = Rf_xlength(h3Sets);
   R_xlen_t i ;
 
+  int geojson = INTEGER(isLatLng)[0];
+
   SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
 
   for (i = 0; i < n; i++) {
     SEXP h3Set = VECTOR_ELT(h3Sets, i);
-    SEXP multiPolygon = singleCellsToMultiPolygon(h3Set, isLatLng, i);
+    SEXP multiPolygon = singleCellsToMultiPolygon(h3Set, geojson, i);
     SET_VECTOR_ELT(out, i, multiPolygon);
   }
 

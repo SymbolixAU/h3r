@@ -67,13 +67,18 @@ SEXP coordIJList(SEXP i, SEXP j);
  //' Converts an integer array to a SEXP (INTSXP) array
  SEXP intToSexpArray(int *arr, R_xlen_t n);
 
- //' H3Error to error message
+ //' h3Error to error message
  //'
  //' Converts an H3Error to error message
  char* h3rErrorToString(int err);
 
- //' H3Error call R API error
+ //' h3rError call R API error
  //'
  //' Throw a R error is there is an error
  void h3rError(int err, R_xlen_t i);
+
+ //' H3r vector length error
+ //'
+ //' Throw a R error is the input vector length is not all the same
+ void h3rVectorError(R_xlen_t *n, int size);
 #endif
