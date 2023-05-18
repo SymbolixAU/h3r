@@ -216,19 +216,6 @@ getRes0Cells <- function() {
   .Call(h3rGetRes0Cells)
 }
 
-# #' Get the number of resolution 0 H3 indexes, which is defined as 122.
-# #'
-# #' @return the number of resolution 0 H3 indexes, which is defined as 122.
-# #'
-# #' @examples
-# #'
-# #' res0CellCount()
-# #'
-# #' @export
-# res0CellCount <- function() {
-#   .Call(h3rRes0CellCount)
-# }
-
 #' Get all the pentagon H3 indexes at the specified resolution.
 #'
 #' @param resolution cell resolution
@@ -243,20 +230,6 @@ getRes0Cells <- function() {
 getPentagons <- function(resolution) {
   .Call(h3rGetPentagons, as.integer(resolution))
 }
-
-# #' Get the number of pentagon H3 indexes per resolution. This is always 12,
-# #' but provided as a convenience.
-# #'
-# #' @return the number of pentagon H3 indexes per resolution.
-# #'
-# #' @examples
-# #'
-# #' pentagonCount()
-# #'
-# #' @export
-# pentagonCount <- function() {
-#   .Call(h3rPentagonCount)
-# }
 
 #' Great Circle Distance In Radians
 #'
@@ -324,21 +297,3 @@ greatCircleDistanceM <- function(aLat, aLng, bLat, bLng) {
 greatCircleDistanceKm <- function(aLat, aLng, bLat, bLng) {
   .Call(h3rGreatCircleDistanceKm, aLat, aLng, bLat, bLng)
 }
-
-
-#' #' Direction For Neighbor
-#' #'
-#' #' Returns the direction between origin / destination pairs.
-#' #'
-#' #' @param origin vector of `cells`
-#' #' @param destination vector of `cells`
-#' #'
-#' #' @examples
-#' #'
-#' #' directionForNeighbor(origin = "", destination = "")
-#' #'
-#' #'
-#' #' @export
-#' directionForNeighbor <- function(origin, destination) {
-#'   .Call(h3rDirectionForNeighbor, origin, destination)
-#' }

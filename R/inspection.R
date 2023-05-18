@@ -118,16 +118,3 @@ getIcosahedronFaces <- function(cell) {
   .Call(h3rGetIcosahedronFaces, cell)
 }
 
-# #' Max Face Count
-# #'
-# #' Returns the maximum number of icosahedron faces the given H3 index may
-# #' intersect.
-# #'
-# #' @examples
-# #' maxFaceCount(cell = c("8cbe63562a54bff","8cbe635631103ff"))
-# #'
-# #'
-# #' @export
-# maxFaceCount <- function(cell) {
-#   .Call(h3rMaxFaceCount, cell)
-# }
