@@ -199,7 +199,7 @@ H3Error (*cellToBoundary);
 int (*getResolution);
 int (*getBaseCellNumber);
 H3Error (*stringToH3);
-H3Error (*h3ToString);
+//H3Error (*h3ToString);
 int (*isValidCell);
 int (*isResClassIII);
 int (*isPentagon);

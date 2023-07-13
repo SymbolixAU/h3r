@@ -1,6 +1,8 @@
 
 #include "h3rUtils.h"
 
+#include <inttypes.h>
+
 void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lng, R_xlen_t idx) {
   latLng->lat = degsToRads(REAL(lat)[idx]);
   latLng->lng = degsToRads(REAL(lng)[idx]);
@@ -20,7 +22,8 @@ H3Index sexpStringToH3(SEXP h3, R_xlen_t idx) {
 
 SEXP h3ToSexpString(H3Index h3) {
   char str[17];
-  h3ToString(h3, str, sizeof(str));
+  //h3ToString(h3, str, sizeof(str));
+  int res = snprintf(str, sizeof(str), "%" PRIx64, h3);
   return Rf_mkChar(str);
 }
 
