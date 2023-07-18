@@ -42,6 +42,9 @@ However, these should all be accessible through the C API
 - All H3Indexes are returned as the String representation. If you want
   the `H3Index` / `uint64_t` type you need to use the C / C++ functions
   directly
+- We’re using the same code conventions as per the H3 API
+  - CamelCase function names (e.g. `latLngToCell`)
+  - lat/lng, rather than lat/lon or lon/lat
 - Functions which return a single coordinate pair for each input return
   a `data.frame`
 
