@@ -35,7 +35,7 @@ H3Index sexpStringToH3(SEXP h3, R_xlen_t idx) {
 SEXP h3ToSexpString(H3Index h3) {
   char str[17];
   //h3ToString(h3, str, sizeof(str));
-  int res = snprintf(str, sizeof(str), "%" PRIx64, h3);
+  //int res = snprintf(str, sizeof(str), "%" PRIx64, h3);
   return Rf_mkChar(str);
 }
 
