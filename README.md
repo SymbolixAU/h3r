@@ -3,7 +3,8 @@
 
 **h3r** is an interface to
 [{h3lib}](https://github.com/SymbolixAU/h3lib), which is itself a
-wrapper around Uber’s H3 library
+wrapper around Uber’s [H3](https://h3geo.org/) library. See their
+[getting started](https://h3geo.org/docs/) guide for all the details.
 
 The wrappers are all vectorised, meaning each input can take a vector,
 and / or return a vector.
@@ -19,6 +20,20 @@ h3r::latLngToCell(
 # [1] "81be7ffffffffff" "8ebe6356311035f"
 ```
 
+Most of the [H3 API](https://h3geo.org/docs/api/indexing) is included in
+this package as R functions. The only exceptions are
+
+- stringToH3
+- h3ToString
+- gridDisksUnsafe
+- cellToChildrenSize
+- uncompactCellsSize
+- maxPolygonToCellsSize
+- cellsToLinkedMultipolygon
+- destroyLInkedMultiPolygon
+
+However, these should all be accessible through the C API
+
 ## Design Choices
 
 - There is no `h3` class, or nice printing, or any fancy sugar-coating
@@ -27,6 +42,39 @@ h3r::latLngToCell(
 - All H3Indexes are returned as the String representation. If you want
   the `H3Index` / `uint64_t` type you need to use the C / C++ functions
   directly
+- Functions which return a single coordinate pair for each input return
+  a `data.frame`
+
+``` r
+h3r::cellToLatLng(cell = c("8cbe63562a54bff","8cbe635631103ff"))
+#         lat      lng
+# 1 -37.82023 144.9832
+# 2 -37.81844 144.9674
+```
+
+- Functions which return a multiple coordinates for each input return a
+  list of `data.frames`
+
+``` r
+h3r::cellToBoundary(cell = c("8cbe63562a54bff","8cbe635631103ff"))
+# $`8cbe63562a54bff`
+#         lat      lng
+# 1 -37.82030 144.9833
+# 2 -37.82019 144.9833
+# 3 -37.82012 144.9832
+# 4 -37.82016 144.9831
+# 5 -37.82026 144.9831
+# 6 -37.82033 144.9832
+# 
+# $`8cbe635631103ff`
+#         lat      lng
+# 1 -37.81851 144.9675
+# 2 -37.81840 144.9675
+# 3 -37.81833 144.9674
+# 4 -37.81837 144.9673
+# 5 -37.81847 144.9673
+# 6 -37.81854 144.9674
+```
 
 ## API
 
@@ -176,7 +224,7 @@ The steps inside this function are:
 
 library(Rcpp)
 library(sf) ## for the `sf.print` method
-# Linking to GEOS 3.10.2, GDAL 3.4.2, PROJ 8.2.1; sf_use_s2() is TRUE
+# Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE
 
 cppFunction(
   

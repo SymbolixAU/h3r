@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 # h3r
 
-**h3r** is an interface to [{h3lib}](https://github.com/SymbolixAU/h3lib), which is itself a wrapper around Uber's H3 library
+**h3r** is an interface to [{h3lib}](https://github.com/SymbolixAU/h3lib), which is itself a wrapper around Uber's [H3](https://h3geo.org/) library. See their [getting started](https://h3geo.org/docs/) guide for all the details.
 
 The wrappers are all vectorised, meaning each input can take a vector, and / or return a vector. 
 
@@ -32,11 +32,37 @@ h3r::latLngToCell(
 ```
 
 
+Most of the [H3 API](https://h3geo.org/docs/api/indexing) is included in this package as R functions. The only exceptions are
+
+- stringToH3
+- h3ToString
+- gridDisksUnsafe
+- cellToChildrenSize
+- uncompactCellsSize
+- maxPolygonToCellsSize
+- cellsToLinkedMultipolygon
+- destroyLInkedMultiPolygon
+
+However, these should all be accessible through the C API
 
 ## Design Choices
 
 - There is no `h3` class, or nice printing, or any fancy sugar-coating of what's returned from the functions. I've kept the outputs as raw / primitive as possible
 - All H3Indexes are returned as the String representation. If you want the `H3Index` / `uint64_t` type you need to use the C / C++ functions directly
+- Functions which return a single coordinate pair for each input return a `data.frame`
+
+
+```{r}
+h3r::cellToLatLng(cell = c("8cbe63562a54bff","8cbe635631103ff"))
+```
+
+- Functions which return a multiple coordinates for each input return a list of `data.frames`
+
+
+```{r}
+h3r::cellToBoundary(cell = c("8cbe63562a54bff","8cbe635631103ff"))
+```
+
 
 ## API
 
