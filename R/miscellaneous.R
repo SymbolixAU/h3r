@@ -44,7 +44,7 @@ radsToDegs <- function(rad) {
 #'
 #' @export
 getHexagonAreaAvgM2 <- function(resolution) {
-  .Call(h3rGetHexagonAreaAvgM2, as.integer(resolution))
+  .Call(h3rGetHexagonAreaAvgM2, int(resolution))
 }
 
 #' Get the average hexagon area in square kilometers at the given resolution.
@@ -61,7 +61,7 @@ getHexagonAreaAvgM2 <- function(resolution) {
 #'
 #' @export
 getHexagonAreaAvgKm2 <- function(resolution) {
-  .Call(h3rGetHexagonAreaAvgKm2, as.integer(resolution))
+  .Call(h3rGetHexagonAreaAvgKm2, int(resolution))
 }
 
 #' Exact area of specific cell in square radians.
@@ -123,7 +123,7 @@ cellAreaKm2 <- function(cell) {
 #'
 #' @export
 getHexagonEdgeLengthAvgM <- function(resolution) {
-  .Call(h3rGetHexagonEdgeLengthAvgM, as.integer(resolution))
+  .Call(h3rGetHexagonEdgeLengthAvgM, int(resolution))
 }
 
 #' Get the average hexagon edge length in kilometers at the given resolution.
@@ -140,7 +140,7 @@ getHexagonEdgeLengthAvgM <- function(resolution) {
 #'
 #' @export
 getHexagonEdgeLengthAvgKm <- function(resolution) {
-  .Call(h3rGetHexagonEdgeLengthAvgKm, as.integer(resolution))
+  .Call(h3rGetHexagonEdgeLengthAvgKm, int(resolution))
 }
 
 #' Get the exact edge length of specific unidirectional edge in radians.
@@ -200,7 +200,7 @@ edgeLengthKm <- function(edge) {
 #'
 #' @export
 getNumCells <- function(resolution) {
-  .Call(h3rGetNumCells, as.integer(resolution))
+  .Call(h3rGetNumCells, int(resolution))
 }
 
 #' Get all the resolution 0 H3 indexes.
@@ -228,7 +228,7 @@ getRes0Cells <- function() {
 #'
 #' @export
 getPentagons <- function(resolution) {
-  .Call(h3rGetPentagons, as.integer(resolution))
+  .Call(h3rGetPentagons, int(resolution))
 }
 
 #' Great Circle Distance In Radians

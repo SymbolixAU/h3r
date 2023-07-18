@@ -17,10 +17,16 @@
 #' ## The `parentRes` should be a lower value than the result of  `getResolution()`
 #' cellToParent(cell = rep(cell, 2), parentRes = c(11L, 10L))
 #'
+#' ## Specifying a single resolution
+#' cells <- c("8cbe63562a54bff", "8cbe635631103ff")
+#' getResolution(cell = cells)
+#'
+#' cellToParent(cell = cells, parentRes = 6)
+#' cellToParent(cell = cells, parentRes = 7)
 #'
 #' @export
 cellToParent <- function(cell, parentRes) {
-  .Call(h3rCellToParent, cell, as.integer(parentRes))
+  .Call(h3rCellToParent, cell, int(parentRes))
 }
 
 
@@ -52,7 +58,7 @@ cellToParent <- function(cell, parentRes) {
 #'
 #' @export
 cellToChildren <- function(cell, childRes) {
-  .Call(h3rCellToChildren, cell, as.integer(childRes))
+  .Call(h3rCellToChildren, cell, int(childRes))
 }
 
 #' Provies the center child index contained by `cell` at the `childRes`
@@ -71,7 +77,7 @@ cellToChildren <- function(cell, childRes) {
 #'
 #' @export
 cellToCenterChild <- function(cell, childRes) {
-  .Call(h3rCellToCenterChild, cell, as.integer(childRes))
+  .Call(h3rCellToCenterChild, cell, int(childRes))
 }
 
 #' Returns the position of the child cell within an ordered list of all
@@ -92,7 +98,7 @@ cellToCenterChild <- function(cell, childRes) {
 #'
 #' @export
 cellToChildPos <- function(cell, parentRes) {
-  .Call(h3rCellToChildPos, cell, as.integer(parentRes))
+  .Call(h3rCellToChildPos, cell, int(parentRes))
 }
 
 #' Returns the child cell at a given position within an ordered list of all
@@ -113,7 +119,7 @@ cellToChildPos <- function(cell, parentRes) {
 #'
 #' @export
 childPosToCell <- function(childPos, cell, childRes) {
-  .Call(h3rChildPosToCell, childPos, cell, as.integer(childRes))
+  .Call(h3rChildPosToCell, childPos, cell, int(childRes))
 }
 
 #' Compacts the set cellSet of indexes as best as possible, into the array
@@ -159,5 +165,5 @@ compactCells <- function(cellSet) {
 #'
 #' @export
 uncompactCells <- function(compactedSet, resolution) {
-.Call(h3rUncompactCells, compactedSet, as.integer(resolution))
+.Call(h3rUncompactCells, compactedSet, int(resolution))
 }

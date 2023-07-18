@@ -86,7 +86,7 @@
 #'
 #' @export
 polygonToCells <- function(polygons, resolution, isLatLng = TRUE) {
-  .Call(h3rPolygonToCells, polygons, as.integer(resolution), as.integer(isLatLng))
+  .Call(h3rPolygonToCells, polygons, int(resolution), int(isLatLng))
 }
 
 
@@ -113,5 +113,5 @@ polygonToCells <- function(polygons, resolution, isLatLng = TRUE) {
 #'
 #' @export
 cellsToMultiPolygon <- function(cellSet, isLatLng = TRUE) {
-  .Call(h3rCellsToMultiPolygon, cellSet, as.integer(isLatLng))
+  .Call(h3rCellsToMultiPolygon, cellSet, int(isLatLng))
 }

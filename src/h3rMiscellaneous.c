@@ -282,12 +282,11 @@ SEXP h3rGreatCircleDistance(SEXP aLats, SEXP aLons, SEXP bLats, SEXP bLons, int 
   R_xlen_t n = Rf_xlength(aLats);
   R_xlen_t i;
 
-  R_xlen_t vectorLength[4];
-  vectorLength[0] = n;
-  vectorLength[1] = Rf_xlength(aLons);
-  vectorLength[2] = Rf_xlength(bLats);
-  vectorLength[3] = Rf_xlength(bLons);
-  h3rVectorError(vectorLength, 4);
+  R_xlen_t vectorLength[3];
+  vectorLength[0] = Rf_xlength(aLons);
+  vectorLength[1] = Rf_xlength(bLats);
+  vectorLength[2] = Rf_xlength(bLons);
+  h3rVectorLengthCheck(n, vectorLength, 3, false);
 
   SEXP out = PROTECT(Rf_allocVector(REALSXP, n));
 

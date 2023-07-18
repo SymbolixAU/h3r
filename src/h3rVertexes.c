@@ -11,10 +11,9 @@ SEXP h3rCellToVertex(SEXP h3, SEXP vertexNum) {
   R_xlen_t n = Rf_xlength(h3);
   R_xlen_t i;
 
-  R_xlen_t vectorLength[2];
-  vectorLength[0] = n;
-  vectorLength[1] = Rf_xlength(vertexNum);
-  h3rVectorError(vectorLength, 2);
+  R_xlen_t vectorLength[1];
+  vectorLength[0] = Rf_xlength(vertexNum);
+  h3rVectorLengthCheck(n, vectorLength, 1, false);
 
   SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
 
@@ -61,17 +60,18 @@ SEXP h3rVertexToLatLng(SEXP h3) {
 
   SEXP lats = PROTECT(Rf_allocVector(REALSXP, n));
   SEXP lons = PROTECT(Rf_allocVector(REALSXP, n));
-
+  SEXP rowNames = PROTECT(Rf_allocVector(INTSXP, n));
   LatLng point;
   for( i = 0; i < n; i++ ) {
+    SET_INTEGER_ELT(rowNames, i, i + 1);
     H3Index index = sexpStringToH3(h3, i);
 
     vertexToLatLng(index, &point);
     latLngToSexp(&point, lats, lons, i);
   }
-  SEXP out = latLngList(lats, lons);
+  SEXP out = latLngList(lats, lons, rowNames);
 
-  UNPROTECT(2);
+  UNPROTECT(3);
   return out;
 }
 

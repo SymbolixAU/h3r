@@ -13,11 +13,14 @@ SEXP h3rLatLngToCell(SEXP lat, SEXP lng, SEXP res) {
   R_xlen_t n = Rf_xlength(lat);
   R_xlen_t i;
 
-  R_xlen_t vectorLength[3];
-  vectorLength[0] = n;
-  vectorLength[1] = Rf_xlength(lng);
-  vectorLength[2] = Rf_xlength(res);
-  h3rVectorError(vectorLength, 3);
+  R_xlen_t vectorLengths[1];
+  vectorLengths[0] = Rf_xlength(lng);
+  h3rVectorLengthCheck(n, vectorLengths, 1, false);
+
+  R_xlen_t optionalLengths[1];
+  optionalLengths[0] = Rf_xlength(res);
+  h3rVectorLengthCheck(n, optionalLengths, 1, true);
+
 
   SEXP cells = PROTECT(Rf_allocVector(STRSXP, n));
 
@@ -26,7 +29,7 @@ SEXP h3rLatLngToCell(SEXP lat, SEXP lng, SEXP res) {
   // char str[17];
 
   for( i = 0; i < n; i++ ) {
-    int ires = INTEGER(res)[i];
+    int ires = _getResolution(res, i);
 
     sexpToLatLng(&latLng, lat, lng, i);
 
@@ -51,18 +54,17 @@ SEXP h3rCellToLatLng(SEXP h3) {
   SEXP lats = PROTECT(Rf_allocVector(REALSXP, n));
   SEXP lons = PROTECT(Rf_allocVector(REALSXP, n));
 
+  SEXP rowNames = PROTECT(Rf_allocVector(INTSXP, n));
+
   for( i = 0; i < n; i++ ) {
+    SET_INTEGER_ELT(rowNames, i, i + 1);
     H3Index index = sexpStringToH3(h3, i);
-    //int isValid = isValidCell(index);
-    //if( !isValid ) {
-    //  fprintf(stderr, "Invlaid H3");
-    //}
     h3rError(cellToLatLng(index, &ll), i);
     latLngToSexp(&ll, lats, lons, i);
   }
 
-  SEXP res = latLngList(lats, lons);
-  UNPROTECT(2);
+  SEXP res = latLngList(lats, lons, rowNames);
+  UNPROTECT(3);
 
   return res;
 }

@@ -24,7 +24,7 @@ expect_equal(
 
 expect_equal(
   vertexToLatLng(vertex = c("24cbe63562a549ff","255283463fffffff"))
-  , list("lat" = c(-37.82029703468319, 37.42012867767778)
+  , data.frame("lat" = c(-37.82029703468319, 37.42012867767778)
          , "lng" = c(144.9833025854974, -122.03773496427027))
   )
 
