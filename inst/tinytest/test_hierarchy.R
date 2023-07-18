@@ -7,11 +7,16 @@ expect_equal(
   , c("83be63fffffffff", "8428347ffffffff")
   )
 
+## Not an error: resoltions can be length 1
+# expect_error(
+#   cellToParent(cell = c("abc", "def"), parentRes = 1)
+#   , pattern = "h3r - Error: Input vectors do not have consistent length"
+# )
+
 expect_error(
-  cellToParent(cell = c("abc", "def"), parentRes = 1)
+  cellToParent(cell = c("abc", "def"), parentRes = 1:3)
   , pattern = "h3r - Error: Input vectors do not have consistent length"
 )
-
 
 expect_equal(
   cellToChildren(
@@ -21,22 +26,33 @@ expect_equal(
   , list("83be63fffffffff" = c("84be631ffffffff", "84be633ffffffff", "84be635ffffffff", "84be637ffffffff", "84be639ffffffff", "84be63bffffffff", "84be63dffffffff"),"85283473fffffff" = c("862834707ffffff", "86283470fffffff", "862834717ffffff", "86283471fffffff", "862834727ffffff", "86283472fffffff", "862834737ffffff"))
   )
 
+## No error: resolution can be length 1
+# expect_error(
+#   cellToChildren(
+#     cell = c("a","b")
+#     , childRes = 1
+#   )
+#   , pattern = "h3r - Error: Input vectors do not have consistent length"
+# )
+
 expect_error(
   cellToChildren(
     cell = c("a","b")
-    , childRes = 1
+    , childRes = 1:3
   )
   , pattern = "h3r - Error: Input vectors do not have consistent length"
 )
 
 res0 <- h3r::getRes0Cells()
-expect_error(
-  h3r::cellToChildren(
-    res0
-    , 1L
-    )
-  , pattern = "h3r - Error: Input vectors do not have consistent length"
-)
+
+## No error: resolutions can be length 1
+# expect_error(
+#   h3r::cellToChildren(
+#     res0
+#     , 1L
+#     )
+#   , pattern = "h3r - Error: Input vectors do not have consistent length"
+# )
 
 expect_error(
   h3r::cellToChildren(res0, rep(15, length(res0)))

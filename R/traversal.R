@@ -20,7 +20,7 @@
 #'
 #' @export
 gridDisk <- function(cell, k) {
-  .Call(h3rGridDisk, cell, as.integer(k))
+  .Call(h3rGridDisk, cell, int(k))
 }
 
 #' Grid Disk Distances
@@ -42,7 +42,7 @@ gridDisk <- function(cell, k) {
 #'
 #' @export
 gridDiskDistances <- function(cell, k) {
-  .Call(h3rGridDiskDistances, cell, as.integer(k))
+  .Call(h3rGridDiskDistances, cell, int(k))
 }
 
 
@@ -62,7 +62,7 @@ gridDiskDistances <- function(cell, k) {
 #'
 #' @export
 gridRingUnsafe <- function(cell, k) {
-  .Call(h3rGridRingUnsafe, cell, as.integer(k))
+  .Call(h3rGridRingUnsafe, cell, int(k))
 }
 
 #' Grid Path Cells
@@ -149,5 +149,5 @@ cellToLocalIj <- function(origin, cell) {
 #'
 #' @export
 localIjToCell <- function(origin, i, j) {
-  .Call(h3rLocalIjToCell, origin, as.integer(i), as.integer(j))
+  .Call(h3rLocalIjToCell, origin, int(i), int(j))
 }

@@ -11,10 +11,9 @@ SEXP h3rAreNeighborCells(SEXP origH3, SEXP destH3) {
   R_xlen_t n = Rf_xlength(origH3);
   R_xlen_t i;
 
-  R_xlen_t vectorLength[2];
-  vectorLength[0] = n;
-  vectorLength[1] = Rf_xlength(destH3);
-  h3rVectorError(vectorLength, 2);
+  R_xlen_t vectorLengths[1];
+  vectorLengths[0] = Rf_xlength(destH3);
+  h3rVectorLengthCheck(n, vectorLengths, 1, false);
 
   SEXP out = PROTECT(Rf_allocVector(INTSXP, n));
 
@@ -36,10 +35,9 @@ SEXP h3rCellsToDirectedEdge(SEXP origH3, SEXP destH3) {
   R_xlen_t n = Rf_xlength(origH3);
   R_xlen_t i;
 
-  R_xlen_t vectorLength[2];
-  vectorLength[0] = n;
-  vectorLength[1] = Rf_xlength(destH3);
-  h3rVectorError(vectorLength, 2);
+  R_xlen_t vectorLengths[1];
+  vectorLengths[0] = Rf_xlength(destH3);
+  h3rVectorLengthCheck(n, vectorLengths, 1, false);
 
   SEXP out = PROTECT(Rf_allocVector(STRSXP, n));
 

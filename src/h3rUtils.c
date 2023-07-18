@@ -3,6 +3,18 @@
 
 #include <inttypes.h>
 
+#include <stdbool.h>
+
+bool isSingleLength(SEXP x) {
+  return Rf_xlength(x) == 1;
+}
+
+
+int _getResolution(SEXP resolution, R_xlen_t idx) {
+  R_xlen_t i = isSingleLength(resolution) ? 0 : idx;
+  return INTEGER_ELT(resolution, i);
+}
+
 void sexpToLatLng(LatLng *latLng, SEXP lat, SEXP lng, R_xlen_t idx) {
   latLng->lat = degsToRads(REAL(lat)[idx]);
   latLng->lng = degsToRads(REAL(lng)[idx]);
@@ -47,13 +59,21 @@ void latLngToSexp(LatLng *latLng, SEXP lats, SEXP lons, R_xlen_t idx) {
   SET_REAL_ELT(lons, idx, lng);
 }
 
-SEXP latLngList(SEXP lats, SEXP lons) {
+SEXP latLngList(SEXP lats, SEXP lons, SEXP rowNames) {
   const char *names[] = {"lat","lng",""};
   SEXP res = PROTECT(mkNamed(VECSXP, names));
 
   SET_VECTOR_ELT(res, 0, lats);
   SET_VECTOR_ELT(res, 1, lons);
-  UNPROTECT(1);
+
+    // Class
+  SEXP cls = PROTECT(Rf_allocVector(STRSXP, 1));
+  SET_STRING_ELT(cls, 0, Rf_mkChar("data.frame"));
+
+  Rf_setAttrib(res, R_ClassSymbol, cls);
+  Rf_setAttrib(res, R_RowNamesSymbol, rowNames);
+
+  UNPROTECT(2);
   return res;
 }
 
@@ -90,12 +110,14 @@ SEXP coordIJList(SEXP i, SEXP j) {
 SEXP cellBoundaryToList(CellBoundary *cb) {
   SEXP lats = PROTECT(Rf_allocVector(REALSXP, cb->numVerts));
   SEXP lons = PROTECT(Rf_allocVector(REALSXP, cb->numVerts));
+  SEXP rowNames = PROTECT(Rf_allocVector(INTSXP, cb->numVerts));
   for( int i = 0; i < cb->numVerts; i++) {
+    SET_INTEGER_ELT(rowNames, i, i + 1);
     SET_REAL_ELT(lats, i, radsToDegs(cb->verts[i].lat));
     SET_REAL_ELT(lons, i, radsToDegs(cb->verts[i].lng));
   }
-  UNPROTECT(2);
-  return latLngList(lats, lons);
+  UNPROTECT(3);
+  return latLngList(lats, lons, rowNames);
 }
 
 SEXP intToSexpArray(int *arr, R_xlen_t n) {
@@ -155,10 +177,16 @@ void h3rError(int err, R_xlen_t i) {
   }
 }
 
-void h3rVectorError(R_xlen_t *lengthVector, int size) {
-  for (int i = 1; i < size; i++){
-    if (lengthVector[i] != lengthVector[0]){
+void h3rVectorLengthCheck(R_xlen_t checkValue, R_xlen_t *lengthVectors, R_xlen_t n, bool canBeSingle) {
+  R_xlen_t i;
+  for(i = 0; i < n; i++) {
+    R_xlen_t l = lengthVectors[i];
+    if(canBeSingle && l == 1) {
+      continue;
+    }
+    if(l != checkValue) {
       error("h3r - Error: Input vectors do not have consistent length\n");
     }
   }
 }
+

@@ -26,5 +26,11 @@ getResolution(cell = cell)
 ## The `parentRes` should be a lower value than the result of  `getResolution()`
 cellToParent(cell = rep(cell, 2), parentRes = c(11L, 10L))
 
+## Specifying a single resolution
+cells <- c("8cbe63562a54bff", "8cbe635631103ff")
+getResolution(cell = cells)
+
+cellToParent(cell = cells, parentRes = 6)
+cellToParent(cell = cells, parentRes = 7)
 
 }

@@ -2,9 +2,22 @@
 #include "h3libapi.h"
 #include <Rinternals.h>
 
+#include <stdbool.h>
 
 #ifndef R_H3R_UTILS
 #define R_H3R_UTILS
+
+//' Is Single Length
+//'
+//' Returns true if length(x) == 1
+bool isSingleLength(SEXP x);
+
+
+//' Get Resolution
+//'
+//' Returns either the resolution and the given index, Or the first element if there
+//' is only one
+int _getResolution(SEXP resolution, R_xlen_t idx);
 
  //' Fill Lat Lng
  //'
@@ -39,8 +52,8 @@
 
  //' LatLngList
  //'
- //' Creates a list of lat/lon elements
- SEXP latLngList(SEXP lats, SEXP lons);
+ //' Creates a data.frame of lat/lon elements
+ SEXP latLngList(SEXP lats, SEXP lons, SEXP rowNames);
 
  //' OrigDestList
  //'
@@ -77,8 +90,12 @@ SEXP coordIJList(SEXP i, SEXP j);
  //' Throw a R error is there is an error
  void h3rError(int err, R_xlen_t i);
 
- //' H3r vector length error
+ //' Vector Length Checks
  //'
- //' Throw a R error is the input vector length is not all the same
- void h3rVectorError(R_xlen_t *n, int size);
+ //' vectors must all be the same length
+ //' unless `canBeSingle` == true, in whcih case they can be length 1
+ void h3rVectorLengthCheck(R_xlen_t checkValue, R_xlen_t *lengthVectors, R_xlen_t n, bool canBeSingle);
+
+ // void h3rVectorLengthOptionalCheck(R_xlen_t checkValue, SEXP vec);
+
 #endif

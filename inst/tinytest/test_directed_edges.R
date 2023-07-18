@@ -76,11 +76,11 @@ expect_equal(
   directedEdgeToBoundary(
     edge = c("115283473fffffff","115283477fffffff")
     )
-  , list("115283473fffffff" = list(
+  , list("115283473fffffff" = data.frame(
     "lat" = c(37.42012867767778, 37.33755608435298)
     , 'lng' = c(-122.03773496427027,-122.09042892904397)
     )
-    , "115283477fffffff" = list(
+    , "115283477fffffff" = data.frame(
       "lat" = c(37.485965058551095, 37.4033911145053)
       , 'lng' = c(-122.21327339445754,-122.2658032483195)
     )

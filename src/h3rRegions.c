@@ -148,17 +148,15 @@ SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isLatLng) {
   R_xlen_t nPolygons = Rf_xlength(polygonArray);
   R_xlen_t i;
 
-
-  R_xlen_t vectorLength[2];
-  vectorLength[0] = nPolygons;
-  vectorLength[1] = Rf_xlength(res);
-  h3rVectorError(vectorLength, 2);
+  R_xlen_t optionalLengths[1];
+  optionalLengths[0] = Rf_xlength(res);
+  h3rVectorLengthCheck(nPolygons, optionalLengths, 1, true);
 
   SEXP out = PROTECT(Rf_allocVector(VECSXP, nPolygons));
 
   for(i = 0; i < nPolygons; i++) {
     SEXP polygon = VECTOR_ELT(polygonArray, i);
-    int ires = INTEGER(res)[i];
+    int ires = _getResolution(res, i);
     SEXP cells = singlePolygonToCells(polygon, ires, isLatLng, i);
     SET_VECTOR_ELT(out, i, cells);
   }
