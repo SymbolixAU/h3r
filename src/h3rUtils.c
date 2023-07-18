@@ -35,7 +35,10 @@ H3Index sexpStringToH3(SEXP h3, R_xlen_t idx) {
 SEXP h3ToSexpString(H3Index h3) {
   char str[17];
   //h3ToString(h3, str, sizeof(str));
-  snprintf(str, sizeof(str), "%" PRIx64, h3);
+  int nchar = snprintf(str, sizeof(str), "%" PRIx64, h3);
+  if(nchar < 0 || nchar >= sizeof(str)){
+      error("h3r - Error: Failed to convert H3 into string\n");
+  }
   return Rf_mkChar(str);
 }
 
