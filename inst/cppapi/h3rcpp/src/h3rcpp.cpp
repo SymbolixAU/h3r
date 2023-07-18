@@ -4,5 +4,5 @@
 
 // [[Rcpp::export]]
 SEXP h3rcppLatLngToCell(SEXP lat, SEXP lon, SEXP res) {
-  return h3r::latLngToCell(lat, lng, res);
+  return h3r::latLngToCell(lat, lon, res);
 }
