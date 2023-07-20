@@ -13,3 +13,4 @@ inst/cppapi/h3rcpp/src/.*dll
 .RData
 .Ruserdata
 .vscode
+docs
