@@ -1,0 +1,162 @@
+---
+title: "Core H3 Themes"
+output: html_document
+date: "2023-07-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Core H3 Themes
+
+Here we will learn some core H3 themes and how are they implemented using R and `h3r`.
+
+```{r}
+library(mapdeck)
+library(data.table)
+library(h3r)
+```
+### Resolution 0 cells and pentagons
+You can see that all of the earth is covered with those cells. Note that the size of cells far from the equator are exaggerates becauses of the use of The Mercator projection. All cells are of roughly the same size.
+Here are the resolution 0 cells
+```{r}
+mapdeck::set_token(secret::get_secret("MAPBOX"))
+
+cells <- h3r::getRes0Cells()
+
+mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+  add_h3(
+    data = data.frame(x = cells)
+    , hexagon = "x"
+    , fill_colour = "x"
+    , fill_opacity = 0.7
+    , tooltip = "x"
+    , stroke_colour = "#000000"
+    , stroke_width = 50000
+  )
+```
+Note that according to uber "The H3 grid is constructed on the icosahedron by recursively creating increasingly higher precision hexagon grids until the desired resolution is achieved. Note that it is impossible to tile the sphere/icosahedron completely with hexagons; each resolution of an icosahedral hexagon grid must contain exactly 12 pentagons at every resolution, with one pentagon centered on each of the icosahedron vertices". Therefore, not all cells are hexagon: some are pentagons. Let's see what are the pentagons in resolution 0.
+```{r}
+mapdeck::set_token(secret::get_secret("MAPBOX"))
+
+cells <- h3r::getRes0Cells()
+mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+  add_h3(
+    data = data.frame(x = cells, is_pentagon = sapply(cells, h3r::isPentagon))
+    , hexagon = "x"
+    , fill_colour = "is_pentagon"
+    , fill_opacity = 0.7
+    , tooltip = "x"
+    , stroke_colour = "#000000"
+    , stroke_width = 50000
+  )
+```
+We can find 12 pentagons in resolution 0. 
+
+### icosahedron faces
+Those 122 resolution 0 cells lives in 20 faces. Let's see which faces are they in.
+```{r}
+cells <- h3r::getRes0Cells()
+faces_list <- lapply(cells, function(cell) {
+  faces <- h3r::getIcosahedronFaces(cell)
+  paste(unlist(faces), collapse = ",")
+})
+faces_df <- data.frame(cell = cells,
+                       face = unlist(faces_list, use.names = FALSE))
+mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+    add_h3(
+        data = faces_df
+        , hexagon = "cell"
+        , fill_colour = "face"
+        , fill_opacity = 0.7
+        , tooltip = "face"
+        , stroke_colour = "#000000"
+        , stroke_width = 50000
+    )
+```
+We can notice that some resolution 0 cells not in the centre intersects with multiple faces. Let's have a look at the centre cells of those faces.
+```{r}
+mapdeck::set_token(secret::get_secret("MAPBOX"))
+
+cells <- c('8021fffffffffff', '8005fffffffffff', '800ffffffffffff', '8035fffffffffff', '803ffffffffffff', '8065fffffffffff', '8033fffffffffff', '8049fffffffffff', '8081fffffffffff', '8097fffffffffff', '8073fffffffffff', '805dfffffffffff', '808ffffffffffff', '80c1fffffffffff', '80abfffffffffff', '80bffffffffffff', '80b5fffffffffff', '80d3fffffffffff', '80effffffffffff', '80e5fffffffffff')
+
+mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+  add_h3(
+    data = data.frame(x = cells)
+    , hexagon = "x"
+    , fill_colour = "x"
+    , fill_opacity = 0.7
+    , tooltip = "x"
+    , stroke_colour = "#000000"
+    , stroke_width = 50000
+  )
+```
+We can tell that all the centre cells are hexagon. By getting the children of this cell a level down (from resolution 0 to resolution 1), let's see if anything interesting happens.
+```{r}
+mapdeck::set_token(secret::get_secret("MAPBOX"))
+
+cells <- c('8021fffffffffff', '8005fffffffffff', '800ffffffffffff', '8035fffffffffff', '803ffffffffffff', '8065fffffffffff', '8033fffffffffff', '8049fffffffffff', '8081fffffffffff', '8097fffffffffff', '8073fffffffffff', '805dfffffffffff', '808ffffffffffff', '80c1fffffffffff', '80abfffffffffff', '80bffffffffffff', '80b5fffffffffff', '80d3fffffffffff', '80effffffffffff', '80e5fffffffffff')
+
+children_cells <- unlist(h3r::cellToChildren(cells, 1L))
+
+mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+  add_h3(
+    data = data.frame(x = c(cells, children_cells))
+    , hexagon = "x"
+    , fill_colour = "x"
+    , fill_opacity = 0.7
+    , tooltip = "x"
+    , stroke_colour = "#000000"
+    , stroke_width = 50000
+  )
+```
+We can find that there are approximtely 7 children per cell when going up a resolution. Let's zoom in to see what is happening.
+
+```{r}
+mapdeck::set_token(secret::get_secret("MAPBOX"))
+
+cells <- c('8081fffffffffff')
+
+children_cells <- unlist(h3r::cellToChildren(cells, 1L))
+
+mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+  add_h3(
+    data = data.frame(x = c(cells, children_cells))
+    , hexagon = "x"
+    , fill_colour = "x"
+    , fill_opacity = 0.7
+    , tooltip = "x"
+    , stroke_colour = "#000000"
+    , stroke_width = 50000
+    , update_view = TRUE
+  )
+```
+We can find that the vertexse of the parent cell is on the vertexes of its child cells. This means that the orientation of each cell changes by 19.1 degs at each resolution. What happens if we go down further?
+
+```{r}
+mapdeck::set_token(secret::get_secret("MAPBOX"))
+
+cells <- c('8081fffffffffff')
+
+children_cells <- unlist(h3r::cellToChildren(cells, 1L))
+
+children_cells_res2 <- unlist(h3r::cellToChildren(children_cells[1], 2L))
+
+children_cells_res3 <- unlist(h3r::cellToChildren(children_cells_res2[1], 3L))
+
+children_cells_res4 <- unlist(h3r::cellToChildren(children_cells_res3[1], 4L))
+
+mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+  add_h3(
+    data = data.frame(x = c(cells, children_cells, children_cells_res2, children_cells_res3, children_cells_res4))
+    , hexagon = "x"
+    , fill_colour = "x"
+    , fill_opacity = 0.7
+    , tooltip = "x"
+    , stroke_colour = "#000000"
+    , stroke_width = 5000
+    , update_view = TRUE
+  )
+```
+We can find that the top vertex of the resolution 0 cell is on the left of the top resolution 1 cell, while the top vertex of the resolution 1 cell is on the right of the top resolution 2 cell. The top vertex of the resolution 2 cell is on the left of the top resolution 3 cell again. This means that this 19.1 degs of change in direction differs for odd and even resolutions.
