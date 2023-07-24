@@ -1,26 +1,38 @@
 ---
 title: "Core H3 Themes"
 output: html_document
+author: "Ray Shao"
 date: "2023-07-20"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
+
 
 ## Core H3 Themes
 
 Here we will learn some core H3 themes and how are they implemented using R and `h3r`.
+
+There's lots of really good content [link to references]() out there, so we're not going to introduce the core themes here, but rather show how you can use them in R through `h3r`
+
 
 ```{r}
 library(mapdeck)
 library(data.table)
 library(h3r)
 ```
-### Resolution 0 cells and pentagons
-You can see that all of the earth is covered with those cells. Note that the size of cells far from the equator are exaggerates becauses of the use of The Mercator projection. All cells are of roughly the same size.
+
+### Resolution 0 and pentagons
+
+Resolution 0 cells cover [the largest area](https://h3geo.org/docs/core-library/restable#average-area-in-km2). 
+
+All of the earth is covered with those cells. Note that the size of cells far from the equator are exaggerates because of the use of The Mercator projection. All cells are of roughly the same size.
+
 Here are the resolution 0 cells
-```{r}
+
+```{r resolution0}
+
 mapdeck::set_token(secret::get_secret("MAPBOX"))
 
 cells <- h3r::getRes0Cells()
@@ -36,7 +48,14 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
     , stroke_width = 50000
   )
 ```
-Note that according to uber "The H3 grid is constructed on the icosahedron by recursively creating increasingly higher precision hexagon grids until the desired resolution is achieved. Note that it is impossible to tile the sphere/icosahedron completely with hexagons; each resolution of an icosahedral hexagon grid must contain exactly 12 pentagons at every resolution, with one pentagon centered on each of the icosahedron vertices". Therefore, not all cells are hexagon: some are pentagons. Let's see what are the pentagons in resolution 0.
+
+
+Note that according to [uber](https://h3geo.org/docs/core-library/overview/) 
+
+> The H3 grid is constructed on the icosahedron by recursively creating increasingly higher precision hexagon grids until the desired resolution is achieved. Note that it is impossible to tile the sphere/icosahedron completely with hexagons; each resolution of an icosahedral hexagon grid must contain exactly 12 pentagons at every resolution, with one pentagon centered on each of the icosahedron vertices. 
+
+Therefore, not all cells are hexagon: some are pentagons. Let's see what are the pentagons in resolution 0.
+
 ```{r}
 mapdeck::set_token(secret::get_secret("MAPBOX"))
 
