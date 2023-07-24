@@ -9,3 +9,4 @@ inst/cppapi/*
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^\.github$
