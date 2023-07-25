@@ -11,7 +11,7 @@ cellToChildPos(cell, parentRes)
 \item{cell}{vector of H3 cells}
 
 \item{parentRes}{integer vector specifying the parent resolution for
-each `cell`}
+each \code{cell}}
 }
 \value{
 the position of the child cell

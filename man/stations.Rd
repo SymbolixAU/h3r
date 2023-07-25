@@ -6,10 +6,10 @@
 \title{Stations}
 \format{
 \describe{
- \item{stop_id}{The ID of the station}
- \item{stop_name}{The name of the station}
- \item{lat}{The latitude coordinate of the station}
- \item{lon}{The longitude coordinate of the station}
+\item{stop_id}{The ID of the station}
+\item{stop_name}{The name of the station}
+\item{lat}{The latitude coordinate of the station}
+\item{lon}{The longitude coordinate of the station}
 }
 }
 \usage{

@@ -13,7 +13,7 @@ childPosToCell(childPos, cell, childRes)
 \item{cell}{vector of H3 cells}
 
 \item{childRes}{integer vector specifying the child resolution for each
-`cell`}
+\code{cell}}
 }
 \value{
 the position of the child cell

@@ -10,3 +10,4 @@ inst/cppapi/*
 ^docs$
 ^pkgdown$
 ^\.github$
+^vignettes*

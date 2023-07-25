@@ -11,7 +11,7 @@ cellToBoundary(cell)
 }
 \value{
 named list, each element named with the input H3 cell, and containing
-a `lat` and `lng` vector
+a \code{lat} and \code{lng} vector
 }
 \description{
 Cell To Boundary

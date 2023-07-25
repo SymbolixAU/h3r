@@ -11,8 +11,8 @@ polygonToCells(polygons, resolution, isLatLng = TRUE)
 
 \item{resolution}{The resolution of the output cells}
 
-\item{isLatLng}{`TRUE` (default) if the coordinates are in `lat / lng` order.
-`FALSE` otherwise}
+\item{isLatLng}{\code{TRUE} (default) if the coordinates are in \code{lat / lng} order.
+\code{FALSE} otherwise}
 }
 \value{
 h3 indexes for the input GeoJSON-like data structure

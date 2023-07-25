@@ -10,8 +10,8 @@ cellToVertexes(cell)
 \item{cell}{vector of H3 cells}
 }
 \description{
-Returns the indexes for all vertices of the given `cell`. The
-Output will have a 0 in the result if the input `cell` is a pentagon
+Returns the indexes for all vertices of the given \code{cell}. The
+Output will have a 0 in the result if the input \code{cell} is a pentagon
 }
 \examples{
 

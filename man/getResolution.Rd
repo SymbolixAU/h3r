@@ -10,7 +10,7 @@ getResolution(cell)
 \item{cell}{vector of H3 cells}
 }
 \value{
-a vector the same length as `cell` giving the resolution of each
+a vector the same length as \code{cell} giving the resolution of each
 index
 }
 \description{

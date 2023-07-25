@@ -11,10 +11,9 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
-
 ## Core H3 Themes
 
-There's lots of really [good content and documentation]() on the fundamentals of H3. This post touches on some of the core concepts, and shows you how you can use them in R through `h3r`
+There's lots of really good content and [documentation](https://h3geo.org) on the fundamentals of H3. This post touches on some of the core concepts, and shows you how you can use them in R through `h3r`
 
 ```{r}
 library(h3r)

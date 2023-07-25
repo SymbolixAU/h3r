@@ -2,7 +2,7 @@
 % Please edit documentation in R/hierarchy.R
 \name{cellToCenterChild}
 \alias{cellToCenterChild}
-\title{Provies the center child index contained by `cell` at the `childRes`
+\title{Provies the center child index contained by \code{cell} at the \code{childRes}
 resolution}
 \usage{
 cellToCenterChild(cell, childRes)
@@ -11,13 +11,13 @@ cellToCenterChild(cell, childRes)
 \item{cell}{vector of H3 cells}
 
 \item{childRes}{integer vector specifying the child resolution for each
-`cell`}
+\code{cell}}
 }
 \value{
 index of the child cells
 }
 \description{
-Provies the center child index contained by `cell` at the `childRes`
+Provies the center child index contained by \code{cell} at the \code{childRes}
 resolution
 }
 \examples{

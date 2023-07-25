@@ -9,8 +9,8 @@ cellsToMultiPolygon(cellSet, isLatLng = TRUE)
 \arguments{
 \item{cellSet}{list of string vectors containing to be H3 cell indexes}
 
-\item{isLatLng}{`TRUE` (default) if the coordinates are in `lat / lng` order.
-`FALSE` otherwise}
+\item{isLatLng}{\code{TRUE} (default) if the coordinates are in \code{lat / lng} order.
+\code{FALSE} otherwise}
 }
 \value{
 GeoJSON-like MultiPolygon containing the outlines of the set of

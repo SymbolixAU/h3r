@@ -10,7 +10,7 @@ isResClassIII(cell)
 \item{cell}{vector of H3 cells}
 }
 \value{
-a vector the same length as `cell` indicating if the cell is Class II
+a vector the same length as \code{cell} indicating if the cell is Class II
 }
 \description{
 Returns non-zero if this index has a resolution with Class III orientation.

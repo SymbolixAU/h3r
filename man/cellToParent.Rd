@@ -10,13 +10,13 @@ cellToParent(cell, parentRes)
 \item{cell}{vector of H3 cells}
 
 \item{parentRes}{integer vector specifying the parent resolution for each
-`cell`}
+\code{cell}}
 }
 \value{
-vector of parent cells for each `cell`
+vector of parent cells for each \code{cell}
 }
 \description{
-Provides the parent (coarser) index containing `cell`
+Provides the parent (coarser) index containing \code{cell}
 }
 \examples{
 

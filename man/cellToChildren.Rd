@@ -10,14 +10,14 @@ cellToChildren(cell, childRes)
 \item{cell}{vector of H3 cells}
 
 \item{childRes}{integer vector specifying the child resolution for each
-`cell`}
+\code{cell}}
 }
 \value{
-a named list, where each element is the input `cell`, and the values
+a named list, where each element is the input \code{cell}, and the values
 of each element are the child H3 cells
 }
 \description{
-Returns all the H3 indexes contained by the input `cell` at the defined
+Returns all the H3 indexes contained by the input \code{cell} at the defined
 child resolution
 }
 \examples{

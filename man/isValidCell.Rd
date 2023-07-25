@@ -10,7 +10,7 @@ isValidCell(cell)
 \item{cell}{vector of H3 cells}
 }
 \value{
-a vector the same length as `cell` giving the validity of the cell
+a vector the same length as \code{cell} giving the validity of the cell
 }
 \description{
 Returns non-zero if this is a valid H3 cell index
