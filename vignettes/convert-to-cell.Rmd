@@ -1,0 +1,63 @@
+---
+title: "Convert to H3 Cells"
+author: Sahinya Akila
+output: html_document
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=TRUE, echo = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+## What is a H3 Cell
+
+It is a hexagonal grid developed by Uber, which helps in geospatial indexing. It is designed to efficiently partition the Earth into non-overlapping hexagonal cells at multiple resolutions. 
+
+Here, we will be converting raw lat and long points into H3 cells/indexes. We will then, get the boundary of each of these cells. 
+
+## Reading in Data
+
+To illustrate this, I will be using the `stations` data in the h3r package.
+
+
+```{r}
+library(sf)
+library(dplyr)
+library(mapdeck)
+library(h3r)
+library(data.table)
+
+set_token(secret::get_secret("MAPBOX"))
+
+dt_stations <- setDT(h3r::stations)
+
+```
+
+Since the data contains the lat and lng points, I am going to be converting them to H3 cells using the `latLngToCell` function 
+
+```{r}
+dt_stations[, cell := latLngToCell(lat = dt_stations$lat, lng = dt_stations$lon, resolution = 8)]
+```
+
+Get the boundary of these cells so that we can plot them. To do this, I will use the `cellToBoundary` function that gives the boundary on the H3 cell. This function returns a list of data.frames with `lat` and `lng` points that define the boundary. So, I am converting them to a sf POLYGON. 
+
+```{r}
+boundary <- cellToBoundary(dt_stations$cell)
+
+boundary <- rbindlist(boundary, idcol = TRUE)
+
+boundary <- boundary %>%
+  st_as_sf(coords = c("lng", "lat"), crs = 4326) %>%
+  group_by(.id) %>%
+  summarise(geometry = st_combine(geometry)) %>%
+  st_cast("POLYGON")
+```
+
+I have made a simple mapdeck plot that shows the H3 cells containing the stations.
+
+```{r}
+mapdeck(location = c(144.946457, -37.840935), zoom = 8) %>% 
+  add_polygon(boundary
+              , fill_colour = '#9f19ff'
+              , update_view = FALSE) 
+```
