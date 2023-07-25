@@ -268,8 +268,6 @@ SEXP singleCellsToMultiPolygon(SEXP h3Sets, int geojson, R_xlen_t idx) {
     h3rError(cellsToLinkedMultiPolygon(cellSet, setSize, &geoPolygon), idx);
 
     SET_VECTOR_ELT(out, i, h3rReadMultiPolygon(&geoPolygon, geojson));
-
-    UNPROTECT(1);
   }
 
   UNPROTECT(1);

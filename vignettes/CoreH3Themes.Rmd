@@ -12,9 +12,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ## Core H3 Themes
 
-Here we will learn some core H3 themes and how are they implemented using R and `h3r`.
-
-There's lots of really good content [link to references]() out there, so we're not going to introduce the core themes here, but rather show how you can use them in R through `h3r`
+There's lots of really [good content and documentation]() on the fundamentals of H3 available, so we're not going to introduce the core themes here, but rather show how you can use them in R through `h3r`
 
 
 ```{r}
@@ -25,13 +23,14 @@ library(h3r)
 
 ### Resolution 0 and pentagons
 
-Resolution 0 cells cover [the largest area](https://h3geo.org/docs/core-library/restable#average-area-in-km2). 
+Resolution 0 cells are the [largest](https://h3geo.org/docs/core-library/restable#average-area-in-km2) (i.e, they cover the largest area, and resolution 15 are the smallest).
 
 All of the earth is covered with those cells. Note that the size of cells far from the equator are exaggerates because of the use of The Mercator projection. All cells are of roughly the same size.
 
 Here are the resolution 0 cells
 
-```{r resolution0}
+```{r resolution0, fig.cap="resolution 0 cells"}
+
 
 mapdeck::set_token(secret::get_secret("MAPBOX"))
 
@@ -179,3 +178,12 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
   )
 ```
 We can find that the top vertex of the resolution 0 cell is on the left of the top resolution 1 cell, while the top vertex of the resolution 1 cell is on the right of the top resolution 2 cell. The top vertex of the resolution 2 cell is on the left of the top resolution 3 cell again. This means that this 19.1 degs of change in direction differs for odd and even resolutions.
+
+```{r references, include = FALSE}
+```
+
+## References
+
+1. H3: Tiling the Earth with Hexagons [Youtube - Uber Engineering](https://www.youtube.com/watch?v=ay2uwtRO3QE&t=1487s)
+2. Tables of Cell Statistics Across Resolutions [h3Geo.org](https://h3geo.org/docs/core-library/restable)
+

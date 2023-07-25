@@ -210,7 +210,6 @@ SEXP h3rCompactCells(SEXP h3Sets) {
     outputSize = j;
 
     SET_VECTOR_ELT(out, i, h3VecToSexpString(compactedSet, outputSize));
-    UNPROTECT(1);
   }
 
   UNPROTECT(1);
@@ -248,7 +247,6 @@ SEXP h3rUncompactCells(SEXP h3Sets, SEXP res) {
     h3rError(uncompactCells(compactedSet, setSize, cellSet, cellSize, ires), i);
 
     SET_VECTOR_ELT(out, i, h3VecToSexpString(cellSet, cellSize));
-    UNPROTECT(1);
   }
 
   UNPROTECT(1);

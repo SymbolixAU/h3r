@@ -258,6 +258,7 @@ SEXP h3rGetPentagons(SEXP res) {
     }
 
     SET_VECTOR_ELT(out, i, group);
+    UNPROTECT(1);
   }
 
   free(pentagons);

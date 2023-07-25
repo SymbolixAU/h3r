@@ -256,8 +256,6 @@ SEXP h3rGridRingUnsafe(SEXP h3, SEXP k) {
     outputSize = j;
 
     SET_VECTOR_ELT(out, i, h3VecToSexpString(result, outputSize));
-
-    UNPROTECT(1);
   }
 
 
