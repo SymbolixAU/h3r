@@ -1,7 +1,7 @@
 ---
 title: "Core H3 Themes"
 output: html_document
-author: "Ray Shao"
+author: "Ray Shao, Sahinya Akila"
 date: "2023-07-20"
 editor_options: 
   chunk_output_type: console
@@ -14,24 +14,31 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ## Core H3 Themes
 
-There's lots of really [good content and documentation]() on the fundamentals of H3 available, so we're not going to introduce the core themes here, but rather show how you can use them in R through `h3r`
-
+There's lots of really [good content and documentation]() on the fundamentals of H3. This post touches on some of the core concepts, and shows you how you can use them in R through `h3r`
 
 ```{r}
+library(h3r)
 library(mapdeck)
 library(data.table)
-library(h3r)
+library(sfheaders)
 ```
 
-## Resolution 0
 
-Resolution 0 cells are the [largest](https://h3geo.org/docs/core-library/restable#average-area-in-km2) (i.e, they cover the largest area, and resolution 15 are the smallest). The whole globe is covered with cells at each resolution. 
+> H3 is a geospatial indexing system that partitions the world into hexagonal cells
+> 
+> The H3 Core Library implements the H3 grid system. It includes functions for converting from latitude and longitude coordinates to the containing H3 cell, finding the center of H3 cells, finding the boundary geometry of H3 cells, finding neighbors of H3 cells, and more.
 
-We're using the term 'cells', because each resolution is made up of some number of hexagons, and exactly 12 pentagons.
+- [H3 v4. Introduction](https://h3geo.org/docs/)
+
+## Cells
+
+Resolution 0 cells are the [largest](https://h3geo.org/docs/core-library/restable#average-area-in-km2) (i.e, they cover the largest area) and resolution 15 are the smallest. The whole globe is covered with cells at each resolution. 
+
+We're using the term 'cells' because each resolution is made up of _some_ number of hexagons, and exactly 12 pentagons.
 
 If we plot all the Resolution 0 cells on a 'flat' map we get distortions as the cells get further from the equator. This is purely a result of plotting using the Mercator projection. However, all hexagons at each resolution are roughly the same size.
 
-```{r resolution0, fig.cap="resolution 0 cells"}
+```{r resolution0}
 mapdeck::set_token(secret::get_secret("MAPBOX"))
 
 cells <- h3r::getRes0Cells()
@@ -47,6 +54,20 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
     , stroke_width = 50000
   )
 ```
+
+#### Plotting (interlude)
+
+We're using the `mapdeck` library for the maps because it uses [deck.gl](https://deck.gl/) as the underlying plotting engine. And given it is also developed by Uber, it can natively plot the H3 Cells, so there's no need to convert to lat/lon coordinates.
+
+However, note that you have to tell `mapdeck()` you want to plot the cells by adding the `libraries = "h3"` parameter:
+
+```{r eval=FALSE}
+
+mapdeck(libraries = "h3") %>%
+  add_h3()
+
+```
+
 
 ### Pentagons
 
@@ -81,6 +102,8 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
 
 Those 122 resolution 0 cells live in 20 faces. Let's see which faces are they in.
 
+If you hover over the cells you can notice that some intersect multiple faces. 
+
 ```{r}
 
 cells <- h3r::getRes0Cells()
@@ -106,40 +129,11 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
     )
 ```
 
-If you hover over the cells you can notice that some intersect multiple faces. 
-
 \
 
 ### Changing Resolution
 
-
-The center cells of each face are hexagons
-
-```{r}
-mapdeck::set_token(secret::get_secret("MAPBOX"))
-
-cells <- c(
-  '8021fffffffffff', '8005fffffffffff', '800ffffffffffff', '8035fffffffffff',
-  '803ffffffffffff', '8065fffffffffff', '8033fffffffffff', '8049fffffffffff', '8081fffffffffff', '8097fffffffffff', '8073fffffffffff', '805dfffffffffff',
-  '808ffffffffffff', '80c1fffffffffff', '80abfffffffffff', '80bffffffffffff',
-  '80b5fffffffffff', '80d3fffffffffff', '80effffffffffff', '80e5fffffffffff'
-  )
-
-mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
-  add_h3(
-    data = data.frame(x = cells)
-    , hexagon = "x"
-    , fill_colour = "x"
-    , fill_opacity = 0.7
-    , tooltip = "x"
-    , stroke_colour = "#000000"
-    , stroke_width = 50000
-  )
-```
-
-\
-
-If we also plot the children of each cell (By going up to resolution 1) we see there are approximtely 7 children per cell.
+If we plot all the Resolution 0 cells at the center of each icosahedron face, plus the children of each of these (by going up to resolution 1) we see there are (approximately) 7 children per cell.
 
 ```{r}
 mapdeck::set_token(secret::get_secret("MAPBOX"))
@@ -167,49 +161,21 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
 
 \
 
-Let's zoom in to see what is happening.
+And if we continue to plot finer and finer resolution cells (all of which are children of the parent cell) we can start to see the rotation effect when changing resolution.
+
+As you go from an odd-to-even resolution, the hexagons are rotated by ~19.1 degrees. Then as you go from even-to-odd, they are rotated back again.
+
+So all the even-resolution cells are at the same orientation as each other, and similarly all the odd-resolution cells are at the same orientations as each other.
 
 ```{r}
 mapdeck::set_token(secret::get_secret("MAPBOX"))
 
 cells <- c('8081fffffffffff')
 
+## Children and resolutions 1:4
 children_cells <- unlist(h3r::cellToChildren(cells, 1L))
-
-mapdeck(
-  libraries = "h3"
-  , location = rev(as.numeric(cellToLatLng(cells)))
-  , zoom = 3
-  , style = mapdeck_style("dark")
-  )  %>%
-  add_h3(
-    data = data.frame(x = c(cells, children_cells))
-    , hexagon = "x"
-    , fill_colour = "x"
-    , fill_opacity = 0.5
-    , tooltip = "x"
-    , stroke_colour = "#000000"
-    , stroke_width = 50000
-    , update_view = TRUE
-  )
-```
-
-\
-
-We see the vertices of the parent cell is on the vertexes of its child cells. This means that the orientation of each cell changes by 19.1 degs at each resolution. What happens if we go down further?
-
-```{r}
-mapdeck::set_token(secret::get_secret("MAPBOX"))
-
-cells <- c('8081fffffffffff')
-
-
-children_cells <- unlist(h3r::cellToChildren(cells, 1L))
-
 children_cells_res2 <- unlist(h3r::cellToChildren(children_cells[1], 2L))
-
 children_cells_res3 <- unlist(h3r::cellToChildren(children_cells_res2[1], 3L))
-
 children_cells_res4 <- unlist(h3r::cellToChildren(children_cells_res3[1], 4L))
 
 mapdeck(
@@ -219,20 +185,89 @@ mapdeck(
   , style = mapdeck_style("dark")
   )  %>%
   add_h3(
-    data = data.frame(x = c(cells, children_cells, children_cells_res2, children_cells_res3, children_cells_res4))
+    data = data.frame(
+      x = c(cells, children_cells, children_cells_res2, children_cells_res3, children_cells_res4)
+      )
     , hexagon = "x"
     , fill_colour = "x"
     , fill_opacity = 0.4
     , tooltip = "x"
     , stroke_colour = "#000000"
-    , stroke_width = 500
+    , stroke_width = 5000
     , update_view = TRUE
   )
 ```
-We can find that the top vertex of the resolution 0 cell is on the left of the top resolution 1 cell, while the top vertex of the resolution 1 cell is on the right of the top resolution 2 cell. The top vertex of the resolution 2 cell is on the left of the top resolution 3 cell again. This means that this 19.1 degs of change in direction differs for odd and even resolutions.
 
-```{r references, include = FALSE}
+\
+
+## Cells and Coordinates
+
+For this section we'll be using the `stations` data from the h3r package
+
+```{r}
+( dt_stations <- as.data.table(h3r::stations) )
 ```
+
+You can convert these coordinates to their containing cells...
+
+
+```{r}
+dt_stations[, cell := h3r::latLngToCell(lat = dt_stations$lat, lng = dt_stations$lon, resolution = 8) ][]
+```
+
+... but you can't get the coordinates back again. You can only get the center coordinates for each cell
+
+
+```{r}
+coords <- h3r::cellToLatLng(dt_stations$cell)
+head(coords)
+
+# Notice how they are different to head(stations)
+```
+
+### Boundaries
+
+If you want the cell as a spatial polygon you can get their boundaries as coordinates, and convert to an `sf` object, as in this exmaple
+
+```{r}
+
+boundaries <- h3r::cellToBoundary(dt_stations$cell)
+
+## The `cellToBoundary` function returns a named list, where each element
+## is given the cell name. However, some stations are in the same cell
+## dt_stations[, .N, by = cell ][ N != 1 ]
+## so Replace the cell name with the stop name
+names(boundaries) <- dt_stations$stop_name
+
+boundaries <- data.table::rbindlist(boundaries, idcol = TRUE)
+
+sf_boundaries <- sfheaders::sf_polygon(boundaries, x = "lng", y = "lat", polygon_id = ".id")
+```
+
+Notice in the map how some stations share the same cell (at resolution 8)
+
+```{r}
+
+mapdeck(
+  location = c(144.967590, -37.810935)
+  , zoom = 11
+  ) %>% 
+  add_scatterplot(
+    data = dt_stations
+    , update_view = FALSE
+    , radius = 50
+  ) %>%
+  add_polygon(
+    sf_boundaries
+    , fill_colour = '#9f19ff88'
+    , stroke_width = 25
+    , update_view = FALSE
+  )
+
+```
+
+\
+\
 
 ## References
 
