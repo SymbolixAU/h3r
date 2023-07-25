@@ -3,6 +3,8 @@ title: "Core H3 Themes"
 output: html_document
 author: "Ray Shao"
 date: "2023-07-20"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -21,17 +23,15 @@ library(data.table)
 library(h3r)
 ```
 
-### Resolution 0 and pentagons
+## Resolution 0
 
-Resolution 0 cells are the [largest](https://h3geo.org/docs/core-library/restable#average-area-in-km2) (i.e, they cover the largest area, and resolution 15 are the smallest).
+Resolution 0 cells are the [largest](https://h3geo.org/docs/core-library/restable#average-area-in-km2) (i.e, they cover the largest area, and resolution 15 are the smallest). The whole globe is covered with cells at each resolution. 
 
-All of the earth is covered with those cells. Note that the size of cells far from the equator are exaggerates because of the use of The Mercator projection. All cells are of roughly the same size.
+We're using the term 'cells', because each resolution is made up of some number of hexagons, and exactly 12 pentagons.
 
-Here are the resolution 0 cells
+If we plot all the Resolution 0 cells on a 'flat' map we get distortions as the cells get further from the equator. This is purely a result of plotting using the Mercator projection. However, all hexagons at each resolution are roughly the same size.
 
 ```{r resolution0, fig.cap="resolution 0 cells"}
-
-
 mapdeck::set_token(secret::get_secret("MAPBOX"))
 
 cells <- h3r::getRes0Cells()
@@ -48,43 +48,55 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
   )
 ```
 
+### Pentagons
 
-Note that according to [uber](https://h3geo.org/docs/core-library/overview/) 
+The reason for using pentagons is summarised by [Uber](https://h3geo.org/docs/core-library/overview/)
 
 > The H3 grid is constructed on the icosahedron by recursively creating increasingly higher precision hexagon grids until the desired resolution is achieved. Note that it is impossible to tile the sphere/icosahedron completely with hexagons; each resolution of an icosahedral hexagon grid must contain exactly 12 pentagons at every resolution, with one pentagon centered on each of the icosahedron vertices. 
 
-Therefore, not all cells are hexagon: some are pentagons. Let's see what are the pentagons in resolution 0.
+The nice feature about the pentagons is that they are all centered in the ocean.
+
 
 ```{r}
 mapdeck::set_token(secret::get_secret("MAPBOX"))
 
 cells <- h3r::getRes0Cells()
+is_pentagon = h3r::isPentagon(cells)
+
 mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
   add_h3(
-    data = data.frame(x = cells, is_pentagon = sapply(cells, h3r::isPentagon))
+    data = data.frame(x = cells, is_pentagon = is_pentagon)
     , hexagon = "x"
     , fill_colour = "is_pentagon"
-    , fill_opacity = 0.7
+    , fill_opacity = 0.5
     , tooltip = "x"
     , stroke_colour = "#000000"
     , stroke_width = 50000
   )
 ```
-We can find 12 pentagons in resolution 0. 
 
-### icosahedron faces
-Those 122 resolution 0 cells lives in 20 faces. Let's see which faces are they in.
+\
+
+### Icosahedron faces
+
+Those 122 resolution 0 cells live in 20 faces. Let's see which faces are they in.
+
 ```{r}
+
 cells <- h3r::getRes0Cells()
-faces_list <- lapply(cells, function(cell) {
-  faces <- h3r::getIcosahedronFaces(cell)
-  paste(unlist(faces), collapse = ",")
-})
-faces_df <- data.frame(cell = cells,
-                       face = unlist(faces_list, use.names = FALSE))
+faces <- h3r::getIcosahedronFaces(cells)
+
+## collapse the faces into a string of face IDs for each cell
+faces <- sapply(faces, \(x) unlist(paste0(x, collapse = ","))) |> unname()
+
+df_faces <- data.frame(
+  cell = cells
+  , face = faces
+  )
+
 mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
     add_h3(
-        data = faces_df
+        data = df_faces
         , hexagon = "cell"
         , fill_colour = "face"
         , fill_opacity = 0.7
@@ -93,11 +105,25 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
         , stroke_width = 50000
     )
 ```
-We can notice that some resolution 0 cells not in the centre intersects with multiple faces. Let's have a look at the centre cells of those faces.
+
+If you hover over the cells you can notice that some intersect multiple faces. 
+
+\
+
+### Changing Resolution
+
+
+The center cells of each face are hexagons
+
 ```{r}
 mapdeck::set_token(secret::get_secret("MAPBOX"))
 
-cells <- c('8021fffffffffff', '8005fffffffffff', '800ffffffffffff', '8035fffffffffff', '803ffffffffffff', '8065fffffffffff', '8033fffffffffff', '8049fffffffffff', '8081fffffffffff', '8097fffffffffff', '8073fffffffffff', '805dfffffffffff', '808ffffffffffff', '80c1fffffffffff', '80abfffffffffff', '80bffffffffffff', '80b5fffffffffff', '80d3fffffffffff', '80effffffffffff', '80e5fffffffffff')
+cells <- c(
+  '8021fffffffffff', '8005fffffffffff', '800ffffffffffff', '8035fffffffffff',
+  '803ffffffffffff', '8065fffffffffff', '8033fffffffffff', '8049fffffffffff', '8081fffffffffff', '8097fffffffffff', '8073fffffffffff', '805dfffffffffff',
+  '808ffffffffffff', '80c1fffffffffff', '80abfffffffffff', '80bffffffffffff',
+  '80b5fffffffffff', '80d3fffffffffff', '80effffffffffff', '80e5fffffffffff'
+  )
 
 mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
   add_h3(
@@ -110,11 +136,20 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
     , stroke_width = 50000
   )
 ```
-We can tell that all the centre cells are hexagon. By getting the children of this cell a level down (from resolution 0 to resolution 1), let's see if anything interesting happens.
+
+\
+
+If we also plot the children of each cell (By going up to resolution 1) we see there are approximtely 7 children per cell.
+
 ```{r}
 mapdeck::set_token(secret::get_secret("MAPBOX"))
 
-cells <- c('8021fffffffffff', '8005fffffffffff', '800ffffffffffff', '8035fffffffffff', '803ffffffffffff', '8065fffffffffff', '8033fffffffffff', '8049fffffffffff', '8081fffffffffff', '8097fffffffffff', '8073fffffffffff', '805dfffffffffff', '808ffffffffffff', '80c1fffffffffff', '80abfffffffffff', '80bffffffffffff', '80b5fffffffffff', '80d3fffffffffff', '80effffffffffff', '80e5fffffffffff')
+cells <- c(
+  '8021fffffffffff', '8005fffffffffff', '800ffffffffffff', '8035fffffffffff',
+  '803ffffffffffff', '8065fffffffffff', '8033fffffffffff', '8049fffffffffff', '8081fffffffffff', '8097fffffffffff', '8073fffffffffff', '805dfffffffffff',
+  '808ffffffffffff', '80c1fffffffffff', '80abfffffffffff', '80bffffffffffff',
+  '80b5fffffffffff', '80d3fffffffffff', '80effffffffffff', '80e5fffffffffff'
+  )
 
 children_cells <- unlist(h3r::cellToChildren(cells, 1L))
 
@@ -123,13 +158,16 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
     data = data.frame(x = c(cells, children_cells))
     , hexagon = "x"
     , fill_colour = "x"
-    , fill_opacity = 0.7
+    , fill_opacity = 0.5
     , tooltip = "x"
     , stroke_colour = "#000000"
     , stroke_width = 50000
   )
 ```
-We can find that there are approximtely 7 children per cell when going up a resolution. Let's zoom in to see what is happening.
+
+\
+
+Let's zoom in to see what is happening.
 
 ```{r}
 mapdeck::set_token(secret::get_secret("MAPBOX"))
@@ -138,24 +176,33 @@ cells <- c('8081fffffffffff')
 
 children_cells <- unlist(h3r::cellToChildren(cells, 1L))
 
-mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+mapdeck(
+  libraries = "h3"
+  , location = rev(as.numeric(cellToLatLng(cells)))
+  , zoom = 3
+  , style = mapdeck_style("dark")
+  )  %>%
   add_h3(
     data = data.frame(x = c(cells, children_cells))
     , hexagon = "x"
     , fill_colour = "x"
-    , fill_opacity = 0.7
+    , fill_opacity = 0.5
     , tooltip = "x"
     , stroke_colour = "#000000"
     , stroke_width = 50000
     , update_view = TRUE
   )
 ```
-We can find that the vertexse of the parent cell is on the vertexes of its child cells. This means that the orientation of each cell changes by 19.1 degs at each resolution. What happens if we go down further?
+
+\
+
+We see the vertices of the parent cell is on the vertexes of its child cells. This means that the orientation of each cell changes by 19.1 degs at each resolution. What happens if we go down further?
 
 ```{r}
 mapdeck::set_token(secret::get_secret("MAPBOX"))
 
 cells <- c('8081fffffffffff')
+
 
 children_cells <- unlist(h3r::cellToChildren(cells, 1L))
 
@@ -165,15 +212,20 @@ children_cells_res3 <- unlist(h3r::cellToChildren(children_cells_res2[1], 3L))
 
 children_cells_res4 <- unlist(h3r::cellToChildren(children_cells_res3[1], 4L))
 
-mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+mapdeck(
+  libraries = "h3"
+  , location = rev(as.numeric(cellToLatLng(cells)))
+  , zoom = 3
+  , style = mapdeck_style("dark")
+  )  %>%
   add_h3(
     data = data.frame(x = c(cells, children_cells, children_cells_res2, children_cells_res3, children_cells_res4))
     , hexagon = "x"
     , fill_colour = "x"
-    , fill_opacity = 0.7
+    , fill_opacity = 0.4
     , tooltip = "x"
     , stroke_colour = "#000000"
-    , stroke_width = 5000
+    , stroke_width = 500
     , update_view = TRUE
   )
 ```
