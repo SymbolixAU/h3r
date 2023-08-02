@@ -22,4 +22,4 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 URL: https://symbolixau.github.io/h3r/
 remotes: 
-  SymbolixAU/h3ilb
+  SymbolixAU/h3lib
