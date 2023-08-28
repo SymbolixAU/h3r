@@ -17,9 +17,12 @@ There's lots of really good content and [documentation](https://h3geo.org) on th
 
 ```{r}
 library(h3r)
-library(mapdeck)
-library(data.table)
-library(sfheaders)
+
+library(mapdeck)     ## Plots / Maps
+library(sfheaders)   ## building sf objects
+library(secret)      ## accesing Mapbox Token
+
+mapdeck::set_token(secret::get_secret("MAPBOX"))
 ```
 
 
@@ -38,7 +41,6 @@ We're using the term 'cells' because each resolution is made up of _some_ number
 If we plot all the Resolution 0 cells on a 'flat' map we get distortions as the cells get further from the equator. This is purely a result of plotting using the Mercator projection. However, all hexagons at each resolution are roughly the same size.
 
 ```{r resolution0}
-mapdeck::set_token(secret::get_secret("MAPBOX"))
 
 cells <- h3r::getRes0Cells()
 
@@ -204,43 +206,58 @@ mapdeck(
 For this section we'll be using the `stations` data from the h3r package
 
 ```{r}
-( dt_stations <- as.data.table(h3r::stations) )
+df_stations <- h3r::stations
+head(df_stations)
 ```
 
 You can convert these coordinates to their containing cells...
 
 
 ```{r}
-dt_stations[, cell := h3r::latLngToCell(lat = dt_stations$lat, lng = dt_stations$lon, resolution = 8) ][]
+df_stations$cell <- h3r::latLngToCell(
+  lat = df_stations$lat
+  , lng = df_stations$lon
+  , resolution = 8
+  )
+head(df_stations)
+
 ```
 
-... but you can't get the coordinates back again. You can only get the center coordinates for each cell
+... but you can't get the coordinates back again. You can only get the **center** coordinates for each cell. Notice here how the returned `coords` are different to the original coordinates
 
 
 ```{r}
-coords <- h3r::cellToLatLng(dt_stations$cell)
-head(coords)
+coords <- h3r::cellToLatLng(df_stations$cell)
+
+cbind( head(coords), head(df_stations) )
 
 # Notice how they are different to head(stations)
 ```
 
 ### Boundaries
 
-If you want the cell as a spatial polygon you can get their boundaries as coordinates, and convert to an `sf` object, as in this exmaple
+If you want the cell as a spatial polygon you can get their boundaries as coordinates, and convert to an `sf` object, as in this example
 
 ```{r}
 
-boundaries <- h3r::cellToBoundary(dt_stations$cell)
+boundaries <- h3r::cellToBoundary(df_stations$cell)
 
 ## The `cellToBoundary` function returns a named list, where each element
 ## is given the cell name. However, some stations are in the same cell
 ## dt_stations[, .N, by = cell ][ N != 1 ]
 ## so Replace the cell name with the stop name
-names(boundaries) <- dt_stations$stop_name
+names(boundaries) <- df_stations$stop_name
 
-boundaries <- data.table::rbindlist(boundaries, idcol = TRUE)
+boundaries <- do.call(rbind, boundaries)
+boundaries$id <- gsub("\\.[0-9]","",rownames(boundaries))
 
-sf_boundaries <- sfheaders::sf_polygon(boundaries, x = "lng", y = "lat", polygon_id = ".id")
+## Make a polygon
+sf_boundaries <- sfheaders::sf_polygon(
+  boundaries
+  , x = "lng"
+  , y = "lat"
+  , polygon_id = "id"
+  )
 ```
 
 Notice in the map how some stations share the same cell (at resolution 8)
@@ -252,7 +269,7 @@ mapdeck(
   , zoom = 11
   ) %>% 
   add_scatterplot(
-    data = dt_stations
+    data = df_stations
     , update_view = FALSE
     , radius = 50
   ) %>%
