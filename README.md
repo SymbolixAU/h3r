@@ -208,7 +208,7 @@ coordinates.
 You can use the C++ `h3r::cellToBoundary()` in your own workflow, and
 using other R packages that allow you to link to the source code.
 
-In this example I’m suing `{geometries}` and `{sfheaders}` to convert to
+In this example I’m using `{geometries}` and `{sfheaders}` to convert to
 a valid `{sf}` object.
 
 The steps inside this function are:
