@@ -17,7 +17,9 @@ There's lots of really good content and [documentation](https://h3geo.org) on th
 
 ```{r}
 library(h3r)
+```
 
+```{r eval = FALSE}
 library(mapdeck)     ## Plots / Maps
 library(sfheaders)   ## building sf objects
 library(secret)      ## accesing Mapbox Token
@@ -44,17 +46,26 @@ If we plot all the Resolution 0 cells on a 'flat' map we get distortions as the 
 
 cells <- h3r::getRes0Cells()
 
-mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+```
+
+```{r eval = FALSE}
+mapdeck(
+  libraries = "h3"
+  , style = mapdeck_style("light")
+  , repeat_view = TRUE
+  )  %>%
   add_h3(
     data = data.frame(x = cells)
     , hexagon = "x"
     , fill_colour = "x"
-    , fill_opacity = 0.7
+    , fill_opacity = 0.4
     , tooltip = "x"
     , stroke_colour = "#000000"
-    , stroke_width = 50000
+    , stroke_width = 25000
   )
 ```
+
+![resolution0](./img/h3rResolution0.png)
 
 #### Plotting (interlude)
 
@@ -80,12 +91,17 @@ The nice feature about the pentagons is that they are all centered in the ocean.
 
 
 ```{r}
-mapdeck::set_token(secret::get_secret("MAPBOX"))
 
 cells <- h3r::getRes0Cells()
 is_pentagon = h3r::isPentagon(cells)
+```
 
-mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+```{r eval = FALSE}
+mapdeck(
+  libraries = "h3"
+  , style = mapdeck_style("dark")
+  , repeat_view = TRUE
+  )  %>%
   add_h3(
     data = data.frame(x = cells, is_pentagon = is_pentagon)
     , hexagon = "x"
@@ -93,9 +109,11 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
     , fill_opacity = 0.5
     , tooltip = "x"
     , stroke_colour = "#000000"
-    , stroke_width = 50000
+    , stroke_width = 25000
   )
 ```
+
+![pentagons](./img/h3rPentagons.png)
 
 \
 
@@ -108,6 +126,27 @@ If you hover over the cells you can notice that some intersect multiple faces.
 ```{r}
 
 cells <- h3r::getRes0Cells()
+is_pentagon = h3r::isPentagon(cells)
+
+pentagonCells <- cells[as.logical(is_pentagon)]
+pentagonFaces <- h3r::getIcosahedronFaces(pentagonCells) |>
+  unlist() |>
+  sort()
+
+## Make triangles out of the pentagons
+df_pentagonFaces <- data.frame(
+  cell = names(pentagonFaces)
+  , face = unname(pentagonFaces)
+  )
+
+# df_pentagonFaces[, c("lat", "lng")] <- 
+## Works
+h3r::cellToLatLng(df_pentagonFaces$cell[1:20])
+
+## Fails
+h3r::cellToLatLng(df_pentagonFaces$cell[21])
+
+
 faces <- h3r::getIcosahedronFaces(cells)
 
 ## collapse the faces into a string of face IDs for each cell
@@ -118,7 +157,15 @@ df_faces <- data.frame(
   , face = faces
   )
 
-mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+```
+
+```{r eval = FALSE}
+
+mapdeck(
+  libraries = "h3"
+  , style = mapdeck_style("dark")
+  , repeat_view = TRUE
+  )  %>%
     add_h3(
         data = df_faces
         , hexagon = "cell"
@@ -126,7 +173,7 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
         , fill_opacity = 0.7
         , tooltip = "face"
         , stroke_colour = "#000000"
-        , stroke_width = 50000
+        , stroke_width = 25000
     )
 ```
 
@@ -147,6 +194,9 @@ cells <- c(
   )
 
 children_cells <- unlist(h3r::cellToChildren(cells, 1L))
+```
+
+```{r eval = FALSE}
 
 mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
   add_h3(
@@ -178,7 +228,9 @@ children_cells <- unlist(h3r::cellToChildren(cells, 1L))
 children_cells_res2 <- unlist(h3r::cellToChildren(children_cells[1], 2L))
 children_cells_res3 <- unlist(h3r::cellToChildren(children_cells_res2[1], 3L))
 children_cells_res4 <- unlist(h3r::cellToChildren(children_cells_res3[1], 4L))
+```
 
+```{r eval = FALSE}
 mapdeck(
   libraries = "h3"
   , location = rev(as.numeric(cellToLatLng(cells)))
@@ -262,7 +314,7 @@ sf_boundaries <- sfheaders::sf_polygon(
 
 Notice in the map how some stations share the same cell (at resolution 8)
 
-```{r}
+```{r, eval = FALSE}
 
 mapdeck(
   location = c(144.967590, -37.810935)
