@@ -1,0 +1,10 @@
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  CoreH3Themes: CoreH3Themes.html
+last_built: 2023-08-30T22:26Z
+urls:
+  reference: https://symbolixau.github.io/h3r/reference
+  article: https://symbolixau.github.io/h3r/articles
+
