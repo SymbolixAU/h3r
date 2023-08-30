@@ -5,9 +5,12 @@ Version: 0.1.0
 Date: 2023-08-29
 Authors@R: c(
     person("David", "Cooley", ,"dcooley@symbolix.com.au", role = c("aut", "cre")),
-    person("Ray", "Shao", ,"rshao@symbolix.com.au", role = c("ctb"))
+    person("Ray", "Shao", ,"rshao@symbolix.com.au", role = c("aut"))
     )
-Description: Provides access to Uber's 'H3' geospatial indexing system.
+Description: Provides access to Uber's 'H3' geospatial indexing system via 'h3lib' 
+  <https://CRAN.R-project.org/package=h3lib>. 'h3r' is designed to mimic the 'H3' 
+  Application Programming Interface (API) <https://h3geo.org/docs/api/indexing/>, 
+  so that any function in the API is also availble in 'h3r'.
 License: MIT + file LICENSE
 URL: https://symbolixau.github.io/h3r/
 BugReports: https://github.com/symbolixau/h3r/issues

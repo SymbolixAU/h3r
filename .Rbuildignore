@@ -11,3 +11,4 @@ inst/cppapi/*
 ^pkgdown$
 ^\.github$
 ^vignettes*
+^CRAN-SUBMISSION$

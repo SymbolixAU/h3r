@@ -20,8 +20,8 @@ h3r::latLngToCell(
 # [1] "81be7ffffffffff" "8ebe6356311035f"
 ```
 
-Most of the [H3 API](https://h3geo.org/docs/api/indexing) is included in
-this package as R functions. The only exceptions are
+Most of the [H3 API](https://h3geo.org/docs/api/indexing/) is included
+in this package as R functions. The only exceptions are
 
 - stringToH3
 - h3ToString
