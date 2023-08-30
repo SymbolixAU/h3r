@@ -119,9 +119,8 @@ mapdeck(
 
 ### Icosahedron faces
 
-Those 122 resolution 0 cells live in 20 faces. Let's see which faces are they in.
+And the pentagons are the corners of each of the 20 icosahedron faces (i.e, each triangle).
 
-If you hover over the cells you can notice that some intersect multiple faces. 
 
 ```{r}
 
@@ -129,53 +128,56 @@ cells <- h3r::getRes0Cells()
 is_pentagon = h3r::isPentagon(cells)
 
 pentagonCells <- cells[as.logical(is_pentagon)]
-pentagonFaces <- h3r::getIcosahedronFaces(pentagonCells) |>
-  unlist() |>
-  sort()
+pentagonFaces <- h3r::getIcosahedronFaces(pentagonCells) 
 
 ## Make triangles out of the pentagons
 df_pentagonFaces <- data.frame(
-  cell = names(pentagonFaces)
-  , face = unname(pentagonFaces)
+  cell = rep(names(pentagonFaces), lengths(pentagonFaces))
+  , face = unlist(unname(pentagonFaces))
   )
 
-# df_pentagonFaces[, c("lat", "lng")] <- 
-## Works
-h3r::cellToLatLng(df_pentagonFaces$cell[1:20])
+df_pentagonFaces <- df_pentagonFaces[ order(df_pentagonFaces$face), ]
 
-## Fails
-h3r::cellToLatLng(df_pentagonFaces$cell[21])
+df_pentagonFaces <- cbind(
+  df_pentagonFaces
+  , h3r::cellToLatLng(df_pentagonFaces$cell)
+)
 
 
-faces <- h3r::getIcosahedronFaces(cells)
-
-## collapse the faces into a string of face IDs for each cell
-faces <- sapply(faces, \(x) unlist(paste0(x, collapse = ","))) |> unname()
-
-df_faces <- data.frame(
-  cell = cells
-  , face = faces
-  )
+sf_faces <- sfheaders::sf_polygon(
+  obj = df_pentagonFaces
+  , polygon_id = "face"
+  , x = "lng"
+  , y = "lat"
+)
 
 ```
 
 ```{r eval = FALSE}
 
+## For plotting reasons I'm removing the faces that cross the 180 & Poles
 mapdeck(
   libraries = "h3"
-  , style = mapdeck_style("dark")
-  , repeat_view = TRUE
-  )  %>%
-    add_h3(
-        data = df_faces
-        , hexagon = "cell"
-        , fill_colour = "face"
-        , fill_opacity = 0.7
-        , tooltip = "face"
-        , stroke_colour = "#000000"
-        , stroke_width = 25000
-    )
+  , style = mapdeck_style("light")
+  , repeat_view = FALSE
+  )  %>% 
+  add_polygon(
+    data = sf_faces[ !sf_faces$face %in% c(1, 6, 11, 15, 16, 19), ]
+    , fill_colour = "face"
+    , fill_opacity = 0.3
+    , tooltip = "face"
+    , stroke_width = 50000
+  ) %>%
+  add_h3(
+    data = data.frame(cell = pentagonCells)
+    , hexagon = "cell"
+    , fill_opacity = 0.6
+  )
+
 ```
+
+![Icosahedrons](./img/h3rIcosahedron.png)
+
 
 \
 
@@ -184,7 +186,6 @@ mapdeck(
 If we plot all the Resolution 0 cells at the center of each icosahedron face, plus the children of each of these (by going up to resolution 1) we see there are (approximately) 7 children per cell.
 
 ```{r}
-mapdeck::set_token(secret::get_secret("MAPBOX"))
 
 cells <- c(
   '8021fffffffffff', '8005fffffffffff', '800ffffffffffff', '8035fffffffffff',
@@ -198,7 +199,10 @@ children_cells <- unlist(h3r::cellToChildren(cells, 1L))
 
 ```{r eval = FALSE}
 
-mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
+mapdeck(
+  libraries = "h3"
+  , style = mapdeck_style("dark")
+  )  %>%
   add_h3(
     data = data.frame(x = c(cells, children_cells))
     , hexagon = "x"
@@ -210,6 +214,9 @@ mapdeck(libraries = "h3", style = mapdeck_style("dark"))  %>%
   )
 ```
 
+![Resolution](.img/h3rChangingResolution1.png)
+
+
 \
 
 And if we continue to plot finer and finer resolution cells (all of which are children of the parent cell) we can start to see the rotation effect when changing resolution.
@@ -219,7 +226,6 @@ As you go from an odd-to-even resolution, the hexagons are rotated by ~19.1 degr
 So all the even-resolution cells are at the same orientation as each other, and similarly all the odd-resolution cells are at the same orientations as each other.
 
 ```{r}
-mapdeck::set_token(secret::get_secret("MAPBOX"))
 
 cells <- c('8081fffffffffff')
 
@@ -251,6 +257,8 @@ mapdeck(
   )
 ```
 
+![Alternating Resolution](./img/h3rChangingResolution2.png)
+
 \
 
 ## Cells and Coordinates
@@ -275,7 +283,9 @@ head(df_stations)
 
 ```
 
-... but you can't get the coordinates back again. You can only get the **center** coordinates for each cell. Notice here how the returned `coords` are different to the original coordinates
+... but you can't get the coordinates back again. You can only get the **center** coordinates for each cell.
+
+Notice here how the returned `coords` are different to the original coordinates
 
 
 ```{r}
@@ -294,10 +304,12 @@ If you want the cell as a spatial polygon you can get their boundaries as coordi
 
 boundaries <- h3r::cellToBoundary(df_stations$cell)
 
-## The `cellToBoundary` function returns a named list, where each element
-## is given the cell name. However, some stations are in the same cell
-## dt_stations[, .N, by = cell ][ N != 1 ]
+## The `cellToBoundary` function returns a named list. Each element is named 
+## with the cell name, and the coordinatres are the vertieces of the hexagons. 
+##
+## However, some stations are in the same cell
 ## so Replace the cell name with the stop name
+
 names(boundaries) <- df_stations$stop_name
 
 boundaries <- do.call(rbind, boundaries)
@@ -333,6 +345,8 @@ mapdeck(
   )
 
 ```
+
+![Stations](./img/h3rStations.png)
 
 \
 \

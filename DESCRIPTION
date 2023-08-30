@@ -19,7 +19,6 @@ Depends:
 LinkingTo:
   h3lib
 Suggests:
-  mapdeck,
   sfheaders,
   tinytest
 Roxygen: list(markdown = TRUE)
