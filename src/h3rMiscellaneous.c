@@ -205,7 +205,7 @@ SEXP h3rGetNumCells(SEXP res) {
   return out;
 }
 
-SEXP h3rGetRes0Cells() {
+SEXP h3rGetRes0Cells(void) {
   int i;
   int count = res0CellCount();
 
@@ -224,7 +224,7 @@ SEXP h3rGetRes0Cells() {
   return out;
 }
 
-SEXP h3rRes0CellCount() {
+SEXP h3rRes0CellCount(void) {
 
   SEXP out = PROTECT(Rf_allocVector(INTSXP, 1));
 
@@ -267,7 +267,7 @@ SEXP h3rGetPentagons(SEXP res) {
   return out;
 }
 
-SEXP h3rPentagonCount() {
+SEXP h3rPentagonCount(void) {
 
   SEXP out = PROTECT(Rf_allocVector(INTSXP, 1));
 

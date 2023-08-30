@@ -10,7 +10,7 @@ Authors@R: c(
 Description: Provides access to Uber's 'H3' geospatial indexing system via 'h3lib' 
   <https://CRAN.R-project.org/package=h3lib>. 'h3r' is designed to mimic the 'H3' 
   Application Programming Interface (API) <https://h3geo.org/docs/api/indexing/>, 
-  so that any function in the API is also availble in 'h3r'.
+  so that any function in the API is also available in 'h3r'.
 License: MIT + file LICENSE
 URL: https://symbolixau.github.io/h3r/
 BugReports: https://github.com/symbolixau/h3r/issues
