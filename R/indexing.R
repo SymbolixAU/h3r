@@ -8,6 +8,8 @@
 #' @param lng longitude
 #' @param resolution cell resolution
 #'
+#' @return vector giving the H3 cell for each input lat/lng pair, at the given resolution
+#'
 #' @examples
 #'
 #' latLngToCell(

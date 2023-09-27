@@ -13,6 +13,9 @@ latLngToCell(lat, lng, resolution)
 
 \item{resolution}{cell resolution}
 }
+\value{
+vector giving the H3 cell for each input lat/lng pair, at the given resolution
+}
 \description{
 Indexes the location at the specified resolution, returning the index of the
 cell containing the location. This buckets the geographic point into the

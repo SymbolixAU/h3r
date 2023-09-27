@@ -9,8 +9,11 @@ isValidVertex(vertex)
 \arguments{
 \item{vertex}{H3 Vertex index}
 }
+\value{
+returns 1 if the given index is a valid H3 vertex
+}
 \description{
-Returns 1 if the given index represents a valid H3 vertex
+Tests if the given vertex is a valid H3 vertex
 }
 \examples{
 

@@ -9,6 +9,10 @@ getIcosahedronFaces(cell)
 \arguments{
 \item{cell}{vector of H3 cells}
 }
+\value{
+list of vectors. Each list element corresponds to the input \code{cell} values.
+Each vector in a list element gives the faces intersected by the \code{cell}
+}
 \description{
 Find all icosahedron faces intersected by a given H3 index.
 Faces are represented as integers from 0-19, inclusive.

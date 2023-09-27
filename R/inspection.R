@@ -113,6 +113,9 @@ isPentagon <- function(cell) {
 #'
 #' getIcosahedronFaces(cell = cellToParent(c("8cbe63562a54bff" ,"8cbe635631103ff"), c(7L, 7L)))
 #'
+#' @return list of vectors. Each list element corresponds to the input `cell` values.
+#' Each vector in a list element gives the faces intersected by the `cell`
+#'
 #' @export
 getIcosahedronFaces <- function(cell) {
   .Call(h3rGetIcosahedronFaces, cell)

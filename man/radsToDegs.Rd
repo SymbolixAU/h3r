@@ -9,6 +9,9 @@ radsToDegs(rad)
 \arguments{
 \item{rad}{vector of radians}
 }
+\value{
+numeric vector giving the input \code{rad} values as degrees
+}
 \description{
 Converts Radians to Degrees
 }

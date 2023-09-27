@@ -9,6 +9,9 @@ vertexToLatLng(vertex)
 \arguments{
 \item{vertex}{H3 Vertex index}
 }
+\value{
+\code{data.frame} of the lat/lng coordinates of the input \code{vertex}
+}
 \description{
 Returns the latitude and longitude of the given vertex
 }

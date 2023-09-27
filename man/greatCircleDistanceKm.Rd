@@ -15,6 +15,9 @@ greatCircleDistanceKm(aLat, aLng, bLat, bLng)
 
 \item{bLng}{vector of longitude coordinates (to)}
 }
+\value{
+numeric vector giving the great circle distance in kilometres
+}
 \description{
 Gives the "great circle" or "haversine" distance between pairs of lat/lng coordinates
 in kilometers.

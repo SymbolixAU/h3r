@@ -9,6 +9,11 @@ cellToVertexes(cell)
 \arguments{
 \item{cell}{vector of H3 cells}
 }
+\value{
+list of vectors giving the vertices of each cell.
+Each list element corresponds to the cell index given in the \code{cell} argument,
+and each element of the vector are the cell vertexes.
+}
 \description{
 Returns the indexes for all vertices of the given \code{cell}. The
 Output will have a 0 in the result if the input \code{cell} is a pentagon

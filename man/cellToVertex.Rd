@@ -11,6 +11,9 @@ cellToVertex(cell, vertexNum)
 
 \item{vertexNum}{integer giving the vertex number of the index to return}
 }
+\value{
+vector of vertex indexes
+}
 \description{
 Returns the index for the specified cell vertex.
 Valid vertex numbers are between 0 and 5 (inclusive) for hexagonal cells,

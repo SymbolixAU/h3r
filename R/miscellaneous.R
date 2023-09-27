@@ -5,6 +5,8 @@
 #'
 #' @param deg vector of degrees
 #'
+#' @return numeric vector giving the input `deg` values as radians
+#'
 #' @examples
 #'
 #' degsToRads(deg = seq(0, 360, by = 15))
@@ -20,6 +22,8 @@ degsToRads <- function(deg) {
 #' Converts Radians to Degrees
 #'
 #' @param rad vector of radians
+#'
+#' @return numeric vector giving the input `rad` values as degrees
 #'
 #' @examples
 #' radsToDegs(rad = seq(0, 2 * pi, by = (pi / 12) ) )
@@ -241,6 +245,8 @@ getPentagons <- function(resolution) {
 #' @param bLat vector of latitude coordinates (to)
 #' @param bLng vector of longitude coordinates (to)
 #'
+#' @return numeric vector giving the great circle distance in radians
+#'
 #' @examples
 #'
 #' greatCircleDistanceRads(
@@ -263,6 +269,7 @@ greatCircleDistanceRads <- function(aLat, aLng, bLat, bLng) {
 #'
 #' @inheritParams greatCircleDistanceRads
 #'
+#' @return numeric vector giving the great circle distance in metres
 #' @examples
 #'
 #' greatCircleDistanceM(
@@ -283,6 +290,7 @@ greatCircleDistanceM <- function(aLat, aLng, bLat, bLng) {
 #' in kilometers.
 #'
 #' @inheritParams greatCircleDistanceRads
+#' @return numeric vector giving the great circle distance in kilometres
 #'
 #' @examples
 #'

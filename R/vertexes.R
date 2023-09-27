@@ -8,6 +8,8 @@
 #' @inheritParams cellToLatLng
 #' @param vertexNum integer giving the vertex number of the index to return
 #'
+#' @return vector of vertex indexes
+#'
 #' @examples
 #'
 #' cellToVertex(
@@ -27,6 +29,10 @@ cellToVertex <- function(cell, vertexNum) {
 #'
 #' @inheritParams cellToLatLng
 #'
+#' @return list of vectors giving the vertices of each cell.
+#' Each list element corresponds to the cell index given in the `cell` argument,
+#' and each element of the vector are the cell vertexes.
+#'
 #' @examples
 #'
 #' cellToVertexes(cell = c("8cbe63562a54bff", "8cbe635631103ff") )
@@ -43,6 +49,8 @@ cellToVertexes <- function(cell) {
 #' Returns the latitude and longitude of the given vertex
 #'
 #' @param vertex H3 Vertex index
+#'
+#' @return `data.frame` of the lat/lng coordinates of the input `vertex`
 #'
 #' @examples
 #'
@@ -62,9 +70,11 @@ vertexToLatLng <- function(vertex) {
 
 #' Is Valid Vertex
 #'
-#' Returns 1 if the given index represents a valid H3 vertex
+#' Tests if the given vertex is a valid H3 vertex
 #'
 #' @inheritParams vertexToLatLng
+#'
+#' @return returns 1 if the given index is a valid H3 vertex
 #'
 #' @examples
 #'
