@@ -49,7 +49,7 @@ static const R_CallMethodDef callMethods[] = {
   {"h3rCellToCenterChild", (DL_FUNC) &h3rCellToCenterChild, 2},
   {"h3rCellToChildPos", (DL_FUNC) &h3rCellToChildPos, 2},
   {"h3rChildPosToCell", (DL_FUNC) &h3rChildPosToCell, 3},
-  {"h3rCompactCells", (DL_FUNC) &h3rCompactCells, 1},
+  // {"h3rCompactCells", (DL_FUNC) &h3rCompactCells, 1},
   {"h3rUncompactCells", (DL_FUNC) &h3rUncompactCells, 2},
 
   // Regions
@@ -232,7 +232,7 @@ void attribute_visible R_init_h3r(DllInfo *info)
   R_RegisterCCallable("h3r", "h3rCellToCenterChild",     (DL_FUNC) &h3rCellToCenterChild);
   R_RegisterCCallable("h3r", "h3rCellToChildPos",        (DL_FUNC) &h3rCellToChildPos);
   R_RegisterCCallable("h3r", "h3rChildPosToCell",        (DL_FUNC) &h3rChildPosToCell);
-  R_RegisterCCallable("h3r", "h3rCompactCells",          (DL_FUNC) &h3rCompactCells);
+  // R_RegisterCCallable("h3r", "h3rCompactCells",          (DL_FUNC) &h3rCompactCells);
   R_RegisterCCallable("h3r", "h3rUncompactCells",        (DL_FUNC) &h3rUncompactCells);
 
   // Regions

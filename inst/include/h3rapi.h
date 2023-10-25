@@ -141,11 +141,11 @@ extern "C" {
       (SEXP(*)(SEXP, SEXP, SEXP)) R_GetCCallable("h3r", "h3rChildPosToCell");
     return fun(pos, h3, res);
   }
-  inline SEXP attribute_hidden h3rCompactCells(SEXP h3Sets) {
-    SEXP(*fun)(SEXP) =
-      (SEXP(*)(SEXP)) R_GetCCallable("h3r", "h3rCompactCells");
-    return fun(h3Sets);
-  }
+  // inline SEXP attribute_hidden h3rCompactCells(SEXP h3Sets) {
+  //   SEXP(*fun)(SEXP) =
+  //     (SEXP(*)(SEXP)) R_GetCCallable("h3r", "h3rCompactCells");
+  //   return fun(h3Sets);
+  // }
   inline SEXP attribute_hidden h3rUncompactCells(SEXP h3Sets, SEXP res) {
     SEXP(*fun)(SEXP, SEXP) =
       (SEXP(*)(SEXP, SEXP)) R_GetCCallable("h3r", "h3rUncompactCells");

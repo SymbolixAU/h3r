@@ -183,38 +183,38 @@ SEXP h3rChildPosToCell(SEXP pos, SEXP h3, SEXP res) {
   return out;
 }
 
-SEXP h3rCompactCells(SEXP h3Sets) {
-  R_xlen_t n = Rf_xlength(h3Sets);
-  R_xlen_t i;
-  int64_t j, setSize, outputSize;
-
-  SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
-
-  for (i = 0; i < n; i++) {
-    SEXP h3Set = VECTOR_ELT(h3Sets, i);
-    setSize = Rf_xlength(h3Set);
-
-    H3Index cellSet[setSize];
-    H3Index compactedSet[setSize];
-
-    for (j = 0; j < setSize; j++) {
-      cellSet[j] = sexpStringToH3(h3Set, j);
-    }
-
-    h3rError(compactCells(cellSet, compactedSet, setSize), i);
-
-    j = 0;
-    while (j < setSize && isValidCell(compactedSet[j])) {
-      j++;
-    }
-    outputSize = j;
-
-    SET_VECTOR_ELT(out, i, h3VecToSexpString(compactedSet, outputSize));
-  }
-
-  UNPROTECT(1);
-  return out;
-}
+// SEXP h3rCompactCells(SEXP h3Sets) {
+//   R_xlen_t n = Rf_xlength(h3Sets);
+//   R_xlen_t i;
+//   int64_t j, setSize, outputSize;
+//
+//   SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
+//
+//   for (i = 0; i < n; i++) {
+//     SEXP h3Set = VECTOR_ELT(h3Sets, i);
+//     setSize = Rf_xlength(h3Set);
+//
+//     H3Index cellSet[setSize];
+//     H3Index compactedSet[setSize];
+//
+//     for (j = 0; j < setSize; j++) {
+//       cellSet[j] = sexpStringToH3(h3Set, j);
+//     }
+//
+//     h3rError(compactCells(cellSet, compactedSet, setSize), i);
+//
+//     j = 0;
+//     while (j < setSize && isValidCell(compactedSet[j])) {
+//       j++;
+//     }
+//     outputSize = j;
+//
+//     SET_VECTOR_ELT(out, i, h3VecToSexpString(compactedSet, outputSize));
+//   }
+//
+//   UNPROTECT(1);
+//   return out;
+// }
 
 SEXP h3rUncompactCells(SEXP h3Sets, SEXP res) {
   R_xlen_t n = Rf_xlength(h3Sets);

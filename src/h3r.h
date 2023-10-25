@@ -42,7 +42,7 @@ SEXP h3rCellToChildrenSize(SEXP h3, SEXP res);
 SEXP h3rCellToCenterChild(SEXP h3, SEXP res);
 SEXP h3rCellToChildPos(SEXP h3, SEXP res);
 SEXP h3rChildPosToCell(SEXP pos, SEXP h3, SEXP res);
-SEXP h3rCompactCells(SEXP h3Sets);
+// SEXP h3rCompactCells(SEXP h3Sets);
 SEXP h3rUncompactCells(SEXP h3Sets, SEXP res);
 
 // Regions
