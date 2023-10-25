@@ -2,13 +2,32 @@
 
 ## Read `h3libapi.h` and write all 'inline' function defs to `init.c`
 
-# lines <- readLines("~/Documents/github/h3lib/inst/include/h3libapi.h")
-# fns <- lines[ grepl("inline ", lines) ]
-# fns <- gsub("inline ", "", fns)
-# fns <- gsub("\\(.*","",fns)
-# fns <- gsub(" ", " (*", fns)
-# fns <- paste0(fns, ");\n")
-# cat(fns)
+lines <- readLines("~/Documents/github/h3lib/inst/include/h3libapi.h")
+fns <- lines[ grepl("^inline ", lines) ]
+
+fns <- gsub("inline ", "", fns)
+
+args <- gsub(".*\\(","", fns)
+args <- trimws(gsub("\\) \\{", "", args))
+
+## Replace arugments (space, followed by arg, followed by comma)
+## with a comma
+args <- gsub(" \\w+,", ",", args)
+
+## remove final argument
+args <- gsub("\\w+$","", args)
+
+## put 'void' back in
+args[ nchar(args) == 0 ] <- "void"
+
+args <- trimws(args)
+
+types <- trimws(gsub("\\w+$","",fns))
+names <- trimws(gsub("^ {0, }\\w+ ", "", fns))
+
+## rebuild
+fns <- paste0(types, " (*", names, ")","(", args, ");\n")
+cat(fns)
 
 
 stations <- structure(list(stop_id = c("15351", "15353", "19827", "19828",
