@@ -54,7 +54,7 @@ static const R_CallMethodDef callMethods[] = {
 
   // Regions
   {"h3rPolygonToCells",                 (DL_FUNC) &h3rPolygonToCells,   3},
-  {"h3rCellsToMultiPolygon",                 (DL_FUNC) &h3rCellsToMultiPolygon,   2},
+  // {"h3rCellsToMultiPolygon",                 (DL_FUNC) &h3rCellsToMultiPolygon,   2},
 
   // Directed Edges
   {"h3rAreNeighborCells",                 (DL_FUNC) &h3rAreNeighborCells,   2},
@@ -205,7 +205,7 @@ H3Error (*gridDiskDistances)(H3Index, int, H3Index*, int*);
 // H3Error (*gridRingUnsafe)(H3Index, int, H3Index*);
 H3Error (*maxPolygonToCellsSize)(const GeoPolygon*, int, uint32_t, int64_t*);
 H3Error (*polygonToCells)(const GeoPolygon*, int, uint32_t, H3Index*);
-H3Error (*cellsToLinkedMultiPolygon)(const H3Index*, const int, LinkedGeoPolygon*);
+// H3Error (*cellsToLinkedMultiPolygon)(const H3Index*, const int, LinkedGeoPolygon*);
 void (*destroyLinkedMultiPolygon)(LinkedGeoPolygon*);
 double (*degsToRads)(double);
 double (*radsToDegs)(double);
@@ -309,7 +309,7 @@ void attribute_visible R_init_h3r(DllInfo *info)
 
   // Regions
   R_RegisterCCallable("h3r", "h3rPolygonToCells",             (DL_FUNC) &h3rPolygonToCells);
-  R_RegisterCCallable("h3r", "h3rCellsToMultiPolygon",        (DL_FUNC) &h3rCellsToMultiPolygon);
+  // R_RegisterCCallable("h3r", "h3rCellsToMultiPolygon",        (DL_FUNC) &h3rCellsToMultiPolygon);
 
   // Directed Edges
   R_RegisterCCallable("h3r", "h3rAreNeighborCells",             (DL_FUNC) &h3rAreNeighborCells);

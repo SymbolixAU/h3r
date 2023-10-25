@@ -2,7 +2,7 @@ Package: h3r
 Type: Package
 Title: Hexagonal Hierarchical Geospatial Indexing System
 Version: 0.1.1
-Date: 2023-10-14
+Date: 2023-10-26
 Authors@R: c(
     person("David", "Cooley", ,"dcooley@symbolix.com.au", role = c("aut", "cre")),
     person("Ray", "Shao", ,"rshao@symbolix.com.au", role = c("aut"))
