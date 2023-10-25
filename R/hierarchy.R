@@ -122,48 +122,48 @@ childPosToCell <- function(childPos, cell, childRes) {
   .Call(h3rChildPosToCell, childPos, cell, int(childRes))
 }
 
-#' Compacts the set cellSet of indexes as best as possible, into the array
-#' compactedSet.
-#'
-#' @param cellSet list of character vectors containing to be compacted
-#' H4 cell indexes
-#'
-#' @return a list of character vectors containing the compacted H3 cell indexes
-#'
-#' @examples
-#'
-#' compactCells(gridDisk(cell = c("8cbe63562a54bff","8cbe635631103ff"), k = c(1L, 2L)))
-#'
-#' @export
-compactCells <- function(cellSet) {
-.Call(h3rCompactCells, cellSet)
-}
+# Compacts the set cellSet of indexes as best as possible, into the array
+# compactedSet.
+#
+# @param cellSet list of character vectors containing to be compacted
+# H4 cell indexes
+#
+# @return a list of character vectors containing the compacted H3 cell indexes
+#
+# @examples
+#
+# compactCells(gridDisk(cell = c("8cbe63562a54bff","8cbe635631103ff"), k = c(1L, 2L)))
+#
+# @export
+# compactCells <- function(cellSet) {
+# .Call(h3rCompactCells, cellSet)
+# }
 
-#' Uncompacts a set of compacted H3 cell indexes to a given resolution.
-#'
-#' This function uncompacts the provided set of compacted H3 cell indexes to
-#' the specified resolution.
-#'
-#' @param compactedSet list of character vectors containing compacted H3 cell
-#' indexes
-#' @param resolution integer specifying the resolution for the uncompacted cells
-#'
-#' @return a list of character vectors containing the uncompacted H3 cell
-#' indexes at the specified resolution
-#'
-#' @examples
-#'
-#' uncompactCells(
-#'   compactCells(
-#'     gridDisk(
-#'       cell = c("85283477fffffff", "85283423fffffff")
-#'       , k = c(1L, 2L)
-#'      )
-#'    )
-#'    , res = c(5L, 5L)
-#'  )
-#'
-#' @export
-uncompactCells <- function(compactedSet, resolution) {
-.Call(h3rUncompactCells, compactedSet, int(resolution))
-}
+# Uncompacts a set of compacted H3 cell indexes to a given resolution.
+#
+# This function uncompacts the provided set of compacted H3 cell indexes to
+# the specified resolution.
+#
+# @param compactedSet list of character vectors containing compacted H3 cell
+# indexes
+# @param resolution integer specifying the resolution for the uncompacted cells
+#
+# @return a list of character vectors containing the uncompacted H3 cell
+# indexes at the specified resolution
+#
+# @examples
+#
+# uncompactCells(
+#   compactCells(
+#     gridDisk(
+#       cell = c("85283477fffffff", "85283423fffffff")
+#       , k = c(1L, 2L)
+#      )
+#    )
+#    , res = c(5L, 5L)
+#  )
+#
+# @export
+# uncompactCells <- function(compactedSet, resolution) {
+#   .Call(h3rUncompactCells, compactedSet, int(resolution))
+# }

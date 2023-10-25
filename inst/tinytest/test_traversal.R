@@ -38,21 +38,21 @@ expect_error(
   , pattern = "h3r - Error: Input vectors do not have consistent length"
 )
 
-expect_equal(
-  gridRingUnsafe(
-    cell = c("85283473fffffff", "85283423fffffff")
-    , k = c(5L, 0L)
-    )
-  , list(c("85291a6ffffffff", "852834d3fffffff", "852834dbfffffff", "8529a937fffffff", "8529a923fffffff", "8529a92bfffffff", "85283693fffffff", "85283683fffffff", "8528368ffffffff", "85283617fffffff", "85283607fffffff", "85283633fffffff", "85283637fffffff", "852830cbfffffff", "852830cffffffff", "8528301bfffffff", "85283013fffffff", "8528308ffffffff", "85283087fffffff", "8528354bfffffff", "85283543fffffff", "85283553fffffff", "852835cbfffffff", "852835dbfffffff", "852834a7fffffff", "852834b7fffffff", "852834b3fffffff", "85283487fffffff", "85283483fffffff", "8528349bfffffff"), c("85283423fffffff"))
-  )
-
-expect_error(
-  gridRingUnsafe(
-    cell = c("a")
-    , k = 1:2
-  )
-  , pattern = "h3r - Error: Input vectors do not have consistent length"
-)
+# expect_equal(
+#   gridRingUnsafe(
+#     cell = c("85283473fffffff", "85283423fffffff")
+#     , k = c(5L, 0L)
+#     )
+#   , list(c("85291a6ffffffff", "852834d3fffffff", "852834dbfffffff", "8529a937fffffff", "8529a923fffffff", "8529a92bfffffff", "85283693fffffff", "85283683fffffff", "8528368ffffffff", "85283617fffffff", "85283607fffffff", "85283633fffffff", "85283637fffffff", "852830cbfffffff", "852830cffffffff", "8528301bfffffff", "85283013fffffff", "8528308ffffffff", "85283087fffffff", "8528354bfffffff", "85283543fffffff", "85283553fffffff", "852835cbfffffff", "852835dbfffffff", "852834a7fffffff", "852834b7fffffff", "852834b3fffffff", "85283487fffffff", "85283483fffffff", "8528349bfffffff"), c("85283423fffffff"))
+#   )
+#
+# expect_error(
+#   gridRingUnsafe(
+#     cell = c("a")
+#     , k = 1:2
+#   )
+#   , pattern = "h3r - Error: Input vectors do not have consistent length"
+# )
 
 expect_equal(
   gridPathCells(

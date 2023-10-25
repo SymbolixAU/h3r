@@ -34,7 +34,7 @@ static const R_CallMethodDef callMethods[] = {
   {"h3rGridDiskUnsafe",           (DL_FUNC) &h3rGridDiskUnsafe, 2},
   {"h3rGridDiskDistancesUnsafe",  (DL_FUNC) &h3rGridDiskDistancesUnsafe, 2},
   {"h3rGridDiskDistancesSafe",    (DL_FUNC) &h3rGridDiskDistancesSafe, 2},
-  {"h3rGridRingUnsafe",           (DL_FUNC) &h3rGridRingUnsafe, 2},
+  // {"h3rGridRingUnsafe",           (DL_FUNC) &h3rGridRingUnsafe, 2},
   {"h3rGridPathCells",            (DL_FUNC) &h3rGridPathCells, 2},
   {"h3rGridPathCellsSize",        (DL_FUNC) &h3rGridPathCellsSize, 2},
   {"h3rGridDistance",             (DL_FUNC) &h3rGridDistance, 2},
@@ -49,8 +49,8 @@ static const R_CallMethodDef callMethods[] = {
   {"h3rCellToCenterChild", (DL_FUNC) &h3rCellToCenterChild, 2},
   {"h3rCellToChildPos", (DL_FUNC) &h3rCellToChildPos, 2},
   {"h3rChildPosToCell", (DL_FUNC) &h3rChildPosToCell, 3},
-  {"h3rCompactCells", (DL_FUNC) &h3rCompactCells, 1},
-  {"h3rUncompactCells", (DL_FUNC) &h3rUncompactCells, 2},
+  // {"h3rCompactCells", (DL_FUNC) &h3rCompactCells, 1},
+  // {"h3rUncompactCells", (DL_FUNC) &h3rUncompactCells, 2},
 
   // Regions
   {"h3rPolygonToCells",                 (DL_FUNC) &h3rPolygonToCells,   3},
@@ -192,6 +192,79 @@ typedef struct {
   int j;  ///< j component
 } CoordIJ;
 
+H3Error (*latLngToCell)(const LatLng*, int, H3Index*);
+H3Error (*cellToLatLng)(H3Index, LatLng*);
+H3Error (*cellToBoundary)(H3Index, CellBoundary*);
+H3Error (*maxGridDiskSize)(int, int64_t*);
+H3Error (*gridDiskUnsafe)(H3Index, int, H3Index*);
+H3Error (*gridDiskDistancesUnsafe)(H3Index, int, H3Index*, int*);
+H3Error (*gridDiskDistancesSafe)(H3Index, int, H3Index*, int*);
+H3Error (*gridDisksUnsafe)(H3Index*, int, int, H3Index*);
+H3Error (*gridDisk)(H3Index, int, H3Index*);
+H3Error (*gridDiskDistances)(H3Index, int, H3Index*, int*);
+// H3Error (*gridRingUnsafe)(H3Index, int, H3Index*);
+H3Error (*maxPolygonToCellsSize)(const GeoPolygon*, int, uint32_t, int64_t*);
+H3Error (*polygonToCells)(const GeoPolygon*, int, uint32_t, H3Index*);
+H3Error (*cellsToLinkedMultiPolygon)(const H3Index*, const int, LinkedGeoPolygon*);
+void (*destroyLinkedMultiPolygon)(LinkedGeoPolygon*);
+double (*degsToRads)(double);
+double (*radsToDegs)(double);
+double (*greatCircleDistanceRads)(const LatLng*, const LatLng*);
+double (*greatCircleDistanceKm)(const LatLng*, const LatLng*);
+double (*greatCircleDistanceM)(const LatLng*, const LatLng*);
+H3Error (*getHexagonAreaAvgKm2)(int, double*);
+H3Error (*getHexagonAreaAvgM2)(int, double*);
+H3Error (*cellAreaRads2)(H3Index, double*);
+H3Error (*cellAreaKm2)(H3Index, double*);
+H3Error (*cellAreaM2)(H3Index, double*);
+H3Error (*getHexagonEdgeLengthAvgKm)(int, double*);
+H3Error (*getHexagonEdgeLengthAvgM)(int, double*);
+H3Error (*edgeLengthRads)(H3Index, double*);
+H3Error (*edgeLengthKm)(H3Index, double*);
+H3Error (*edgeLengthM)(H3Index, double*);
+H3Error (*getNumCells)(int, int64_t*);
+int (*res0CellCount)(void);
+H3Error (*getRes0Cells)(H3Index*);
+int (*pentagonCount)(void);
+H3Error (*getPentagons)(int, H3Index*);
+int (*getResolution)(H3Index);
+int (*getBaseCellNumber)(H3Index);
+H3Error (*stringToH3)(const char*, H3Index*);
+int (*isValidCell)(H3Index);
+H3Error (*cellToParent)(H3Index, int, H3Index*);
+H3Error (*cellToChildrenSize)(H3Index, int, int64_t*);
+H3Error (*cellToChildren)(H3Index, int, H3Index*);
+H3Error (*cellToCenterChild)(H3Index, int, H3Index*);
+H3Error (*cellToChildPos)(H3Index, int, int64_t*);
+H3Error (*childPosToCell)(int64_t, H3Index, int, H3Index*);
+// H3Error (*compactCells)(const H3Index*, H3Index*, const int64_t);
+H3Error (*uncompactCellsSize)(const H3Index*, const int64_t, const int, int64_t*);
+// H3Error (*uncompactCells)(const H3Index*, const int64_t, H3Index*, const int64_t, const int);
+int (*isResClassIII)(H3Index);
+int (*isPentagon)(H3Index);
+H3Error (*maxFaceCount)(H3Index, int*);
+H3Error (*getIcosahedronFaces)(H3Index, int*);
+H3Error (*areNeighborCells)(H3Index, H3Index, int*);
+H3Error (*cellsToDirectedEdge)(H3Index, H3Index, H3Index*);
+int (*isValidDirectedEdge)(H3Index);
+H3Error (*getDirectedEdgeOrigin)(H3Index, H3Index*);
+H3Error (*getDirectedEdgeDestination)(H3Index, H3Index*);
+H3Error (*directedEdgeToCells)(H3Index, H3Index*);
+H3Error (*originToDirectedEdges)(H3Index, H3Index*);
+H3Error (*directedEdgeToBoundary)(H3Index, CellBoundary*);
+H3Error (*cellToVertex)(H3Index, int, H3Index*);
+H3Error (*cellToVertexes)(H3Index, H3Index*);
+H3Error (*vertexToLatLng)(H3Index, LatLng*);
+int (*isValidVertex)(H3Index);
+H3Error (*gridDistance)(H3Index, H3Index, int64_t*);
+H3Error (*gridPathCellsSize)(H3Index, H3Index, int64_t*);
+H3Error (*gridPathCells)(H3Index, H3Index, H3Index*);
+H3Error (*cellToLocalIj)(H3Index, H3Index, uint32_t, CoordIJ*);
+H3Error (*localIjToCell)(H3Index, const CoordIJ*, uint32_t, H3Index*);
+Direction (*directionForNeighbor)(H3Index, H3Index);
+void (*_geoToClosestFace)(const LatLng*, int*, double*);
+void (*h3lib_tests)(void);
+
 void attribute_visible R_init_h3r(DllInfo *info)
 {
   R_registerRoutines(info, NULL, callMethods, NULL, NULL);
@@ -218,7 +291,7 @@ void attribute_visible R_init_h3r(DllInfo *info)
   R_RegisterCCallable("h3r", "h3rGridDiskUnsafe",           (DL_FUNC)&h3rGridDiskUnsafe);
   R_RegisterCCallable("h3r", "h3rGridDiskDistancesUnsafe",  (DL_FUNC)&h3rGridDiskDistancesUnsafe);
   R_RegisterCCallable("h3r", "h3rGridDiskDistancesSafe",    (DL_FUNC)&h3rGridDiskDistancesSafe);
-  R_RegisterCCallable("h3r", "h3rGridRingUnsafe",           (DL_FUNC)&h3rGridRingUnsafe);
+  // R_RegisterCCallable("h3r", "h3rGridRingUnsafe",           (DL_FUNC)&h3rGridRingUnsafe);
   R_RegisterCCallable("h3r", "h3rGridPathCells",            (DL_FUNC)&h3rGridPathCells);
   R_RegisterCCallable("h3r", "h3rGridPathCellsSize",        (DL_FUNC)&h3rGridPathCellsSize);
   R_RegisterCCallable("h3r", "h3rGridDistance",             (DL_FUNC)&h3rGridDistance);
@@ -231,8 +304,8 @@ void attribute_visible R_init_h3r(DllInfo *info)
   R_RegisterCCallable("h3r", "h3rCellToCenterChild",     (DL_FUNC) &h3rCellToCenterChild);
   R_RegisterCCallable("h3r", "h3rCellToChildPos",        (DL_FUNC) &h3rCellToChildPos);
   R_RegisterCCallable("h3r", "h3rChildPosToCell",        (DL_FUNC) &h3rChildPosToCell);
-  R_RegisterCCallable("h3r", "h3rCompactCells",          (DL_FUNC) &h3rCompactCells);
-  R_RegisterCCallable("h3r", "h3rUncompactCells",        (DL_FUNC) &h3rUncompactCells);
+  // R_RegisterCCallable("h3r", "h3rCompactCells",          (DL_FUNC) &h3rCompactCells);
+  // R_RegisterCCallable("h3r", "h3rUncompactCells",        (DL_FUNC) &h3rUncompactCells);
 
   // Regions
   R_RegisterCCallable("h3r", "h3rPolygonToCells",             (DL_FUNC) &h3rPolygonToCells);

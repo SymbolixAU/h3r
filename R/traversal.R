@@ -46,24 +46,24 @@ gridDiskDistances <- function(cell, k) {
 }
 
 
-#' Grid Ring Unsafe
-#'
-#' Produces the hollow hexagonal ring centered at origin with sides of length k.
-#'
-#' @param cell vector of H3 cells
-#' @param k side length
-#'
-#' @return the indices of the hollow hexagonal ring centered at origin with
-#' sides of length k.
-#'
-#' @examples
-#'
-#' gridRingUnsafe(cell = c("8cbe63562a54bff","85283473fffffff"), k = c(2L, 1L))
-#'
-#' @export
-gridRingUnsafe <- function(cell, k) {
-  .Call(h3rGridRingUnsafe, cell, int(k))
-}
+# Grid Ring Unsafe
+#
+# Produces the hollow hexagonal ring centered at origin with sides of length k.
+#
+# @param cell vector of H3 cells
+# @param k side length
+#
+# @return the indices of the hollow hexagonal ring centered at origin with
+# sides of length k.
+#
+# @examples
+#
+# gridRingUnsafe(cell = c("8cbe63562a54bff","85283473fffffff"), k = c(2L, 1L))
+#
+# @export
+# gridRingUnsafe <- function(cell, k) {
+#   .Call(h3rGridRingUnsafe, cell, int(k))
+# }
 
 #' Grid Path Cells
 #'

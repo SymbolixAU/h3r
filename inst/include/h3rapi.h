@@ -86,11 +86,11 @@ extern "C" {
       (SEXP(*)(SEXP, SEXP)) R_GetCCallable("h3r", "h3rGridDiskDistancesSafe");
     return fun(h3, k);
   }
-  inline SEXP attribute_hidden h3rGridRingUnsafe(SEXP h3, SEXP k) {
-    SEXP(*fun)(SEXP, SEXP) =
-      (SEXP(*)(SEXP, SEXP)) R_GetCCallable("h3r", "h3rGridRingUnsafe");
-    return fun(h3, k);
-  }
+  // inline SEXP attribute_hidden h3rGridRingUnsafe(SEXP h3, SEXP k) {
+  //   SEXP(*fun)(SEXP, SEXP) =
+  //     (SEXP(*)(SEXP, SEXP)) R_GetCCallable("h3r", "h3rGridRingUnsafe");
+  //   return fun(h3, k);
+  // }
   inline SEXP attribute_hidden h3rGridPathCells(SEXP origH3, SEXP destH3) {
     SEXP(*fun)(SEXP, SEXP) =
       (SEXP(*)(SEXP, SEXP)) R_GetCCallable("h3r", "h3rGridPathCells");
@@ -141,16 +141,16 @@ extern "C" {
       (SEXP(*)(SEXP, SEXP, SEXP)) R_GetCCallable("h3r", "h3rChildPosToCell");
     return fun(pos, h3, res);
   }
-  inline SEXP attribute_hidden h3rCompactCells(SEXP h3Sets) {
-    SEXP(*fun)(SEXP) =
-      (SEXP(*)(SEXP)) R_GetCCallable("h3r", "h3rCompactCells");
-    return fun(h3Sets);
-  }
-  inline SEXP attribute_hidden h3rUncompactCells(SEXP h3Sets, SEXP res) {
-    SEXP(*fun)(SEXP, SEXP) =
-      (SEXP(*)(SEXP, SEXP)) R_GetCCallable("h3r", "h3rUncompactCells");
-    return fun(h3Sets, res);
-  }
+  // inline SEXP attribute_hidden h3rCompactCells(SEXP h3Sets) {
+  //   SEXP(*fun)(SEXP) =
+  //     (SEXP(*)(SEXP)) R_GetCCallable("h3r", "h3rCompactCells");
+  //   return fun(h3Sets);
+  // }
+  // inline SEXP attribute_hidden h3rUncompactCells(SEXP h3Sets, SEXP res) {
+  //   SEXP(*fun)(SEXP, SEXP) =
+  //     (SEXP(*)(SEXP, SEXP)) R_GetCCallable("h3r", "h3rUncompactCells");
+  //   return fun(h3Sets, res);
+  // }
   inline SEXP attribute_hidden h3rAreNeighborCells(SEXP origH3, SEXP destH3) {
     SEXP(*fun)(SEXP, SEXP) =
       (SEXP(*)(SEXP, SEXP)) R_GetCCallable("h3r", "h3rAreNeighborCells");
@@ -383,9 +383,9 @@ namespace h3r {
     inline SEXP gridDiskDistancesSafe(SEXP h3, SEXP k) {
     return h3rGridDiskDistancesSafe(h3, k);
   }
-    inline SEXP gridRingUnsafe(SEXP h3, SEXP k) {
-    return h3rGridRingUnsafe(h3, k);
-  }
+  //   inline SEXP gridRingUnsafe(SEXP h3, SEXP k) {
+  //   return h3rGridRingUnsafe(h3, k);
+  // }
     inline SEXP gridPathCells(SEXP origH3, SEXP destH3) {
     return h3rGridPathCells(origH3, destH3);
   }
@@ -416,12 +416,12 @@ namespace h3r {
     inline SEXP childPosToCell(SEXP pos, SEXP h3, SEXP res) {
     return h3rChildPosToCell(pos, h3, res);
   }
-    inline SEXP compactCells(SEXP h3Sets) {
-    return h3rCompactCells(h3Sets);
-  }
-    inline SEXP uncompactCells(SEXP h3Sets, SEXP res) {
-    return h3rUncompactCells(h3Sets, res);
-  }
+  //   inline SEXP compactCells(SEXP h3Sets) {
+  //   return h3rCompactCells(h3Sets);
+  // }
+  //   inline SEXP uncompactCells(SEXP h3Sets, SEXP res) {
+  //   return h3rUncompactCells(h3Sets, res);
+  // }
     inline SEXP areNeighborCells(SEXP origH3, SEXP destH3) {
     return h3rAreNeighborCells(origH3, destH3);
   }

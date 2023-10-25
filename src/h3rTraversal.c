@@ -226,43 +226,43 @@ SEXP h3rGridDiskDistancesSafe(SEXP h3, SEXP k) {
 
 }
 
-SEXP h3rGridRingUnsafe(SEXP h3, SEXP k) {
-  R_xlen_t n = Rf_xlength(h3);
-  R_xlen_t i;
-
-  R_xlen_t vectorLength[1];
-  vectorLength[0] = Rf_xlength(k);
-  h3rVectorLengthCheck(n, vectorLength, 1, false);
-
-  H3Index h;
-  int length;
-  int64_t maxSize, j, outputSize;
-
-  SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
-
-  for( i = 0; i < n; i++ ) {
-    h = sexpStringToH3(h3, i);
-    length = INTEGER(k)[i];
-
-    h3rError(maxGridDiskSize(length, &maxSize), i);
-    H3Index result[maxSize];
-
-    h3rError(gridRingUnsafe(h, length, result), i);
-
-    j = 0;
-    while (j < maxSize && isValidCell(result[j])) {
-      j++;
-    }
-    outputSize = j;
-
-    SET_VECTOR_ELT(out, i, h3VecToSexpString(result, outputSize));
-  }
-
-
-  UNPROTECT(1);
-  return out;
-
-}
+// SEXP h3rGridRingUnsafe(SEXP h3, SEXP k) {
+//   R_xlen_t n = Rf_xlength(h3);
+//   R_xlen_t i;
+//
+//   R_xlen_t vectorLength[1];
+//   vectorLength[0] = Rf_xlength(k);
+//   h3rVectorLengthCheck(n, vectorLength, 1, false);
+//
+//   H3Index h;
+//   int length;
+//   int64_t maxSize, j, outputSize;
+//
+//   SEXP out = PROTECT(Rf_allocVector(VECSXP, n));
+//
+//   for( i = 0; i < n; i++ ) {
+//     h = sexpStringToH3(h3, i);
+//     length = INTEGER(k)[i];
+//
+//     h3rError(maxGridDiskSize(length, &maxSize), i);
+//     H3Index result[maxSize];
+//
+//     h3rError(gridRingUnsafe(h, length, result), i);
+//
+//     j = 0;
+//     while (j < maxSize && isValidCell(result[j])) {
+//       j++;
+//     }
+//     outputSize = j;
+//
+//     SET_VECTOR_ELT(out, i, h3VecToSexpString(result, outputSize));
+//   }
+//
+//
+//   UNPROTECT(1);
+//   return out;
+//
+// }
 
 SEXP h3rGridPathCells(SEXP origH3, SEXP destH3) {
   R_xlen_t n = Rf_xlength(origH3);

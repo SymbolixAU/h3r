@@ -28,7 +28,7 @@ SEXP h3rGridDiskDistances(SEXP h3, SEXP k);
 SEXP h3rGridDiskUnsafe(SEXP h3, SEXP k) ;
 SEXP h3rGridDiskDistancesUnsafe(SEXP h3, SEXP k) ;
 SEXP h3rGridDiskDistancesSafe(SEXP h3, SEXP k);
-SEXP h3rGridRingUnsafe(SEXP h3, SEXP k);
+// SEXP h3rGridRingUnsafe(SEXP h3, SEXP k);
 SEXP h3rGridPathCells(SEXP origH3, SEXP destH3);
 SEXP h3rGridPathCellsSize(SEXP origH3, SEXP destH3);
 SEXP h3rGridDistance(SEXP origH3, SEXP destH3);
@@ -42,8 +42,8 @@ SEXP h3rCellToChildrenSize(SEXP h3, SEXP res);
 SEXP h3rCellToCenterChild(SEXP h3, SEXP res);
 SEXP h3rCellToChildPos(SEXP h3, SEXP res);
 SEXP h3rChildPosToCell(SEXP pos, SEXP h3, SEXP res);
-SEXP h3rCompactCells(SEXP h3Sets);
-SEXP h3rUncompactCells(SEXP h3Sets, SEXP res);
+// SEXP h3rCompactCells(SEXP h3Sets);
+// SEXP h3rUncompactCells(SEXP h3Sets, SEXP res);
 
 // Regions
 SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isLatLng);
