@@ -1,3 +1,4 @@
+#pragma once
 
 #ifndef R_H3R_API_H
 #define R_H3R_API_H
