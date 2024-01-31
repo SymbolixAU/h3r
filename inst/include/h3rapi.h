@@ -9,7 +9,7 @@
 #include <R_ext/Rdynload.h>
 
 #ifdef HAVE_VISIBILITY_ATTRIBUTE
-# define attribute_hidden __attribute__ ((visibility (hidden)))
+# define attribute_hidden __attribute__ ((visibility ("hidden")))
 #else
 # define attribute_hidden
 #endif
