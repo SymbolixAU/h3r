@@ -195,8 +195,9 @@ SEXP h3rCompactCells(SEXP h3Sets) {
     setSize = Rf_xlength(h3Set);
 
     H3Index cellSet[setSize];
-    memset(cellSet, H3_INIT, sizeof(cellSet));
+    memset(cellSet, -1, sizeof(cellSet));
     H3Index compactedSet[setSize];
+    memset(compactedSet, -1, sizeof(compactedSet));
 
     for (j = 0; j < setSize; j++) {
       cellSet[j] = sexpStringToH3(h3Set, j);
@@ -236,6 +237,8 @@ SEXP h3rUncompactCells(SEXP h3Sets, SEXP res) {
     setSize = Rf_xlength(h3Set);
 
     H3Index compactedSet[setSize];
+    memset(compactedSet, -1, sizeof(compactedSet));
+
     ires = _getResolution(res, i);
 
     for (j = 0; j < setSize; j++) {
@@ -244,6 +247,7 @@ SEXP h3rUncompactCells(SEXP h3Sets, SEXP res) {
 
     h3rError(uncompactCellsSize(compactedSet, setSize, ires, &cellSize), i);
     H3Index cellSet[cellSize];
+    memset(cellSet, -1, sizeof(cellSet));
 
     h3rError(uncompactCells(compactedSet, setSize, cellSet, cellSize, ires), i);
 

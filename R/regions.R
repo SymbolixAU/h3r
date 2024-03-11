@@ -90,28 +90,28 @@ polygonToCells <- function(polygons, resolution, isLatLng = TRUE) {
 }
 
 
-#' Cells to GeoPolygons
-#'
-#' Get the outlines of a set of H3 hexagons, returned in GeoJSON-like
-#' MultiPolygon.
-#'
-#' @param cellSet list of string vectors containing to be H3 cell indexes
-#' @inheritParams polygonToCells
-#'
-#' @return GeoJSON-like MultiPolygon containing the outlines of the set of
-#' input H3 hexagons
-#'
-#' @examples
-#'
-#' cellsToMultiPolygon(
-#'   cellSet = list(
-#'     list(c("872830828ffffff", "87283082effffff"))
-#'     , list(c("872830828ffffff"))
-#'     )
-#'     , 1L
-#'   )
-#'
-#' @export
-cellsToMultiPolygon <- function(cellSet, isLatLng = TRUE) {
-  .Call(h3rCellsToMultiPolygon, cellSet, int(isLatLng))
-}
+# Cells to GeoPolygons
+#
+# Get the outlines of a set of H3 hexagons, returned in GeoJSON-like
+# MultiPolygon.
+#
+# @param cellSet list of string vectors containing to be H3 cell indexes
+# @inheritParams polygonToCells
+#
+# @return GeoJSON-like MultiPolygon containing the outlines of the set of
+# input H3 hexagons
+#
+# @examples
+#
+# cellsToMultiPolygon(
+#   cellSet = list(
+#     list(c("872830828ffffff", "87283082effffff"))
+#     , list(c("872830828ffffff"))
+#     )
+#     , 1L
+#   )
+#
+# @export
+# cellsToMultiPolygon <- function(cellSet, isLatLng = TRUE) {
+#   .Call(h3rCellsToMultiPolygon, cellSet, int(isLatLng))
+# }

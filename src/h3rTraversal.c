@@ -246,6 +246,7 @@ SEXP h3rGridRingUnsafe(SEXP h3, SEXP k) {
 
     h3rError(maxGridDiskSize(length, &maxSize), i);
     H3Index result[maxSize];
+    memset(result, -1, sizeof(result));
 
     h3rError(gridRingUnsafe(h, length, result), i);
 
