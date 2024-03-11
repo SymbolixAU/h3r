@@ -195,6 +195,7 @@ SEXP h3rCompactCells(SEXP h3Sets) {
     setSize = Rf_xlength(h3Set);
 
     H3Index cellSet[setSize];
+    memset(cellSet, H3_INIT, sizeof(cellSet));
     H3Index compactedSet[setSize];
 
     for (j = 0; j < setSize; j++) {
