@@ -162,36 +162,36 @@
 <h3 id="description">DESCRIPTION<a class="anchor" aria-label="anchor" href="#description"></a>
 </h3>
 <p>Depend &amp; Link to {h3r}</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Depends<span class="sc">:</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  h3r</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>LinkingTo<span class="sc">:</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  h3r</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>Depends<span class="sc">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  h3r</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>LinkingTo<span class="sc">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  h3r</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="srcinitc">src/init.c<a class="anchor" aria-label="anchor" href="#srcinitc"></a>
 </h3>
 <p>Define the functions you want to import from {h3r}</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>SEXP <span class="op">(*</span>h3rLatLngToCell<span class="op">)(</span>SEXP<span class="op">,</span>SEXP<span class="op">,</span>SEXP<span class="op">);</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> R_init_h3rc<span class="op">(</span>DllInfo <span class="op">*</span>info<span class="op">)</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  R_registerRoutines<span class="op">(</span>info<span class="op">,</span> NULL<span class="op">,</span> callMethods<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">);</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  R_useDynamicSymbols<span class="op">(</span>info<span class="op">,</span> FALSE<span class="op">);</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* Imports from h3r */</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  h3rLatLngToCell <span class="op">=</span> <span class="op">(</span>SEXP<span class="op">(*)(</span>SEXP<span class="op">,</span>SEXP<span class="op">,</span>SEXP<span class="op">))</span> R_GetCCallable<span class="op">(</span><span class="st">"h3r"</span><span class="op">,</span> <span class="st">"h3rLatLngToCell"</span><span class="op">);</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>SEXP <span class="op">(*</span>h3rLatLngToCell<span class="op">)(</span>SEXP<span class="op">,</span>SEXP<span class="op">,</span>SEXP<span class="op">);</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="dt">void</span> R_init_h3rc<span class="op">(</span>DllInfo <span class="op">*</span>info<span class="op">)</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  R_registerRoutines<span class="op">(</span>info<span class="op">,</span> NULL<span class="op">,</span> callMethods<span class="op">,</span> NULL<span class="op">,</span> NULL<span class="op">);</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  R_useDynamicSymbols<span class="op">(</span>info<span class="op">,</span> FALSE<span class="op">);</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="co">/* Imports from h3r */</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  h3rLatLngToCell <span class="op">=</span> <span class="op">(</span>SEXP<span class="op">(*)(</span>SEXP<span class="op">,</span>SEXP<span class="op">,</span>SEXP<span class="op">))</span> R_GetCCallable<span class="op">(</span><span class="st">"h3r"</span><span class="op">,</span> <span class="st">"h3rLatLngToCell"</span><span class="op">);</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="srch3rcc">src/h3rc.c<a class="anchor" aria-label="anchor" href="#srch3rcc"></a>
 </h3>
 <p>Include the “h3rapi.h” header, then you can call the functions you’ve registered in <code>src/init.c</code></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"h3rapi.h"</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>SEXP h3rcLatLngToCell<span class="op">(</span>SEXP lat<span class="op">,</span> SEXP lng<span class="op">,</span> SEXP res<span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> h3rLatLngToCell<span class="op">(</span>lat<span class="op">,</span> lng<span class="op">,</span> res<span class="op">);</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="pp">#include </span><span class="im">"h3rapi.h"</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>SEXP h3rcLatLngToCell<span class="op">(</span>SEXP lat<span class="op">,</span> SEXP lng<span class="op">,</span> SEXP res<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>  <span class="cf">return</span> h3rLatLngToCell<span class="op">(</span>lat<span class="op">,</span> lng<span class="op">,</span> res<span class="op">);</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="rh3rrr">R/h3rr.R<a class="anchor" aria-label="anchor" href="#rh3rrr"></a>
