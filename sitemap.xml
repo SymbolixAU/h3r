@@ -1,192 +1,66 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://symbolixau.github.io/h3r/404.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/articles/CoreH3Themes.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/index.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/areNeighborCells.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellAreaKm2.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellAreaM2.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellAreaRads2.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellToBoundary.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellToCenterChild.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellToChildPos.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellToChildren.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellToLatLng.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellToLocalIj.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellToParent.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellToVertex.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellToVertexes.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/cellsToDirectedEdge.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/childPosToCell.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/compactCells.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/degsToRads.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/directedEdgeToBoundary.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/directedEdgeToCells.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/edgeLengthKm.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/edgeLengthM.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/edgeLengthRads.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getBaseCellNumber.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getDirectedEdgeDestination.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getDirectedEdgeOrigin.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getHexagonAreaAvgKm2.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getHexagonAreaAvgM2.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getHexagonEdgeLengthAvgKm.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getHexagonEdgeLengthAvgM.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getIcosahedronFaces.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getNumCells.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getPentagons.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getRes0Cells.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/getResolution.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/greatCircleDistanceKm.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/greatCircleDistanceM.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/greatCircleDistanceRads.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/gridDisk.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/gridDiskDistances.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/gridDistance.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/gridPathCells.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/gridRingUnsafe.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/isPentagon.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/isResClassIII.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/isValidCell.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/isValidDirectedEdge.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/isValidVertex.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/latLngToCell.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/localIjToCell.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/originToDirectedEdges.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/polygonToCells.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/radsToDegs.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/stations.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/uncompactCells.html</loc>
-  </url>
-  <url>
-    <loc>https://symbolixau.github.io/h3r/reference/vertexToLatLng.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://symbolixau.github.io/h3r/404.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/LICENSE-text.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/LICENSE.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/articles/CoreH3Themes.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/articles/index.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/authors.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/index.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/areNeighborCells.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellAreaKm2.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellAreaM2.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellAreaRads2.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellToBoundary.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellToCenterChild.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellToChildPos.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellToChildren.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellToLatLng.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellToLocalIj.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellToParent.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellToVertex.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellToVertexes.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/cellsToDirectedEdge.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/childPosToCell.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/compactCells.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/degsToRads.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/directedEdgeToBoundary.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/directedEdgeToCells.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/edgeLengthKm.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/edgeLengthM.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/edgeLengthRads.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getBaseCellNumber.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getDirectedEdgeDestination.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getDirectedEdgeOrigin.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getHexagonAreaAvgKm2.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getHexagonAreaAvgM2.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getHexagonEdgeLengthAvgKm.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getHexagonEdgeLengthAvgM.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getIcosahedronFaces.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getNumCells.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getPentagons.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getRes0Cells.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/getResolution.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/greatCircleDistanceKm.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/greatCircleDistanceM.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/greatCircleDistanceRads.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/gridDisk.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/gridDiskDistances.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/gridDistance.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/gridPathCells.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/gridRingUnsafe.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/index.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/isPentagon.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/isResClassIII.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/isValidCell.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/isValidDirectedEdge.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/isValidVertex.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/latLngToCell.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/localIjToCell.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/originToDirectedEdges.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/polygonToCells.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/radsToDegs.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/stations.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/uncompactCells.html</loc></url>
+<url><loc>https://symbolixau.github.io/h3r/reference/vertexToLatLng.html</loc></url>
 </urlset>
+
