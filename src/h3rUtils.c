@@ -119,8 +119,9 @@ SEXP cellBoundaryToList(CellBoundary *cb) {
     SET_REAL_ELT(lats, i, radsToDegs(cb->verts[i].lat));
     SET_REAL_ELT(lons, i, radsToDegs(cb->verts[i].lng));
   }
+  SEXP lst = latLngList(lats, lons, rowNames);
   UNPROTECT(3);
-  return latLngList(lats, lons, rowNames);
+  return lst;
 }
 
 SEXP intToSexpArray(int *arr, R_xlen_t n) {
