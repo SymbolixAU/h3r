@@ -19,7 +19,7 @@ stations
 A data set of train stations in Melbourne
 }
 \details{
-Obtained from \url{https://discover.data.vic.gov.au/dataset/timetable-and-geographic-information-gtfs}
+Obtained from \url{https://discover.data.vic.gov.au/dataset/gtfs-schedule}
 and distributed under the Creative Commons 4 License \url{https://creativecommons.org/licenses/by/4.0/}
 }
 \keyword{datasets}
