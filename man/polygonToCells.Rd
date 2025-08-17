@@ -18,7 +18,10 @@ polygonToCells(polygons, resolution, isLatLng = TRUE)
 h3 indexes for the input GeoJSON-like data structure
 }
 \description{
-Returns the h3 indexes for the input GeoJSON-like data structure
+Produces a collection of cells (h3 indexes) that are contained within the polygon.
+Containment is determined by centroids of the cells, so that a partitioning
+of polygons (covering an area without overlaps) will result in a partitioning
+of H3 cells.
 }
 \examples{
 

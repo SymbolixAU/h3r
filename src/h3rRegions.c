@@ -100,8 +100,9 @@ void h3rCoordinatesToGeoPolygon(SEXP polygons, GeoPolygon *geoPolygon, int isLat
   free(polygonArray);
 }
 
-SEXP singlePolygonToCells(SEXP polygon, int res, SEXP isLatLng, R_xlen_t idx) {
+SEXP singlePolygonToCells(SEXP polygon, int res, SEXP isLatLng, R_xlen_t idx, bool isExperimental) {
   uint32_t flags = 0;
+  uint32_t experimental_flags = 3;
   int64_t numHexagons, i;
   int64_t validCount = 0;
   int64_t j = 0;
@@ -112,11 +113,20 @@ SEXP singlePolygonToCells(SEXP polygon, int res, SEXP isLatLng, R_xlen_t idx) {
 
   h3rCoordinatesToGeoPolygon(polygon, &geoPolygon, reverseCoordinates);
 
-  h3rError(maxPolygonToCellsSize(&geoPolygon, res, flags, &numHexagons), idx);
+  if( isExperimental ) {
+    h3rError(maxPolygonToCellsSizeExperimental(&geoPolygon, res, experimental_flags, &numHexagons), idx);
+  } else {
+    h3rError(maxPolygonToCellsSize(&geoPolygon, res, flags, &numHexagons), idx);
+  }
 
   H3Index *result = (H3Index *)calloc(numHexagons, sizeof(H3Index));
 
-  h3rError(polygonToCells(&geoPolygon, res, flags, result), idx);
+  if( isExperimental ) {
+    h3rError(polygonToCellsExperimental(&geoPolygon, res, experimental_flags, numHexagons, result), idx);
+  } else {
+    h3rError(polygonToCells(&geoPolygon, res, flags, result), idx);
+  }
+
 
   for (i = 0; i < numHexagons; i++){
     if( isValidCell(result[i])){
@@ -157,7 +167,29 @@ SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isLatLng) {
   for(i = 0; i < nPolygons; i++) {
     SEXP polygon = VECTOR_ELT(polygonArray, i);
     int ires = _getResolution(res, i);
-    SEXP cells = singlePolygonToCells(polygon, ires, isLatLng, i);
+    SEXP cells = singlePolygonToCells(polygon, ires, isLatLng, i, false);
+    SET_VECTOR_ELT(out, i, cells);
+  }
+
+  UNPROTECT(1);
+  return out;
+}
+
+SEXP h3rPolygonToCellsExperimental(SEXP polygonArray, SEXP res, SEXP isLatLng) {
+
+  R_xlen_t nPolygons = Rf_xlength(polygonArray);
+  R_xlen_t i;
+
+  R_xlen_t optionalLengths[1];
+  optionalLengths[0] = Rf_xlength(res);
+  h3rVectorLengthCheck(nPolygons, optionalLengths, 1, true);
+
+  SEXP out = PROTECT(Rf_allocVector(VECSXP, nPolygons));
+
+  for(i = 0; i < nPolygons; i++) {
+    SEXP polygon = VECTOR_ELT(polygonArray, i);
+    int ires = _getResolution(res, i);
+    SEXP cells = singlePolygonToCells(polygon, ires, isLatLng, i, true);
     SET_VECTOR_ELT(out, i, cells);
   }
 

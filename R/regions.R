@@ -1,7 +1,11 @@
 
 #' Polygon to cells
 #'
-#' Returns the h3 indexes for the input GeoJSON-like data structure
+#' Produces a collection of cells (h3 indexes) that are contained within the polygon.
+#' Containment is determined by centroids of the cells, so that a partitioning
+#' of polygons (covering an area without overlaps) will result in a partitioning
+#' of H3 cells.
+#'
 #'
 #' @param polygons A list of polygons. Each polygon is list of matrices.
 #' @param resolution The resolution of the output cells
@@ -89,6 +93,13 @@ polygonToCells <- function(polygons, resolution, isLatLng = TRUE) {
   .Call(h3rPolygonToCells, polygons, int(resolution), int(isLatLng))
 }
 
+
+#' Polygon To Cells Experimental
+#'
+#' @export
+polygonToCellsExperimental <- function(polygons, resolution, isLatLng = TRUE) {
+  .Call(h3rPolygonToCellsExperimental, polygons, int(resolution), int(isLatLng))
+}
 
 # Cells to GeoPolygons
 #

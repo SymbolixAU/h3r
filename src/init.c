@@ -55,6 +55,7 @@ static const R_CallMethodDef callMethods[] = {
 
   // Regions
   {"h3rPolygonToCells",                 (DL_FUNC) &h3rPolygonToCells,   3},
+  {"h3rPolygonToCellsExperimental",     (DL_FUNC) &h3rPolygonToCellsExperimental,   4},
   // {"h3rCellsToMultiPolygon",                 (DL_FUNC) &h3rCellsToMultiPolygon,   2},
 
   // Directed Edges

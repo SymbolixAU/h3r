@@ -25,7 +25,9 @@ H3Error (gridDisk)(H3Index, int, H3Index*);
 H3Error (gridDiskDistances)(H3Index, int, H3Index*, int*);
 H3Error (gridRingUnsafe)(H3Index, int, H3Index*);
 H3Error (maxPolygonToCellsSize)(const GeoPolygon*, int, uint32_t, int64_t*);
+H3Error (maxPolygonToCellsSizeExperimental)(const GeoPolygon*, int, uint32_t, int64_t*);
 H3Error (polygonToCells)(const GeoPolygon*, int, uint32_t, H3Index*);
+H3Error (polygonToCellsExperimental)(const GeoPolygon*, int, uint32_t, int64_t, H3Index*);
 H3Error (cellsToLinkedMultiPolygon)(const H3Index*, const int, LinkedGeoPolygon*);
 void (destroyLinkedMultiPolygon)(LinkedGeoPolygon*);
 double (degsToRads)(double);
@@ -127,6 +129,7 @@ SEXP h3rUncompactCells(SEXP h3Sets, SEXP res);
 
 // Regions
 SEXP h3rPolygonToCells(SEXP polygonArray, SEXP res, SEXP isLatLng);
+SEXP h3rPolygonToCellsExperimental(SEXP polygonArray, SEXP res, SEXP isLatLng);
 // SEXP h3rCellsToMultiPolygon(SEXP h3Sets, SEXP isGeoJson);
 
 // Directed Edges
